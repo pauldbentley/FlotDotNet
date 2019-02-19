@@ -1,0 +1,52 @@
+﻿@model FlotDotNet.FlotChart
+
+@{
+    ViewData["Title"] = "Toggling Series";
+}
+
+<div class="demo-container">
+    @Html.Raw(Model.Placeholder(new { @class = "demo-placeholder", style = "float: left; width: 675px;" }))
+    <p id="choices" style="float:right; width:135px;"></p>
+</div>
+
+<p>This example shows military budgets for various countries in constant (2005) million US dollars (source: <a href="http://www.sipri.org/">SIPRI</a>).</p>
+
+<p>Since all data is available client-side, it's pretty easy to make the plot interactive. Try turning countries on and off with the checkboxes next to the plot.</p>
+
+@section Scripts {
+    @Html.Raw(Model.Plot(false))
+
+    <script type="text/javascript">
+        $(function()
+        {
+            var datasets = chart.datasets;
+
+            // insert checkboxes
+            var choiceContainer = $("#choices");
+            $.each(datasets, function(key, val)
+            {
+                choiceContainer.append("<br/><input type='checkbox' name='" + key +
+                    "' checked='checked' id='id" + key + "'></input>" +
+                    "<label for='id" + key + "'>"
+                    + val.label + "</label>");
+            });
+
+            choiceContainer.find("input").click(plotAccordingToChoices);
+
+            function plotAccordingToChoices()
+            {
+                var keys = [];
+
+                choiceContainer.find("input:checked").each(function()
+                {
+                    var key = $(this).attr("name");
+                    keys.push(key);
+                });
+
+                chart.plotData(keys);
+            }
+
+            plotAccordingToChoices();
+        });
+    </script>
+}

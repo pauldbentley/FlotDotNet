@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Flot Examples: @ViewData["Title"]</title>
+
+    <link rel="stylesheet" href="~/lib/flot/examples/examples.css" />
+</head>
+<body>
+
+    <div id="header">
+        <h2>@ViewData["Title"]</h2>
+    </div>
+
+    <div id="content">
+        @RenderBody()
+    </div>
+
+    <div id="footer">
+        Copyright &copy; 2007 - 2014 IOLA and Ole Laursen
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/flot/jquery.flot.js"></script>
+
+    <script type="text/javascript">
+        $(function()
+        {
+            $("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+        });
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

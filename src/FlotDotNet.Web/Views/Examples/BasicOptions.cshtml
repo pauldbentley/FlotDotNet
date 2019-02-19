@@ -1,0 +1,17 @@
+﻿@model FlotDotNet.FlotChart
+
+@{
+    ViewData["Title"] = "Basic Options";
+}
+
+@section Scripts {
+    @Html.Raw(Model.Plot())
+}
+
+<div class="demo-container">
+    @Html.Raw(Model.Placeholder(new { @class = "demo-placeholder" }))
+</div>
+
+<p>There are plenty of options you can set to control the precise looks of your plot. You can control the ticks on the axes, the legend, the graph type, etc.</p>
+
+<p>Flot goes to great lengths to provide sensible defaults so that you don't have to customize much for a good-looking result.</p>

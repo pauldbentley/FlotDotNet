@@ -1,0 +1,15 @@
+﻿@model FlotDotNet.FlotChart
+
+@{
+    ViewData["Title"] = "Series Types";
+}
+
+@section Scripts {
+    @Html.Raw(Model.Plot())
+}
+
+<div class="demo-container">
+    @Html.Raw(Model.Placeholder(new { @class = "demo-placeholder" }))
+</div>
+
+<p>Flot supports lines, points, filled areas, bars and any combinations of these, in the same plot and even on the same data series.</p>
