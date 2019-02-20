@@ -26,6 +26,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Examples\AxesMultiple.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Examples\SeriesToggle.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

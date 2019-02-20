@@ -1,0 +1,49 @@
+﻿@model FlotDotNet.FlotChart
+
+@{
+    ViewData["Title"] = "Multiple axes";
+}
+
+@section Scripts {
+    <script src="~/lib/flot/jquery.flot.time.js"></script>
+
+    <script type="text/javascript">
+        function euroFormatter(v, axis)
+        {
+            return v.toFixed(axis.tickDecimals) + "€";
+        }
+
+        function doPlot(position)
+        {
+            // align if we are to the right
+            chart.options.yaxes[1].alignTicksWithAxis = position == "right" ? 1 : null;
+            chart.options.yaxes[1].position = position;
+
+            chart.plotChart();
+        }
+    </script>
+
+    @Html.Raw(Model.Plot(false))
+
+    <script type="text/javascript">
+        $(function()
+        {
+            doPlot("right");
+
+            $("button").click(function()
+            {
+                doPlot($(this).text());
+            });
+        });
+    </script>
+}
+
+<div class="demo-container">
+    @Html.Raw(Model.Placeholder(new { @class = "demo-placeholder" }))
+</div>
+
+<p>Multiple axis support showing the raw oil price in US $/barrel of crude oil vs. the exchange rate from US $ to €.</p>
+
+<p>As illustrated, you can put in multiple axes if you need to. For each data series, simply specify the axis number. In the options, you can then configure where you want the extra axes to appear.</p>
+
+<p>Position axis <button>left</button> or <button>right</button>.</p>

@@ -9,13 +9,6 @@
     public sealed class FlotAxis
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FlotAxis"/> class.
-        /// </summary>
-        internal FlotAxis()
-        {
-        }
-
-        /// <summary>
         /// Gets or sets a value which indicates that the axis is to be shown.
         /// If you don't set this option (i.e. it is null), visibility is auto-detected,
         /// i.e. the axis will show up if there's data associated with it.

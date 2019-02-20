@@ -70,11 +70,13 @@
         /// <summary>
         /// The 1-based index of the X-axis against which this data series is to be plotted.
         /// </summary>
+        [JsonProperty(PropertyName = "xaxis")]
         public int? XAxis { get; set; }
 
         /// <summary>
         /// The 1-based index of the Y-axis against which this data series is to be plotted.
         /// </summary>
+        [JsonProperty(PropertyName = "yaxis")]
         public int? YAxis { get; set; }
 
         public bool? Clickable { get; set; }
