@@ -120,6 +120,8 @@
         [JsonIgnore]
         public FlotGrid Grid { get; } = new FlotGrid();
 
+        public FlotTooltip Tootip { get; } = new FlotTooltip();
+
         /// <summary>
         /// Gets the list of the data series within the chart.
         /// </summary>
