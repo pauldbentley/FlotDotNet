@@ -1,5 +1,6 @@
 ﻿namespace FlotDotNet
 {
+    using System.Linq;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
 
@@ -40,6 +41,12 @@
         /// Gets or sets the data which will be plotted on the chart.
         /// </summary>
         public FlotDataPointCollection Data { get; set; } = new FlotDataPointCollection();
+
+        /// <summary>
+        /// Gets the thresholds (requires the threshold plugin).
+        /// </summary>
+        [JsonProperty(PropertyName = "threshold")]
+        public FlotThresholdCollection Thresholds { get; } = new FlotThresholdCollection();
 
         /// <summary>
         /// Gets or sets the label.
@@ -102,5 +109,11 @@
         public bool ShouldSerializeBars() => SerializationHelper.ShouldSerialize(Bars);
 
         public bool ShouldSerializeLines() => SerializationHelper.ShouldSerialize(Lines);
+
+        /// <summary>
+        /// Tests if the <see cref="Thresholds"/> property should be serialized.
+        /// </summary>
+        /// <returns>true if the <see cref="Thresholds"/> should be serialized; otherwise, false.</returns>
+        public bool ShouldSerializeThresholds() => Thresholds.Any();
     }
 }
