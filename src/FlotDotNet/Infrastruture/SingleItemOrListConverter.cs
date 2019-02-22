@@ -7,6 +7,7 @@
 
     /// <summary>
     /// Used to convert objects which can either be a single item, or a list of items.
+    /// Empty collections are output as null.
     /// </summary>
     internal class SingleItemOrListConverter : JsonConverter
     {
@@ -46,7 +47,11 @@
         {
             var collection = value as IEnumerable<object>;
 
-            if (collection.Count() == 1)
+            if (collection == null || collection.Count() == 0)
+            {
+                writer.WriteNull();
+            }
+            else if (collection.Count() == 1)
             {
                 serializer.Serialize(writer, collection.First());
             }

@@ -139,13 +139,13 @@
         private JRaw PlaceholderObject => new JRaw("$(\"#" + PlaceholderId + "\")");
 
         [JsonProperty]
-        private JRaw PlotChart => new JRaw("function(){this.plotData(Object.keys(this.datasets));}");
+        private JRaw PlotChart => new JRaw("function(){this.plotData(Object.keys(this.data));}");
 
         [JsonProperty]
-        private JRaw PlotData => new JRaw("function(keys){var d=[];var t=this;for(var i=0; i<keys.length; i++){var k=keys[i];if(t.datasets[k]){d.push(t.datasets[k]);}}t.plot=$.plot(t.placeholder,d,t.options);}");
+        private JRaw PlotData => new JRaw("function(keys){var d=[];var t=this;for(var i=0; i<keys.length; i++){var k=keys[i];if(t.data[k]){d.push(t.data[k]);}}t.plot=$.plot(t.placeholder,d,t.options);}");
 
         [JsonProperty]
-        private Dictionary<string, FlotSeries> Datasets
+        private Dictionary<string, FlotSeries> Data
         {
             get
             {
