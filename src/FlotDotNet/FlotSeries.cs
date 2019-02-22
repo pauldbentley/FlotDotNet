@@ -106,6 +106,12 @@
         /// </summary>
         public FlotBarAlign Align { get; set; }
 
+        /// <summary>
+        /// Gets any additional attributes to serialize.
+        /// </summary>
+        [JsonExtensionData]
+        public Dictionary<string, object> Attributes { get; } = new Dictionary<string, object>();
+
         public bool ShouldSerializePoints() => SerializationHelper.ShouldSerialize(Points);
 
         public bool ShouldSerializeBars() => SerializationHelper.ShouldSerialize(Bars);
