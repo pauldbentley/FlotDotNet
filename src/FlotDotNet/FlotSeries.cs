@@ -1,5 +1,6 @@
 ﻿namespace FlotDotNet
 {
+    using System.Collections.Generic;
     using System.Linq;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
@@ -38,15 +39,16 @@
         public FlotColor FillColor { get; set; }
 
         /// <summary>
-        /// Gets or sets the data which will be plotted on the chart.
+        /// Gets the data which will be plotted on the chart.
         /// </summary>
-        public FlotDataPointCollection Data { get; set; } = new FlotDataPointCollection();
+        public List<FlotData> Data { get; } = new List<FlotData>();
 
         /// <summary>
         /// Gets the thresholds (requires the threshold plugin).
         /// </summary>
         [JsonProperty(PropertyName = "threshold")]
-        public FlotThresholdCollection Thresholds { get; } = new FlotThresholdCollection();
+        [JsonConverter(typeof(SingleItemOrListConverter))]
+        public List<FlotThreshold> Thresholds { get; } = new List<FlotThreshold>();
 
         /// <summary>
         /// Gets or sets the label.
@@ -103,6 +105,12 @@
         /// Value can be "left" or "center"
         /// </summary>
         public FlotBarAlign Align { get; set; }
+
+        /// <summary>
+        /// Gets any additional attributes to serialize.
+        /// </summary>
+        [JsonExtensionData]
+        public Dictionary<string, object> Attributes { get; } = new Dictionary<string, object>();
 
         public bool ShouldSerializePoints() => SerializationHelper.ShouldSerialize(Points);
 
