@@ -1,5 +1,6 @@
 ﻿namespace FlotDotNet
 {
+    using System.Collections.Generic;
     using System.Linq;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
@@ -103,6 +104,12 @@
         /// Value can be "left" or "center"
         /// </summary>
         public FlotBarAlign Align { get; set; }
+
+        /// <summary>
+        /// Gets any additional attributes to serialize.
+        /// </summary>
+        [JsonExtensionData]
+        public Dictionary<string, object> Attributes { get; } = new Dictionary<string, object>();
 
         public bool ShouldSerializePoints() => SerializationHelper.ShouldSerialize(Points);
 
