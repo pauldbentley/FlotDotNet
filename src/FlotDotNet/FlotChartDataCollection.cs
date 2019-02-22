@@ -3,22 +3,22 @@
     using System.Collections.Generic;
 
     /// <summary>
-    /// A collection of <see cref="FlotDataPoint"/> objects.
+    /// A collection of <see cref="FlotData"/> objects.
     /// </summary>
-    public class FlotDataPointCollection : List<FlotDataPoint>
+    public class FlotChartDataCollection : List<FlotData>
     {
         /// <summary>
         /// Adds a data point to the collection.
         /// </summary>
         /// <param name="x">The value of the x-axis.</param>
         /// <param name="y">The value of the y-axis.</param>
-        public void Add(double? x, double? y) => Add(new FlotDataPoint(x, y));
+        public void Add(double x, double y) => Add(new FlotChartData(x, y));
 
         /// <summary>
-        /// Adds (pie) data to the collection.
+        /// Adds a pie data item to the collection.
         /// </summary>
         /// <param name="label">Label for the data point.</param>
         /// <param name="value">Value of the data point.</param>
-        public void Add(string label, double value) => Add(new FlotDataPoint(label, value));
+        public void Add(string label, double value) => Add(new FlotPieData(label, value));
     }
 }

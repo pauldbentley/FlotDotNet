@@ -97,6 +97,12 @@
         public FlotLines Lines { get; } = new FlotLines();
 
         /// <summary>
+        /// Gets the options for displaying a pie chart.
+        /// </summary>
+        [JsonIgnore]
+        public FlotPie Pie { get; } = new FlotPie();
+
+        /// <summary>
         /// Gets the colours.
         /// </summary>
         public List<FlotColor> Colors { get; } = new List<FlotColor>();
@@ -159,10 +165,11 @@
                 var bars = SerializationHelper.ShouldSerialize(Bars) ? Bars : null;
                 var points = SerializationHelper.ShouldSerialize(Points) ? Points : null;
                 var lines = SerializationHelper.ShouldSerialize(Lines) ? Lines : null;
+                var pie = SerializationHelper.ShouldSerialize(Pie) ? Pie : null;
 
-                var series = (bars == null && points == null && lines == null)
+                var series = (bars == null && points == null && lines == null && pie == null)
                     ? null
-                    : new { bars, points, lines };
+                    : new { bars, points, lines, pie };
 
                 // We will always return an options property
                 // we still need this even if it is empty

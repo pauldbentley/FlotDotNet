@@ -3,19 +3,16 @@
     /// <summary>
     /// Pie slice borders.
     /// </summary>
-    [FlotProperty]
-    public class FlotPieStroke : FlotElement
+    public class FlotPieStroke
     {
         /// <summary>
         /// Color of the border of each slice. Hexadecimal color definitions are prefered (other formats may or may not work).
         /// </summary>
-        [FlotProperty(SerializationOptions = FlotSerializationOptions.QuoteValue)]
-        public string Color = "#fff";
+        public string Color { get; set; } = "#fff";
 
         /// <summary>
         ///  Pixel width of the border of each slice.
         /// </summary>
-        [FlotProperty]
-        public int Width = 1;
+        public int Width { get; set; } = 1;
     }
 }

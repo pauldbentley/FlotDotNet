@@ -4,8 +4,7 @@
     /// Options for display of pie charts.
     /// See http://people.iola.dk/olau/flot/examples/pie.html
     /// </summary>
-    [FlotProperty(Name = "pie")]
-    public partial class FlotPie : FlotElement
+    public partial class FlotPie
     {
         internal FlotPie()
         {
@@ -14,62 +13,52 @@
         /// <summary>
         /// Enable the plugin and draw as a pie.
         /// </summary>
-        [FlotProperty]
-        public bool Show = true;
+        public bool? Show { get; set; }
 
         /// <summary>
         ///  Sets the radius of the pie. If value is between 0 and 1 (inclusive) then it will use that as a percentage of the available space (size of the container), otherwise it will use the value as a direct pixel length. If set to 'auto', it will be set to 1 if the legend is enabled and 3/4 if not.
         /// </summary>
-        [FlotProperty(SerializationOptions=FlotSerializationOptions.QuoteValue)]
-        public string Radius = "auto";
+        public string Radius { get; set; } = "auto";
 
         /// <summary>
         /// Sets the radius of the donut hole. If value is between 0 and 1 (inclusive) then it will use that as a percentage of the radius, otherwise it will use the value as a direct pixel length.
         /// </summary>
-        [FlotProperty]
-        public double InnerRadius = 0;
+        public double? InnerRadius { get; set; }
 
         /// <summary>
         /// Factor of pi used for the starting angle (in radians) It can range between 0 and 2 (where 0 and 2 have the same result).
         /// </summary>
-        [FlotProperty]
-        public double StartAngle = 3.0 / 2.0;
+        public double? StartAngle { get; set; }
 
         /// <summary>
         /// Percentage of tilt ranging from 0 and 1, where 1 has no change (fully vertical) and 0 is completely flat (fully horizontal -- in which case nothing actually gets drawn).
         /// </summary>
-        [FlotProperty]
-        public int Tilt = 1;
+        public double? Tilt { get; set; }
 
         /// <summary>
         /// Positioning of the pie chart within the canvas.
         /// </summary>
-        [FlotProperty]
-        public FlotPieOffset Offset = new FlotPieOffset();
+        public FlotPieOffset Offset { get; set; }
 
         /// <summary>
         /// Pie slice borders.
         /// </summary>
-        [FlotProperty]
-        public FlotPieStroke Stroke = new FlotPieStroke();
+        public FlotPieStroke Stroke { get; set; }
 
         /// <summary>
         /// Pie slice label.
         /// </summary>
-        [FlotProperty]
-        public FlotPieLabel Label = new FlotPieLabel();
+        public FlotPieLabel Label { get; set; }
 
         /// <summary>
         /// Combines slices that are smaller than the specified percentage.
         /// </summary>
-        [FlotProperty]
-        public FlotPieCombine Combine = new FlotPieCombine();
+        public FlotPieCombine Combine { get; set; }
 
         /// <summary>
         /// This option is not used because any value causes the hover to fill the slice black. The manual says this:
         /// Opacity of the highlight overlay on top of the current pie slice. Currently this just uses a white overlay, but support for changing the color of the overlay will also be added at a later date.
         /// </summary>
-        // [FlotProperty]
-        public double Highlight = 0.5;
+        public double? Highlight { get; set; }
     }
 }

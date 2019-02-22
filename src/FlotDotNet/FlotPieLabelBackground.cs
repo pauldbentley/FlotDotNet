@@ -3,19 +3,16 @@
     /// <summary>
     /// Pie slice label background.
     /// </summary>
-    [FlotProperty]
-    public class FlotPieLabelBackground : FlotElement
+    public class FlotPieLabelBackground
     {
         /// <summary>
         /// Colour of the label background.
         /// </summary>
-        [FlotProperty(SerializationOptions = FlotSerializationOptions.QuoteValue)]
-        public string Color = "#000";
+        public string Color { get; set; } = "#000";
 
         /// <summary>
         /// Opacity of the label background
         /// </summary>
-        [FlotProperty]
-        public double Opacity = 0.5;
+        public double Opacity { get; set; } = 0.5;
     }
 }
