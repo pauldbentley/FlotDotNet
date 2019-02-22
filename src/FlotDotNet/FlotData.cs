@@ -3,8 +3,11 @@
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
 
+    /// <summary>
+    /// A Flot data item.
+    /// </summary>
     [JsonConverter(typeof(FlotConverter))]
-    public class FlotData
+    public abstract class FlotData
     {
     }
 }

@@ -18,7 +18,7 @@
         /// <summary>
         ///  Sets the radius of the pie. If value is between 0 and 1 (inclusive) then it will use that as a percentage of the available space (size of the container), otherwise it will use the value as a direct pixel length. If set to 'auto', it will be set to 1 if the legend is enabled and 3/4 if not.
         /// </summary>
-        public string Radius { get; set; } = "auto";
+        public string Radius { get; set; }
 
         /// <summary>
         /// Sets the radius of the donut hole. If value is between 0 and 1 (inclusive) then it will use that as a percentage of the radius, otherwise it will use the value as a direct pixel length.

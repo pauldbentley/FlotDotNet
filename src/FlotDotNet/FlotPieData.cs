@@ -7,7 +7,6 @@
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FlotPieData"/> class with a value and a label.
-        /// Use this is for Pie charts.
         /// </summary>
         /// <param name="label">The label.</param>
         /// <param name="value">The value.</param>
