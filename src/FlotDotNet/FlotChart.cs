@@ -138,24 +138,49 @@
         [JsonProperty(PropertyName = "placeholder")]
         private JRaw PlaceholderObject => new JRaw("$(\"#" + PlaceholderId + "\")");
 
-        [JsonProperty]
-        private JRaw PlotChart => new JRaw("function(){this.plotData(Object.keys(this.data));}");
+        [JsonIgnore]
+        private JRaw PlotChartStandard => new JRaw("function(keys){var t=this;var d=[];if(keys===undefined){keys=Object.keys(this.data);}for(var i=0; i<keys.length; i++){var k=keys[i];if(t.data[k]){d.push(t.data[k]);}}t.plot=$.plot(t.placeholder,d,t.options);}");
+
+        [JsonIgnore]
+        private JRaw PlotChartPie => new JRaw("function(){var t=this;t.plot=$.plot(t.placeholder,t.data,t.options);}");
 
         [JsonProperty]
-        private JRaw PlotData => new JRaw("function(keys){var d=[];var t=this;for(var i=0; i<keys.length; i++){var k=keys[i];if(t.data[k]){d.push(t.data[k]);}}t.plot=$.plot(t.placeholder,d,t.options);}");
+        private JRaw PlotChart => Pie.Show == true ? PlotChartPie : PlotChartStandard;
 
         [JsonProperty]
-        private Dictionary<string, FlotSeries> Data
+        private object Data
         {
             get
             {
                 if (!Series.Any())
                 {
-                    return new Dictionary<string, FlotSeries>();
+                    return Array.Empty<object>();
+                }
+
+                if (Pie.Show == true)
+                {
+                    // The Pie plugin assumes that each series has a single data value
+                    // Each Series is converted into a single data array.
+                    // var data = [
+                    // { label: "Series A",  data: 0.2063},
+                    // { label: "Series B",  data: 38888}
+                    // ];
+                    // so we take the label from each series
+                    // and the first data item
+                    return Series
+                        .Select(s => new
+                        {
+                            s.Label,
+                            Data = s.Data.Any() ? (double?)s.Data.First().Y : null
+                        });
                 }
 
                 return Series
-                    .Select(s => new { Key = s.Id, Value = s })
+                    .Select(s => new
+                    {
+                        Key = s.Id,
+                        Value = (object)s
+                    })
                     .ToDictionary(k => k.Key, v => v.Value);
             }
         }

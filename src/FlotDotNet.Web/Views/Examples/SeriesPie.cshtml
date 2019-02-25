@@ -28,7 +28,8 @@
             width: 200px;
         }
 
-            #menu button
+            #menu button,
+            #menu a
             {
                 display: inline-block;
                 width: 200px;
@@ -44,6 +45,10 @@
                 -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.15);
                 box-shadow: 0 1px 2px rgba(0,0,0,0.15);
                 cursor: pointer;
+                text-decoration: none;
+                color: #000;
+                text-align: center;
+                box-sizing: border-box;
             }
 
         #description
@@ -119,42 +124,10 @@
             //	{ label: "Series B",  data: 38888}
             //];
 
-            var placeholder = $("#placeholder");
+            var placeholder = $("#@Model.Chart.PlaceholderId");
             placeholder.unbind();
             setCode(["@Html.Raw(string.Join("\",\"", Model.Code))"]);
             chart.plotChart();
-
-            $("#example-2").click(function()
-            {
-                placeholder.unbind();
-
-                $("#title").text("Default without legend");
-                $("#description").text("The default pie chart when the legend is disabled. Since the labels would normally be outside the container, the chart is resized to fit.");
-
-                $.plot(placeholder, data, {
-                    series: {
-                        pie: {
-                            show: true
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                });
-
-                setCode([
-                    "$.plot('#placeholder', data, {",
-                    "    series: {",
-                    "        pie: {",
-                    "            show: true",
-                    "        }",
-                    "    },",
-                    "    legend: {",
-                    "        show: false",
-                    "    }",
-                    "});"
-                ]);
-            });
 
             $("#example-3").click(function()
             {
@@ -666,10 +639,10 @@
 
 <h3 id="title">@Model.Title</h3>
 <div class="demo-container">
-    <div id="placeholder" class="demo-placeholder"></div>
+    <div id="@Model.Chart.PlaceholderId" class="demo-placeholder"></div>
     <div id="menu">
         <a asp-route-example="1">Default Options</a>
-        <button id="example-2">Without Legend</button>
+        <a asp-route-example="2">Without Legend</a>
         <button id="example-3">Label Formatter</button>
         <button id="example-4">Label Radius</button>
         <button id="example-5">Label Styles #1</button>
