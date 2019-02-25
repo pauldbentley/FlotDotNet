@@ -94,6 +94,18 @@
 
 @section Scripts {
     <script src="~/lib/flot/jquery.flot.pie.js"></script>
+    <script type="text/javascript">
+        function labelFormatter(label, series)
+        {
+            return "<div style='font-size:8pt; text-align:center; padding:2px; color:white;'>" + label + "<br/>" + Math.round(series.percent) + "%</div>";
+        }
+
+        function setCode(lines)
+        {
+            $("#code").text(lines.join("\n"));
+        }
+    </script>
+
     @Html.Raw(Model.Chart.Plot(false));
     <script type="text/javascript">
 
@@ -643,7 +655,7 @@
     <div id="menu">
         <a asp-route-example="1">Default Options</a>
         <a asp-route-example="2">Without Legend</a>
-        <button id="example-3">Label Formatter</button>
+        <a asp-route-example="3">Label Formatter</a>
         <button id="example-4">Label Radius</button>
         <button id="example-5">Label Styles #1</button>
         <button id="example-6">Label Styles #2</button>

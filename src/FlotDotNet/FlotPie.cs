@@ -1,5 +1,7 @@
 ﻿namespace FlotDotNet
 {
+    using FlotDotNet.Infrastruture;
+
     /// <summary>
     /// Options for display of pie charts.
     /// See http://people.iola.dk/olau/flot/examples/pie.html
@@ -18,7 +20,7 @@
         /// <summary>
         ///  Sets the radius of the pie. If value is between 0 and 1 (inclusive) then it will use that as a percentage of the available space (size of the container), otherwise it will use the value as a direct pixel length. If set to 'auto', it will be set to 1 if the legend is enabled and 3/4 if not.
         /// </summary>
-        public string Radius { get; set; }
+        public AutoValue<decimal> Radius { get; set; }
 
         /// <summary>
         /// Sets the radius of the donut hole. If value is between 0 and 1 (inclusive) then it will use that as a percentage of the radius, otherwise it will use the value as a direct pixel length.
@@ -48,7 +50,7 @@
         /// <summary>
         /// Pie slice label.
         /// </summary>
-        public FlotPieLabel Label { get; set; }
+        public FlotPieLabel Label { get; } = new FlotPieLabel();
 
         /// <summary>
         /// Combines slices that are smaller than the specified percentage.
@@ -60,5 +62,7 @@
         /// Opacity of the highlight overlay on top of the current pie slice. Currently this just uses a white overlay, but support for changing the color of the overlay will also be added at a later date.
         /// </summary>
         public double? Highlight { get; set; }
+
+        public bool ShouldSerializeLabel() => SerializationHelper.ShouldSerialize(Label);
     }
 }

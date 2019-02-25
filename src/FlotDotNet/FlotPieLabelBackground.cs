@@ -8,11 +8,11 @@
         /// <summary>
         /// Colour of the label background.
         /// </summary>
-        public string Color { get; set; } = "#000";
+        public FlotColor Color { get; set; }
 
         /// <summary>
         /// Opacity of the label background
         /// </summary>
-        public double Opacity { get; set; } = 0.5;
+        public double? Opacity { get; set; }
     }
 }

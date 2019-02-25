@@ -17,7 +17,7 @@
         /// Initializes a new instance of the <see cref="FlotColor"/> class with the specified CSS color.
         /// </summary>
         /// <param name="color">The CSS color.</param>
-        public FlotColor(string color)
+        internal FlotColor(string color)
         {
             if (color == null)
             {
@@ -37,7 +37,7 @@
         /// specifies which of auto-generated colors to select.
         /// </summary>
         /// <param name="index">The index of the auto-generated color to select.</param>
-        public FlotColor(int index)
+        internal FlotColor(int index)
         {
             if (index < 0)
             {
