@@ -1,17 +1,20 @@
 ﻿namespace FlotDotNet
 {
+    using FlotDotNet.Infrastruture;
+    using Newtonsoft.Json;
+
     /// <summary>
     /// Represents an x,y-pair to be plotted on a chart.
-    /// Use for bar, line, and scatter plots.
     /// </summary>
-    public sealed class FlotChartData : FlotData
+    [JsonConverter(typeof(FlotConverter))]
+    public sealed class FlotDataPoint
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FlotChartData"/> class with specific x-y values.
+        /// Initializes a new instance of the <see cref="FlotDataPoint"/> class with specific x-y values.
         /// </summary>
         /// <param name="x">The value for the x-axis</param>
         /// <param name="y">The value for the y-axis</param>
-        public FlotChartData(double x, double y)
+        public FlotDataPoint(double x, double y)
         {
             X = x;
             Y = y;
@@ -28,7 +31,7 @@
         public double Y { get; }
 
         /// <summary>
-        /// Serialized the <see cref="FlotChartData"/> to an object for JSON output.
+        /// Serialized the <see cref="FlotDataPoint"/> to an object for JSON output.
         /// </summary>
         /// <returns>An object for JSON output.</returns>
         internal object Serialize()

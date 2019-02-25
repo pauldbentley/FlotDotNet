@@ -149,6 +149,11 @@
         {
             get
             {
+                if (!Series.Any())
+                {
+                    return new Dictionary<string, FlotSeries>();
+                }
+
                 return Series
                     .Select(s => new { Key = s.Id, Value = s })
                     .ToDictionary(k => k.Key, v => v.Value);

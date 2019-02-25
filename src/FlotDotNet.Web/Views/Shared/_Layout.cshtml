@@ -5,6 +5,7 @@
     <title>Flot Examples: @ViewData["Title"]</title>
 
     <link rel="stylesheet" href="~/lib/flot/examples/examples.css" />
+    @RenderSection("Styles", required: false)
 </head>
 <body>
 
@@ -20,6 +21,7 @@
         Copyright &copy; 2007 - 2014 IOLA and Ole Laursen
     </div>
 
+    <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="~/lib/flot/excanvas.js"></script><![endif]-->
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/lib/flot/jquery.flot.js"></script>
 

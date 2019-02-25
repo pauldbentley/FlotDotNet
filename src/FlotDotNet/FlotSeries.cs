@@ -14,7 +14,7 @@
         /// Initializes a new instance of the <see cref="FlotSeries"/> class.
         /// </summary>
         /// <param name="id">The identifier for the series.</param>
-        internal FlotSeries(string id)
+        public FlotSeries(string id)
         {
             Id = id;
         }
@@ -41,7 +41,7 @@
         /// <summary>
         /// Gets the data which will be plotted on the chart.
         /// </summary>
-        public List<FlotData> Data { get; } = new List<FlotData>();
+        public List<FlotDataPoint> Data { get; } = new List<FlotDataPoint>();
 
         /// <summary>
         /// Gets the thresholds (requires the threshold plugin).
@@ -70,11 +70,6 @@
         /// Gets the options for displaying lines on the series.
         /// </summary>
         public FlotLines Lines { get; } = new FlotLines();
-
-        /// <summary>
-        /// To create the Pie series, call CreateSeriesPie on a chart object.
-        /// </summary>
-        // public FlotPie Pie { get; set; }
 
         /// <summary>
         /// The 1-based index of the X-axis against which this data series is to be plotted.
