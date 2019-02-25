@@ -141,108 +141,6 @@
             setCode(["@Html.Raw(string.Join("\",\"", Model.Code))"]);
             chart.plotChart();
 
-            $("#example-3").click(function()
-            {
-
-                placeholder.unbind();
-
-                $("#title").text("Custom Label Formatter");
-                $("#description").text("Added a semi-transparent background to the labels and a custom labelFormatter function.");
-
-                $.plot(placeholder, data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 1,
-                            label: {
-                                show: true,
-                                radius: 1,
-                                formatter: labelFormatter,
-                                background: {
-                                    opacity: 0.8
-                                }
-                            }
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                });
-
-                setCode([
-                    "$.plot('#placeholder', data, {",
-                    "    series: {",
-                    "        pie: {",
-                    "            show: true,",
-                    "            radius: 1,",
-                    "            label: {",
-                    "                show: true,",
-                    "                radius: 1,",
-                    "                formatter: labelFormatter,",
-                    "                background: {",
-                    "                    opacity: 0.8",
-                    "                }",
-                    "            }",
-                    "        }",
-                    "    },",
-                    "    legend: {",
-                    "        show: false",
-                    "    }",
-                    "});"
-                ]);
-            });
-
-            $("#example-4").click(function()
-            {
-
-                placeholder.unbind();
-
-                $("#title").text("Label Radius");
-                $("#description").text("Slightly more transparent label backgrounds and adjusted the radius values to place them within the pie.");
-
-                $.plot(placeholder, data, {
-                    series: {
-                        pie: {
-                            show: true,
-                            radius: 1,
-                            label: {
-                                show: true,
-                                radius: 3 / 4,
-                                formatter: labelFormatter,
-                                background: {
-                                    opacity: 0.5
-                                }
-                            }
-                        }
-                    },
-                    legend: {
-                        show: false
-                    }
-                });
-
-                setCode([
-                    "$.plot('#placeholder', data, {",
-                    "    series: {",
-                    "        pie: {",
-                    "            show: true,",
-                    "            radius: 1,",
-                    "            label: {",
-                    "                show: true,",
-                    "                radius: 3/4,",
-                    "                formatter: labelFormatter,",
-                    "                background: {",
-                    "                    opacity: 0.5",
-                    "                }",
-                    "            }",
-                    "        }",
-                    "    },",
-                    "    legend: {",
-                    "        show: false",
-                    "    }",
-                    "});"
-                ]);
-            });
-
             $("#example-5").click(function()
             {
 
@@ -656,7 +554,7 @@
         <a asp-route-example="1">Default Options</a>
         <a asp-route-example="2">Without Legend</a>
         <a asp-route-example="3">Label Formatter</a>
-        <button id="example-4">Label Radius</button>
+        <a asp-route-example="4">Label Radius</a>
         <button id="example-5">Label Styles #1</button>
         <button id="example-6">Label Styles #2</button>
         <button id="example-7">Hidden Labels</button>

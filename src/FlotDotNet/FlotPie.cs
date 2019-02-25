@@ -6,7 +6,7 @@
     /// Options for display of pie charts.
     /// See http://people.iola.dk/olau/flot/examples/pie.html
     /// </summary>
-    public partial class FlotPie
+    public sealed class FlotPie
     {
         internal FlotPie()
         {

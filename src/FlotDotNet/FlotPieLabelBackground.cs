@@ -3,8 +3,15 @@
     /// <summary>
     /// Pie slice label background.
     /// </summary>
-    public class FlotPieLabelBackground
+    public sealed class FlotPieLabelBackground
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FlotPieLabelBackground"/> class.
+        /// </summary>
+        internal FlotPieLabelBackground()
+        {
+        }
+
         /// <summary>
         /// Colour of the label background.
         /// </summary>

@@ -40,6 +40,7 @@ namespace FlotDotNet.Web.Models.Examples
                 yield return Example1;
                 yield return Example2;
                 yield return Example3;
+                yield return Example4;
             }
         }
 
@@ -115,6 +116,43 @@ namespace FlotDotNet.Web.Models.Examples
             label.Radius = 1;
             label.Formatter = "labelFormatter";
             label.Background.Opacity = 0.8;
+        }
+
+        private void Example4()
+        {
+            Title = "Label Radius";
+            Description = "Slightly more transparent label backgrounds and adjusted the radius values to place them within the pie.";
+            Code = new[]
+            {
+                "$.plot('#placeholder', data, {",
+                "    series: {",
+                "        pie: {",
+                "            show: true,",
+                "            radius: 1,",
+                "            label: {",
+                "                show: true,",
+                "                radius: 3/4,",
+                "                formatter: labelFormatter,",
+                "                background: {",
+                "                    opacity: 0.5",
+                "                }",
+                "            }",
+                "        }",
+                "    },",
+                "    legend: {",
+                "        show: false",
+                "    }",
+                "});"
+            };
+
+            Chart.Legend.Show = false;
+            Chart.Pie.Radius = 1;
+
+            var label = Chart.Pie.Label;
+            label.Show = true;
+            label.Radius = 3 / 4d;
+            label.Formatter = "labelFormatter";
+            label.Background.Opacity = 0.5;
         }
     }
 }

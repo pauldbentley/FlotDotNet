@@ -8,6 +8,9 @@
     /// </summary>
     public sealed class FlotPieLabel
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FlotPieLabel"/> class.
+        /// </summary>
         internal FlotPieLabel()
         {
         }
