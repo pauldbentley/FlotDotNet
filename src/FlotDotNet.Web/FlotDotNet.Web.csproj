@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Content Update="Views\Examples\SeriesPie.cshtml">
+    <Content Update="Views\Examples\Stacking.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Views\Examples\Threshold.cshtml">

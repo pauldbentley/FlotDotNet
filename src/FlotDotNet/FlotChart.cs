@@ -91,6 +91,12 @@
         public FlotBars Bars { get; } = new FlotBars();
 
         /// <summary>
+        /// Gets or sets the stack option for this chart.
+        /// </summary>
+        [JsonIgnore]
+        public FlotStack Stack { get; set; }
+
+        /// <summary>
         /// Gets the options for displaying lines on the chart
         /// </summary>
         [JsonIgnore]
@@ -195,11 +201,12 @@
                 var bars = SerializationHelper.ShouldSerialize(Bars) ? Bars : null;
                 var points = SerializationHelper.ShouldSerialize(Points) ? Points : null;
                 var lines = SerializationHelper.ShouldSerialize(Lines) ? Lines : null;
+                var stack = Stack?.Value;
                 var pie = SerializationHelper.ShouldSerialize(Pie) ? Pie : null;
 
-                var series = (bars == null && points == null && lines == null && pie == null)
+                var series = (bars == null && points == null && lines == null && stack == null && pie == null)
                     ? null
-                    : new { bars, points, lines, pie };
+                    : new { bars, points, lines, stack, pie };
 
                 // We will always return an options property
                 // we still need this even if it is empty
