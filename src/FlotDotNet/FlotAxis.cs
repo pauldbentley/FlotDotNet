@@ -1,7 +1,7 @@
 ﻿namespace FlotDotNet
 {
-    using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     /// <summary>
     /// Represents an axis on the chart.
@@ -74,22 +74,22 @@
         /// Gets or sets a callback you can put in to change the way the data is drawn.
         /// Value can be null or fn: number -> number
         /// </summary>
-        [JsonConverter(typeof(RawValueConverter))]
+        [JsonIgnore]
         public string Transform { get; set; }
 
         /// <summary>
         /// Gets or sets a callback you can put in to change the way the data is drawn.
         /// Value can be null or fn: number -> number
         /// </summary>
-        [JsonConverter(typeof(RawValueConverter))]
+        [JsonIgnore]
         public string InverseTransform { get; set; }
 
         /// <summary>
         /// Gets or sets the chart ticks.
         /// If you don't specify any ticks, a tick generator algorithm will make some for you.
-        /// If you don't want any ticks at all, set to 0.
+        /// If you don't want any ticks at all, set to 0 or an empty array.
         /// </summary>
-        public FlotTickOptions Ticks { get; set; } = new FlotTickOptions();
+        public FlotTickOptions Ticks { get; set; }
 
         /// <summary>
         /// Gets or sets the tick interval size.
@@ -107,7 +107,7 @@
         /// The function is passed two parameters, the tick value and an axis object with information,
         /// and should return a string.
         /// </summary>
-        [JsonConverter(typeof(RawValueConverter))]
+        [JsonIgnore]
         public string TickFormatter { get; set; }
 
         /// <summary>
@@ -151,10 +151,13 @@
         [JsonProperty(PropertyName = "timeformat")]
         public string TimeFormat { get; set; }
 
-        /// <summary>
-        /// Tests if the <see cref="Ticks"/> property should be serialized.
-        /// </summary>
-        /// <returns>true if the <see cref="Ticks"/> should be serialized; otherwise, false.</returns>
-        public bool ShouldSerializeTicks() => SerializationHelper.ShouldSerialize(Ticks);
+        [JsonProperty(PropertyName = nameof(Transform))]
+        private JRaw TransformRaw => string.IsNullOrEmpty(Transform) ? null : new JRaw(Transform);
+
+        [JsonProperty(PropertyName = nameof(InverseTransform))]
+        private JRaw InverseTransformRaw => string.IsNullOrEmpty(InverseTransform) ? null : new JRaw(InverseTransform);
+
+        [JsonProperty(PropertyName = nameof(TickFormatter))]
+        private JRaw TickFormatterRaw => string.IsNullOrEmpty(TickFormatter) ? null : new JRaw(TickFormatter);
     }
 }

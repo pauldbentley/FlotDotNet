@@ -128,11 +128,14 @@ namespace FlotDotNet.Web.Controllers
                 d3.Data.Add(i, Math.Tan(i));
             }
 
-            chart.XAxis.Ticks.Add(0);
-            chart.XAxis.Ticks.Add(Math.PI / 2, "\u03c0/2");
-            chart.XAxis.Ticks.Add(Math.PI, "\u03c0");
-            chart.XAxis.Ticks.Add(Math.PI * 3 / 2, "3\u03c0/2");
-            chart.XAxis.Ticks.Add(Math.PI * 2, "2\u03c0");
+            chart.XAxis.Ticks = new FlotTickOptions
+            {
+                0,
+                { Math.PI / 2, "\u03c0/2" },
+                { Math.PI, "\u03c0" },
+                { Math.PI * 3 / 2, "3\u03c0/2" },
+                { Math.PI * 2, "2\u03c0" }
+            };
 
             chart.YAxis.Ticks = 10;
             chart.YAxis.Min = -2;
@@ -259,7 +262,10 @@ namespace FlotDotNet.Web.Controllers
                 d1.Data.Add(i, Convert.ToInt32((random.NextDouble() * 30) - 10));
             }
 
-            d1.Thresholds.Add(0, "rgb(200, 20, 30)");
+            d1.Thresholds = new List<FlotThreshold>
+            {
+                { 0, "rgb(200, 20, 30)" }
+            };
 
             return View(chart);
         }

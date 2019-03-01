@@ -198,11 +198,11 @@
             {
                 // The series property is serialized
                 // if any of these properties are set
-                var bars = SerializationHelper.ShouldSerialize(Bars) ? Bars : null;
-                var points = SerializationHelper.ShouldSerialize(Points) ? Points : null;
-                var lines = SerializationHelper.ShouldSerialize(Lines) ? Lines : null;
-                var stack = Stack?.Value;
-                var pie = SerializationHelper.ShouldSerialize(Pie) ? Pie : null;
+                var bars = SerializationHelper.ShouldSerializeOrDefault(Bars);
+                var points = SerializationHelper.ShouldSerializeOrDefault(Points);
+                var lines = SerializationHelper.ShouldSerializeOrDefault(Lines);
+                var pie = SerializationHelper.ShouldSerializeOrDefault(Pie);
+                var stack = Stack;
 
                 var series = (bars == null && points == null && lines == null && stack == null && pie == null)
                     ? null
@@ -212,12 +212,12 @@
                 // we still need this even if it is empty
                 return new
                 {
-                    Legend = SerializationHelper.ShouldSerialize(Legend) ? Legend : null,
+                    Legend = SerializationHelper.ShouldSerializeOrDefault(Legend),
                     Xaxes = XAxes.Any() ? XAxes : null,
                     Yaxes = YAxes.Any() ? YAxes : null,
                     Xaxis = !XAxes.Any() && SerializationHelper.ShouldSerialize(XAxis) ? XAxis : null,
                     Yaxis = !YAxes.Any() && SerializationHelper.ShouldSerialize(YAxis) ? YAxis : null,
-                    Grid = SerializationHelper.ShouldSerialize(Grid) ? Grid : null,
+                    Grid = SerializationHelper.ShouldSerializeOrDefault(Grid),
                     Series = series
                 };
             }

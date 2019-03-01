@@ -1,17 +1,17 @@
 namespace FlotDotNet.Tests
 {
-    using Newtonsoft.Json;
+    using FlotDotNet.Infrastruture;
     using Shouldly;
     using Xunit;
 
     public class FlotAxisTests
     {
         [Fact]
-        public void FlotAxis_Empty_ShouldSerialize()
+        public void WhenEmpty_ShouldNotSerialize()
         {
             var axis = new FlotAxis();
-            string actual = JsonConvert.SerializeObject(axis, FlotConfiguration.SerializerSettings);
-            actual.ShouldBe("{}");
+            bool actual = SerializationHelper.ShouldSerialize(axis);
+            actual.ShouldBe(false);
         }
     }
 }
