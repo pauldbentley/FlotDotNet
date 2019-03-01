@@ -1,24 +1,26 @@
 ﻿namespace FlotDotNet
 {
+    using System.Diagnostics;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
 
     [JsonConverter(typeof(FlotConverter))]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + "()}")]
     public sealed class FlotFill
     {
-        public FlotFill(double number)
+        private FlotFill(double number)
         {
             Number = number;
         }
 
-        public FlotFill(bool full)
+        private FlotFill(bool full)
         {
             Full = full;
         }
 
-        public double? Number { get; }
+        private double? Number { get; }
 
-        public bool? Full { get; }
+        private bool? Full { get; }
 
         public static implicit operator FlotFill(double number) => new FlotFill(number);
 
@@ -35,5 +37,7 @@
                 return Full;
             }
         }
+
+        private object DebuggerDisplay() => Serialize();
     }
 }

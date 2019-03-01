@@ -44,11 +44,10 @@
         public List<FlotDataPoint> Data { get; } = new List<FlotDataPoint>();
 
         /// <summary>
-        /// Gets the thresholds (requires the threshold plugin).
+        /// Gets or sets the thresholds (requires the threshold plugin).
         /// </summary>
-        [JsonProperty(PropertyName = "threshold")]
-        [JsonConverter(typeof(SingleItemOrListConverter))]
-        public List<FlotThreshold> Thresholds { get; } = new List<FlotThreshold>();
+        [JsonIgnore]
+        public List<FlotThreshold> Thresholds { get; set; }
 
         /// <summary>
         /// Gets or sets the label.
@@ -112,16 +111,30 @@
         [JsonExtensionData]
         public Dictionary<string, object> Attributes { get; } = new Dictionary<string, object>();
 
+        [JsonProperty(PropertyName = "threshold")]
+        private object ThresholdsObject
+        {
+            get
+            {
+                if (Thresholds == null || !Thresholds.Any())
+                {
+                    return null;
+                }
+                else if (Thresholds.Count() == 1)
+                {
+                    return Thresholds.First();
+                }
+                else
+                {
+                    return Thresholds;
+                }
+            }
+        }
+
         public bool ShouldSerializePoints() => SerializationHelper.ShouldSerialize(Points);
 
         public bool ShouldSerializeBars() => SerializationHelper.ShouldSerialize(Bars);
 
         public bool ShouldSerializeLines() => SerializationHelper.ShouldSerialize(Lines);
-
-        /// <summary>
-        /// Tests if the <see cref="Thresholds"/> property should be serialized.
-        /// </summary>
-        /// <returns>true if the <see cref="Thresholds"/> should be serialized; otherwise, false.</returns>
-        public bool ShouldSerializeThresholds() => Thresholds.Any();
     }
 }

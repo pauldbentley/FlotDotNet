@@ -1,59 +1,29 @@
 ﻿namespace FlotDotNet
 {
     using System.Diagnostics;
+    using FlotDotNet.Infrastruture;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Flot plugin for stacking data sets rather than overlyaing them.
     /// </summary>
+    [JsonConverter(typeof(FlotConverter))]
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + "()}")]
     public sealed class FlotStack
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FlotStack"/> class with a specified boolean value.
-        /// </summary>
-        /// <param name="value">The value.</param>
-        internal FlotStack(bool value)
+        private FlotStack(bool value)
         {
             BoolValue = value;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FlotStack"/> class with a specified string key.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        internal FlotStack(string key)
+        private FlotStack(string key)
         {
             StringKey = key;
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="FlotStack"/> class with a specified number key.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        internal FlotStack(int key)
+        private FlotStack(int key)
         {
             NumberKey = key;
-        }
-
-        /// <summary>
-        /// Gets the value.
-        /// </summary>
-        internal object Value
-        {
-            get
-            {
-                if (BoolValue.HasValue)
-                {
-                    return BoolValue;
-                }
-
-                if (NumberKey.HasValue)
-                {
-                    return NumberKey;
-                }
-
-                return StringKey;
-            }
         }
 
         private bool? BoolValue { get; set; }
@@ -80,6 +50,25 @@
         /// <param name="key">The key.</param>
         public static implicit operator FlotStack(int key) => new FlotStack(key);
 
-        private object DebuggerDisplay() => Value;
+        /// <summary>
+        /// Serialized the <see cref="FlotStack"/> to an object for JSON output.
+        /// </summary>
+        /// <returns>An object for JSON output.</returns>
+        internal object Serialize()
+        {
+            if (BoolValue.HasValue)
+            {
+                return BoolValue;
+            }
+
+            if (NumberKey.HasValue)
+            {
+                return NumberKey;
+            }
+
+            return StringKey;
+        }
+
+        private object DebuggerDisplay() => Serialize();
     }
 }

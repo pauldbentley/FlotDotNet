@@ -7,10 +7,7 @@
     {
         public override bool CanRead => false;
 
-        public override bool CanConvert(Type objectType)
-        {
-            return SerializationHelper.GetSerializeMethod(objectType) != null;
-        }
+        public override bool CanConvert(Type objectType) => true;
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
@@ -24,10 +21,6 @@
             {
                 var data = method.Invoke(value, null);
                 serializer.Serialize(writer, data);
-            }
-            else
-            {
-                throw new ArgumentException("Type does not define " + SerializationHelper.SerializeMethodName + "() method.", nameof(value));
             }
         }
     }
