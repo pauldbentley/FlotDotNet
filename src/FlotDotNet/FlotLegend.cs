@@ -1,7 +1,7 @@
 ﻿namespace FlotDotNet
 {
-    using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     /// <summary>
     /// The legend is generated as a table with the data series labels and small label boxes with the color of the series.
@@ -17,7 +17,7 @@
         /// If you want to format the labels in some way, e.g. make them to links, you can pass in a function for "labelFormatter".
         /// The value can be null or (fn: string, series object -> string)
         /// </summary>
-        [JsonConverter(typeof(RawValueConverter))]
+        [JsonIgnore]
         public string LabelFormatter { get; set; }
 
         public FlotColor LabelBoxBorderColor { get; set; }
@@ -54,5 +54,8 @@
         /// The value can be null or jQuery object/DOM element/jQuery expression
         /// </summary>
         public string Container { get; set; }
+
+        [JsonProperty(PropertyName = nameof(LabelFormatter))]
+        private JRaw LabelFormatterRaw => string.IsNullOrEmpty(LabelFormatter) ? null : new JRaw(LabelFormatter);
     }
 }

@@ -25,10 +25,12 @@ namespace FlotDotNet.Tests
         [Fact]
         public void FlotTickOptions_WithTicks_ShouldSerialize()
         {
-            var options = new FlotTickOptions(1, 2, 3);
-            options.Add(4, 5, 6);
-            options.Add(7, "Seven");
-            options.Add(8, "Eight");
+            var options = new FlotTickOptions
+            {
+                { 1, 2, 3, 4, 5, 6 },
+                { 7, "Seven" },
+                { 8, "Eight" }
+            };
             string actual = JsonConvert.SerializeObject(options, FlotConfiguration.SerializerSettings);
             actual.ShouldBe("[1.0,2.0,3.0,4.0,5.0,6.0,[7.0,\"Seven\"],[8.0,\"Eight\"]]");
         }
