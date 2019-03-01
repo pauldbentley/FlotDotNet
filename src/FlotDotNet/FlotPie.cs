@@ -40,12 +40,12 @@
         /// <summary>
         /// Positioning of the pie chart within the canvas.
         /// </summary>
-        public FlotPieOffset Offset { get; set; }
+        public FlotPieOffset Offset { get; } = new FlotPieOffset();
 
         /// <summary>
         /// Pie slice borders.
         /// </summary>
-        public FlotPieStroke Stroke { get; set; }
+        public FlotPieStroke Stroke { get; } = new FlotPieStroke();
 
         /// <summary>
         /// Pie slice label.
@@ -55,7 +55,7 @@
         /// <summary>
         /// Combines slices that are smaller than the specified percentage.
         /// </summary>
-        public FlotPieCombine Combine { get; set; }
+        public FlotPieCombine Combine { get; } = new FlotPieCombine();
 
         /// <summary>
         /// This option is not used because any value causes the hover to fill the slice black. The manual says this:
@@ -63,6 +63,12 @@
         /// </summary>
         public double? Highlight { get; set; }
 
+        public bool ShouldSerializeOffset() => SerializationHelper.ShouldSerialize(Offset);
+
+        public bool ShouldSerializeStroke() => SerializationHelper.ShouldSerialize(Stroke);
+
         public bool ShouldSerializeLabel() => SerializationHelper.ShouldSerialize(Label);
+
+        public bool ShouldSerializeCombine() => SerializationHelper.ShouldSerialize(Combine);
     }
 }

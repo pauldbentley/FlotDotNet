@@ -2,6 +2,7 @@
 {
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     /// <summary>
     /// Pie slice label.
@@ -34,13 +35,16 @@
         /// This function specifies how the positioned labels should be formatted, and is applied after the legend's labelFormatter function. The labels can also still be styled using the class "pieLabel" (i.e. ".pieLabel" or "#graph1 .pieLabel").
         /// The value of this property must be valid JavaScript; it is not quoted by the serialisation.
         /// </summary>
-        [JsonConverter(typeof(RawValueConverter))]
+        [JsonIgnore]
         public string Formatter { get; set; }
 
         /// <summary>
         /// Background color of the positioned labels.
         /// </summary>
         public FlotPieLabelBackground Background { get; } = new FlotPieLabelBackground();
+
+        [JsonProperty(PropertyName = nameof(Formatter))]
+        private JRaw FormatterRaw => string.IsNullOrEmpty(Formatter) ? null : new JRaw(Formatter);
 
         public bool ShouldSerializeBackground() => SerializationHelper.ShouldSerialize(Background);
     }
