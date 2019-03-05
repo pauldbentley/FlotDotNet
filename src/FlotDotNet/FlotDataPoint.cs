@@ -1,5 +1,6 @@
 ﻿namespace FlotDotNet
 {
+    using System.Diagnostics;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
 
@@ -7,6 +8,7 @@
     /// Represents an x,y-pair to be plotted on a chart.
     /// </summary>
     [JsonConverter(typeof(FlotConverter))]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + "()}")]
     public sealed class FlotDataPoint
     {
         /// <summary>

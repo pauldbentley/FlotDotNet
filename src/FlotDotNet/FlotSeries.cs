@@ -1,5 +1,6 @@
 ﻿namespace FlotDotNet
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using FlotDotNet.Infrastruture;
@@ -16,6 +17,16 @@
         /// <param name="id">The identifier for the series.</param>
         public FlotSeries(string id)
         {
+            if (id == null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                throw new ArgumentOutOfRangeException(nameof(id));
+            }
+
             Id = id;
         }
 
@@ -77,7 +88,7 @@
         public int? XAxis { get; set; }
 
         /// <summary>
-        /// The 1-based index of the Y-axis against which this data series is to be plotted.
+        /// Gets or sets the 1-based index of the Y-axis against which this data series is to be plotted.
         /// </summary>
         [JsonProperty(PropertyName = "yaxis")]
         public int? YAxis { get; set; }
@@ -96,7 +107,8 @@
         public FlotColor HighlightColor { get; set; }
 
         /// <summary>
-        /// Value can be "left" or "center"
+        /// Gets or sets the bar alignment.
+        /// Value can be "left" or "center".
         /// </summary>
         public FlotBarAlign Align { get; set; }
 
@@ -126,10 +138,10 @@
             }
         }
 
-        public bool ShouldSerializePoints() => SerializationHelper.ShouldSerialize(Points);
+        private bool ShouldSerializePoints() => SerializationHelper.ShouldSerialize(Points);
 
-        public bool ShouldSerializeBars() => SerializationHelper.ShouldSerialize(Bars);
+        private bool ShouldSerializeBars() => SerializationHelper.ShouldSerialize(Bars);
 
-        public bool ShouldSerializeLines() => SerializationHelper.ShouldSerialize(Lines);
+        private bool ShouldSerializeLines() => SerializationHelper.ShouldSerialize(Lines);
     }
 }

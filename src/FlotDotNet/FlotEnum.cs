@@ -41,6 +41,10 @@
         /// </summary>
         public string Value { get; }
 
+        /// <summary>
+        /// Serialized the <see cref="FlotEnum"/> to an object for JSON output.
+        /// </summary>
+        /// <returns>An object for JSON output.</returns>
         protected internal string Serialize() => Value.ToLowerInvariant();
 
         private object DebuggerDisplay() => Name;

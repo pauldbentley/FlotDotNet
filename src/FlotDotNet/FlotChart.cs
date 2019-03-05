@@ -236,12 +236,6 @@
         }
 
         /// <summary>
-        /// Tests if the <see cref="Colors"/> property should be serialized.
-        /// </summary>
-        /// <returns>true if the <see cref="Colors"/> should be serialized; otherwise, false.</returns>
-        public bool ShouldSerializeColors() => Colors.Any();
-
-        /// <summary>
         /// Creates a new chart series and adds it to the series list.
         /// </summary>
         /// <param name="id">A unique identifier for the series.</param>
@@ -355,5 +349,7 @@
 
             return Placeholder(attributes);
         }
+
+        private bool ShouldSerializeColors() => Colors.Any();
     }
 }

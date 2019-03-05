@@ -17,7 +17,9 @@
         /// Initializes a new instance of the <see cref="FlotColor"/> class with the specified CSS color.
         /// </summary>
         /// <param name="color">The CSS color.</param>
-        internal FlotColor(string color)
+        /// <exception cref="ArgumentNullException">If <paramref name="color"/> is null.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">If <paramref name="color"/> is empty or whitespace.</exception>
+        public FlotColor(string color)
         {
             if (color == null)
             {
@@ -37,7 +39,8 @@
         /// specifies which of auto-generated colors to select.
         /// </summary>
         /// <param name="index">The index of the auto-generated color to select.</param>
-        internal FlotColor(int index)
+        /// <exception cref="ArgumentOutOfRangeException">If <paramref name="index"/> is less than 0.</exception>
+        public FlotColor(int index)
         {
             if (index < 0)
             {
@@ -73,7 +76,7 @@
         /// Serialized the <see cref="FlotColor"/> to an object for JSON output.
         /// </summary>
         /// <returns>An object for JSON output.</returns>
-        internal object Serialize()
+        private object Serialize()
         {
             if (Index.HasValue)
             {

@@ -11,32 +11,53 @@
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + "()}")]
     public sealed class FlotStack
     {
-        private FlotStack(bool value)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FlotStack"/> class with a boolean key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        public FlotStack(bool key)
         {
-            BoolValue = value;
+            BooleanKey = key;
         }
 
-        private FlotStack(string key)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FlotStack"/> class with a string key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        public FlotStack(string key)
         {
             StringKey = key;
         }
 
-        private FlotStack(int key)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FlotStack"/> class with a numeric key.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        public FlotStack(int key)
         {
-            NumberKey = key;
+            NumericKey = key;
         }
 
-        private bool? BoolValue { get; set; }
+        /// <summary>
+        /// Gets the boolean key.
+        /// </summary>
+        public bool? BooleanKey { get; }
 
-        private string StringKey { get; set; }
+        /// <summary>
+        /// Gets the string key.
+        /// </summary>
+        public string StringKey { get; }
 
-        private int? NumberKey { get; set; }
+        /// <summary>
+        /// Gets the numeric key.
+        /// </summary>
+        public int? NumericKey { get; }
 
         /// <summary>
         /// Creates a <see cref="FlotStack"/> from the specified boolean value.
         /// </summary>
-        /// <param name="value">The value.</param>
-        public static implicit operator FlotStack(bool value) => new FlotStack(value);
+        /// <param name="key">The key.</param>
+        public static implicit operator FlotStack(bool key) => new FlotStack(key);
 
         /// <summary>
         /// Creates a <see cref="FlotStack"/> from the specified string key.
@@ -56,14 +77,14 @@
         /// <returns>An object for JSON output.</returns>
         internal object Serialize()
         {
-            if (BoolValue.HasValue)
+            if (BooleanKey.HasValue)
             {
-                return BoolValue;
+                return BooleanKey;
             }
 
-            if (NumberKey.HasValue)
+            if (NumericKey.HasValue)
             {
-                return NumberKey;
+                return NumericKey;
             }
 
             return StringKey;

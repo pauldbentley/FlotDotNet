@@ -22,9 +22,9 @@
 
         private static void GuardNotNull(object collection)
         {
-            if (collection == null)
+            if (value == null)
             {
-                throw new ArgumentNullException(nameof(collection));
+                throw new ArgumentNullException(nameof(value));
             }
         }
     }

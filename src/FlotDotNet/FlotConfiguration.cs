@@ -3,12 +3,15 @@
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
 
+    /// <summary>
+    /// Configuration for FlotDotNet.
+    /// </summary>
     public static class FlotConfiguration
     {
         /// <summary>
-        /// Gets the settings used when reading JSON in the API.
+        /// Gets the settings used when serializing JSON.
         /// </summary>
-        internal static JsonSerializerSettings SerializerSettings { get; } = BuildSerializerSettings();
+        public static JsonSerializerSettings SerializerSettings { get; } = BuildSerializerSettings();
 
         private static JsonSerializerSettings BuildSerializerSettings()
         {

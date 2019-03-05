@@ -7,7 +7,7 @@ namespace FlotDotNet.Tests
     public class FlotTickOptionsTests
     {
         [Fact]
-        public void FlotTickOptions_WithFunction_ShouldSerialize()
+        public void WithFunction_ShouldSerialize()
         {
             var options = new FlotTickOptions("functionName");
             string actual = JsonConvert.SerializeObject(options, FlotConfiguration.SerializerSettings);
@@ -15,7 +15,7 @@ namespace FlotDotNet.Tests
         }
 
         [Fact]
-        public void FlotTickOptions_WithNumber_ShouldSerialize()
+        public void WithNumber_ShouldSerialize()
         {
             var options = new FlotTickOptions(1);
             string actual = JsonConvert.SerializeObject(options, FlotConfiguration.SerializerSettings);
@@ -23,14 +23,15 @@ namespace FlotDotNet.Tests
         }
 
         [Fact]
-        public void FlotTickOptions_WithTicks_ShouldSerialize()
+        public void WithTicks_ShouldSerialize()
         {
             var options = new FlotTickOptions
             {
-                { 1, 2, 3, 4, 5, 6 },
+                1, 2, 3, 4, 5, 6,
                 { 7, "Seven" },
                 { 8, "Eight" }
             };
+
             string actual = JsonConvert.SerializeObject(options, FlotConfiguration.SerializerSettings);
             actual.ShouldBe("[1.0,2.0,3.0,4.0,5.0,6.0,[7.0,\"Seven\"],[8.0,\"Eight\"]]");
         }
