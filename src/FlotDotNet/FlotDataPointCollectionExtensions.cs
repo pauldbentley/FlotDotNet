@@ -9,7 +9,7 @@
     public static class FlotDataPointCollectionExtensions
     {
         /// <summary>
-        /// Adds a <see cref="FlotDataPoint"/> to the end of the <see cref="ICollection{FlotData}"/>.
+        /// Adds a <see cref="FlotDataPoint"/> to the end of the <see cref="ICollection{T}"/>.
         /// </summary>
         /// <param name="collection">The collection.</param>
         /// <param name="x">The value of the x-axis.</param>
@@ -20,7 +20,7 @@
             collection.Add(new FlotDataPoint(x, y));
         }
 
-        private static void GuardNotNull(object collection)
+        private static void GuardNotNull(object value)
         {
             if (value == null)
             {
