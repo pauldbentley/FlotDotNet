@@ -1,5 +1,6 @@
 ﻿namespace FlotDotNet
 {
+    using System.Collections.Generic;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
 
@@ -17,7 +18,11 @@
         /// <summary>
         /// Color/gradient or null
         /// </summary>
-        public FlotColorGradient BackgroundColor { get; set; }
+        [JsonIgnore]
+        public FlotColor BackgroundColor { get; }
+
+        [JsonIgnore]
+        public List<string> BackgroundGradient { get; set; } = new List<string>();
 
         public int? LabelMargin { get; set; }
 
@@ -56,6 +61,32 @@
 
         public int? MouseActiveRadius { get; set; }
 
-        public bool ShouldSerializeBorderWidth() => SerializationHelper.ShouldSerialize(BorderWidth);
+        [JsonProperty(PropertyName = "backgroundColor")]
+        private object BackgroundColorObject
+        {
+            get
+            {
+                if (BackgroundColor != null)
+                {
+                    return BackgroundColor;
+                }
+
+                if (BackgroundGradient != null && BackgroundGradient.Count > 0)
+                {
+                    return new { Colors = BackgroundGradient };
+                }
+
+                return null;
+            }
+        }
+
+        private bool ShouldSerializeBorderWidth()
+        {
+            // 1 is the default border width
+            // so if all values are 1 we don't serialize
+            return
+                BorderWidth != null &&
+                (BorderWidth.Top > 1 || BorderWidth.Right > 1 || BorderWidth.Bottom > 1 || BorderWidth.Left > 1);
+        }
     }
 }

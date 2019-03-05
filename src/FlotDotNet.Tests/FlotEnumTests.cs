@@ -7,7 +7,7 @@ namespace FlotDotNet.Tests
     public class FlotEnumTests
     {
         [Fact]
-        public void FlotEnum_ShouldSerialize()
+        public void ShouldSerialize()
         {
             var testEnum = new TestEnum("TestEnum");
             string actual = JsonConvert.SerializeObject(testEnum, FlotConfiguration.SerializerSettings);

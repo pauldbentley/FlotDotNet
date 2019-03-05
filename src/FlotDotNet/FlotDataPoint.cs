@@ -1,5 +1,6 @@
 ﻿namespace FlotDotNet
 {
+    using System.Diagnostics;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
 
@@ -7,6 +8,7 @@
     /// Represents an (x,y)-pair to be plotted on a chart, or a (label,value)-pair to be plotted on a pie chart.
     /// </summary>
     [JsonConverter(typeof(FlotConverter))]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + "()}")]
     public sealed class FlotDataPoint
     {
         /// <summary>
@@ -63,6 +65,10 @@
         /// </summary>
         public string Label { get; }
 
+        /// <summary>
+        /// Serialized the <see cref="FlotDataPoint"/> to an object for JSON output.
+        /// </summary>
+        /// <returns>An object for JSON output.</returns>
         internal object Serialize()
         {
             // TODO ** ADDED **
@@ -78,5 +84,7 @@
                 return new[] { X, Y };
             }
         }
+
+        private object DebuggerDisplay() => Serialize();
     }
 }

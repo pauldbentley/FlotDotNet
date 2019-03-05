@@ -7,7 +7,7 @@ namespace FlotDotNet.Tests
     public class FlotThresholdTests
     {
         [Fact]
-        public void FlotThreshold_ShouldSerialize()
+        public void ShouldSerialize()
         {
             var threshold = new FlotThreshold(5, "#333");
             string actual = JsonConvert.SerializeObject(threshold, FlotConfiguration.SerializerSettings);

@@ -21,8 +21,7 @@
         public static MethodInfo GetSerializeMethod(Type objectType)
         {
             // see if there is a specific Serialize() method
-            // this can be private or internal
-            var method = objectType.GetMethod(SerializeMethodName, BindingFlags.NonPublic | BindingFlags.Instance);
+            var method = objectType.GetMethod(SerializeMethodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
             return method != null && method.GetParameters().Length == 0
                 ? method
@@ -36,8 +35,10 @@
         /// <returns>true if the value should be serialize; otherwise, false.</returns>
         public static bool ShouldSerialize(object value)
         {
-            // we don't serialize nulls
-            if (value == null)
+            bool includeNulls = FlotConfiguration.SerializerSettings.NullValueHandling == NullValueHandling.Include;
+
+            // null check
+            if (!includeNulls && value == null)
             {
                 return false;
             }
@@ -45,8 +46,7 @@
             var objectType = value.GetType();
 
             // see if there is a specific ShouldSerialize() method on the value
-            // this can be private or internal
-            var shouldSerializeMethod = objectType.GetMethod(ShouldSerializeMethodPrefix, BindingFlags.NonPublic | BindingFlags.Instance);
+            var shouldSerializeMethod = objectType.GetMethod(ShouldSerializeMethodPrefix, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             if (shouldSerializeMethod != null)
             {
                 // this is for the whole value
@@ -61,7 +61,7 @@
             // go through each property
             // these can be private or internal
             // as we need to check the attributes
-            foreach (var property in objectType.GetProperties(BindingFlags.NonPublic | BindingFlags.Instance))
+            foreach (var property in objectType.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance))
             {
                 // check for JsonIgnore
                 var jsonIgnore = property.GetCustomAttribute<JsonIgnoreAttribute>();
@@ -92,8 +92,7 @@
                 var propertyValue = property.GetValue(value);
 
                 // see if there is a specific check on the property
-                // Json.Net requires this to be public
-                var shouldSerializePropertyMethod = objectType.GetMethod(ShouldSerializeMethodPrefix + property.Name);
+                var shouldSerializePropertyMethod = objectType.GetMethod(ShouldSerializeMethodPrefix + property.Name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
                 if (shouldSerializePropertyMethod != null)
                 {
@@ -103,7 +102,7 @@
                         return true;
                     }
                 }
-                else if (propertyValue != null)
+                else if (propertyValue != null || (includeNulls && propertyValue == null))
                 {
                     // general null check
                     return true;

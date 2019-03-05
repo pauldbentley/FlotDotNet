@@ -8,17 +8,17 @@ namespace FlotDotNet.Tests
     public class FlotFillTests
     {
         [Fact]
-        public void FlotFill_WithFill_ShouldSerialize()
+        public void WithFill_ShouldSerialize()
         {
-            FlotFill fill = 0.9;
+            var fill = new FlotFill(0.9);
             string actual = JsonConvert.SerializeObject(fill, FlotConfiguration.SerializerSettings);
             actual.ShouldBe("0.9");
         }
 
         [Fact]
-        public void FlotFill_WithFull_ShouldSerialize()
+        public void WithFull_ShouldSerialize()
         {
-            FlotFill fill = true;
+            var fill = new FlotFill(true);
             string actual = JsonConvert.SerializeObject(fill, FlotConfiguration.SerializerSettings);
             actual.ShouldBe("true");
         }

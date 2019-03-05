@@ -1,7 +1,7 @@
 ﻿namespace FlotDotNet
 {
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Diagnostics;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -13,50 +13,25 @@
         {
         }
 
-        internal FlotTickOptions(int number)
+        public FlotTickOptions(int number)
         {
             Number = number;
         }
 
-        internal FlotTickOptions(string function)
+        public FlotTickOptions(string function)
         {
             Function = function;
         }
 
-        private int? Number { get; }
+        public int? Number { get; }
 
-        private string Function { get; }
+        public string Function { get; }
 
         public static implicit operator FlotTickOptions(int number) => new FlotTickOptions(number);
 
         public static implicit operator FlotTickOptions(string function) => new FlotTickOptions(function);
 
-        public static implicit operator FlotTickOptions(FlotTick[] ticks)
-        {
-            var options = new FlotTickOptions();
-            options.AddRange(ticks);
-            return options;
-        }
-
-        public void Add(params double[] value)
-        {
-            if (value != null)
-            {
-                AddRange(value.Select(v => new FlotTick(v)));
-            }
-        }
-
-        public void Add(double value, string label)
-        {
-            Add(new FlotTick(value, label));
-        }
-
-        public void Add(double value, double timeLabel)
-        {
-            Add(new FlotTick(value, timeLabel));
-        }
-
-        internal object Serialize()
+        private object Serialize()
         {
             // can be number, array, or function
             if (!string.IsNullOrEmpty(Function))
@@ -67,11 +42,11 @@
             }
             else if (Number.HasValue)
             {
-                return Number;
+                return Number.Value;
             }
             else
             {
-                return this.AsEnumerable();
+                return ToArray();
             }
         }
     }

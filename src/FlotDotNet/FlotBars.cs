@@ -1,7 +1,10 @@
 ﻿namespace FlotDotNet
 {
+    using System.Collections.Generic;
+    using Newtonsoft.Json;
+
     /// <summary>
-    /// Defines the options for displaying bars on the data series.
+    /// Specific bars options.
     /// </summary>
     public sealed class FlotBars : FlotOptions
     {
@@ -20,5 +23,36 @@
         /// Requires the barOrder plug-in.
         /// </summary>
         public int? Order { get; set; }
+
+        /// <summary>
+        /// Gets or sets the fill color.
+        /// </summary>
+        [JsonIgnore]
+        public FlotColor FillColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets a list of scaling of the brightness and the opacity of the series color.
+        /// </summary>
+        [JsonIgnore]
+        public List<FlotScaling> FillGradient { get; set; } = new List<FlotScaling>();
+
+        [JsonProperty(PropertyName = "fillColor")]
+        private object FillColorObject
+        {
+            get
+            {
+                if (FillColor != null)
+                {
+                    return FillColor;
+                }
+
+                if (FillGradient.Count > 0)
+                {
+                    return new { Colors = FillGradient };
+                }
+
+                return null;
+            }
+        }
     }
 }
