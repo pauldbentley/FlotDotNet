@@ -7,7 +7,7 @@ namespace FlotDotNet.Tests
     public class FlotColorTests
     {
         [Fact]
-        public void FlotColor_WithIndex_ShouldSerialize()
+        public void WithIndex_ShouldSerialize()
         {
             var color = new FlotColor(1);
             string actual = JsonConvert.SerializeObject(color, FlotConfiguration.SerializerSettings);
@@ -15,7 +15,7 @@ namespace FlotDotNet.Tests
         }
 
         [Fact]
-        public void FlotColor_WithColor_ShouldSerialize()
+        public void WithColor_ShouldSerialize()
         {
             var color = new FlotColor("#333");
             string actual = JsonConvert.SerializeObject(color, FlotConfiguration.SerializerSettings);

@@ -14,7 +14,7 @@
         public bool? Show { get; set; }
 
         /// <summary>
-        /// If you want to format the labels in some way, e.g. make them to links, you can pass in a function for "labelFormatter".
+        /// Gets or sets the name of a function used if you want to format the labels in some way, e.g. make them to links.
         /// The value can be null or (fn: string, series object -> string)
         /// </summary>
         [JsonIgnore]
@@ -23,7 +23,7 @@
         public FlotColor LabelBoxBorderColor { get; set; }
 
         /// <summary>
-        /// The number of columns to divide the legend table into.
+        /// Gets or sets the number of columns to divide the legend table into.
         /// </summary>
         public int? NoColumns { get; set; }
 
@@ -48,14 +48,14 @@
         public double? BackgroundOpacity { get; set; }
 
         /// <summary>
-        /// If you want the legend to appear somewhere else in the DOM, you can specify "container" as a jQuery object/expression to put the legend table into.
+        /// Gets or sets a jQuery object/expression if you want the legend table to appear somewhere else in the DOM.
         /// The "position" and "margin" etc. options will then be ignored.
         /// Note that Flot will overwrite the contents of the container.
         /// The value can be null or jQuery object/DOM element/jQuery expression
         /// </summary>
         public string Container { get; set; }
 
-        [JsonProperty(PropertyName = nameof(LabelFormatter))]
+        [JsonProperty(PropertyName = "labelFormatter")]
         private JRaw LabelFormatterRaw => string.IsNullOrEmpty(LabelFormatter) ? null : new JRaw(LabelFormatter);
     }
 }

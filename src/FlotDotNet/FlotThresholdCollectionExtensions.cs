@@ -16,12 +16,16 @@
         /// <param name="color">The color of the threshold.</param>
         public static void Add(this ICollection<FlotThreshold> collection, decimal below, FlotColor color)
         {
-            if (collection == null)
-            {
-                throw new ArgumentNullException(nameof(collection));
-            }
-
+            GuardNotNull(collection);
             collection.Add(new FlotThreshold(below, color));
+        }
+
+        private static void GuardNotNull(object value)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
         }
     }
 }

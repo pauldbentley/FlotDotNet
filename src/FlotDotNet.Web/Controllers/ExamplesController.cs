@@ -142,7 +142,7 @@ namespace FlotDotNet.Web.Controllers
             chart.YAxis.TickDecimals = 3;
 
             chart.Grid.BorderWidth = 1;
-            chart.Grid.BackgroundColor = new[] { "#fff", "#eee" };
+            chart.Grid.BackgroundGradient.AddRange(new[] { "#fff", "#eee" });
 
             chart.Grid.BorderWidth.Left = 2;
             chart.Grid.BorderWidth.Bottom = 2;

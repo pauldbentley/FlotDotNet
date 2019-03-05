@@ -32,11 +32,11 @@
             collection.Add(new FlotDataPoint(label, value));
         }
 
-        private static void GuardNotNull(ICollection<FlotDataPoint> collection)
+        private static void GuardNotNull(object value)
         {
-            if (collection == null)
+            if (value == null)
             {
-                throw new ArgumentNullException(nameof(collection));
+                throw new ArgumentNullException(nameof(value));
             }
         }
     }

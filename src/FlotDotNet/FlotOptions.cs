@@ -21,11 +21,5 @@
         /// You can adjust the opacity of the fill by setting fill to a number between 0 (fully transparent) and 1 (fully opaque).
         /// </summary>
         public FlotFill Fill { get; set; }
-
-        /// <summary>
-        /// Gets or sets the fill color.
-        /// Value can be null or color/gradient.
-        /// </summary>
-        public FlotColor FillColor { get; set; }
     }
 }

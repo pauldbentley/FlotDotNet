@@ -151,13 +151,13 @@
         [JsonProperty(PropertyName = "timeformat")]
         public string TimeFormat { get; set; }
 
-        [JsonProperty(PropertyName = nameof(Transform))]
+        [JsonProperty(PropertyName = "transform")]
         private JRaw TransformRaw => string.IsNullOrEmpty(Transform) ? null : new JRaw(Transform);
 
-        [JsonProperty(PropertyName = nameof(InverseTransform))]
+        [JsonProperty(PropertyName = "inverseTransform")]
         private JRaw InverseTransformRaw => string.IsNullOrEmpty(InverseTransform) ? null : new JRaw(InverseTransform);
 
-        [JsonProperty(PropertyName = nameof(TickFormatter))]
+        [JsonProperty(PropertyName = "tickFormatter")]
         private JRaw TickFormatterRaw => string.IsNullOrEmpty(TickFormatter) ? null : new JRaw(TickFormatter);
     }
 }
