@@ -36,6 +36,12 @@
         [JsonIgnore]
         public List<FlotScaling> FillGradient { get; set; } = new List<FlotScaling>();
 
+        /// <summary>
+        /// Gets or sets a value indicating whether chart data start from zero, regardless of the data's range.
+        /// Setting it to false tells the series to use the same automatic scaling as an un-filled line.
+        /// </summary>
+        public bool? Zero { get; set; }
+
         [JsonProperty(PropertyName = "fillColor")]
         private object FillColorObject
         {

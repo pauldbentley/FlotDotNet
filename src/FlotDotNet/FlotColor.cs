@@ -72,10 +72,6 @@
         /// <param name="index">The index.</param>
         public static implicit operator FlotColor(int index) => new FlotColor(index);
 
-        /// <summary>
-        /// Serialized the <see cref="FlotColor"/> to an object for JSON output.
-        /// </summary>
-        /// <returns>An object for JSON output.</returns>
         private object Serialize()
         {
             if (Index.HasValue)

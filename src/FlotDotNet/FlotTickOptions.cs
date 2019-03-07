@@ -1,34 +1,61 @@
 ﻿namespace FlotDotNet
 {
     using System.Collections.Generic;
-    using System.Diagnostics;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
+    /// <summary>
+    /// Defines the options for how ticks are displayed on a plot.
+    /// </summary>
     [JsonConverter(typeof(FlotConverter))]
     public sealed class FlotTickOptions : List<FlotTick>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FlotTickOptions"/> class.
+        /// </summary>
         public FlotTickOptions()
         {
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FlotTickOptions"/> class with a given number of ticks.
+        /// </summary>
+        /// <param name="number">The number of ticks.</param>
         public FlotTickOptions(int number)
         {
             Number = number;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FlotTickOptions"/> class with a given tick function.
+        /// </summary>
+        /// <param name="function">The tick function.</param>
         public FlotTickOptions(string function)
         {
             Function = function;
         }
 
+        /// <summary>
+        /// Gets the number of ticks.
+        /// </summary>
         public int? Number { get; }
 
+        /// <summary>
+        /// Gets the tick function.
+        /// </summary>
         public string Function { get; }
 
+        /// <summary>
+        /// Creates a new <see cref="FlotTickOptions"/> instance with the given number of ticks.
+        /// </summary>
+        /// <param name="number">The number of ticks.</param>
         public static implicit operator FlotTickOptions(int number) => new FlotTickOptions(number);
 
+        /// <summary>
+        /// Creates a new <see cref="FlotTickOptions"/> instance with the given tick function.
+        /// </summary>
+        /// <param name="function">The tick function.</param>
         public static implicit operator FlotTickOptions(string function) => new FlotTickOptions(function);
 
         private object Serialize()

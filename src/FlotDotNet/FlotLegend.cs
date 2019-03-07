@@ -20,6 +20,9 @@
         [JsonIgnore]
         public string LabelFormatter { get; set; }
 
+        /// <summary>
+        /// Gets or sets the color of the label box.
+        /// </summary>
         public FlotColor LabelBoxBorderColor { get; set; }
 
         /// <summary>
@@ -33,17 +36,17 @@
         public FlotLegendPosition Position { get; set; }
 
         /// <summary>
-        /// Number of pixels or [x margin, y margin]
+        /// Gets or sets the margin distance to the plot edge.
         /// </summary>
-        public string Margin { get; set; }
+        public FlotLegendMargin Margin { get; set; }
 
         /// <summary>
-        /// null or color
+        /// Gets or sets the background color.
         /// </summary>
         public FlotColor BackgroundColor { get; set; }
 
         /// <summary>
-        /// number between 0 and 1
+        /// Gets or sets the background opacity.
         /// </summary>
         public double? BackgroundOpacity { get; set; }
 
