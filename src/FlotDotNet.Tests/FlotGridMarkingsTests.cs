@@ -33,17 +33,19 @@
                 {
                     XAxis = new FlotMarking(1, 2),
                     YAxis = new FlotMarking(3, 4),
-                    Color = "#333"
+                    Color = "#333",
+                    LineWidth = 5
                 },
                 new FlotGridMarking
                 {
-                    XAxis = new FlotMarking(2, 5, 6),
-                    YAxis = new FlotMarking(3, 7, 8),
-                    Color = "#444"
+                    XAxis = new FlotMarking(6, 7, 8),
+                    YAxis = new FlotMarking(9, 10, 11),
+                    Color = "#444",
+                    LineWidth = 12
                 }
             };
             string actual = SerializeObject(input);
-            actual.ShouldBe("[{\"xaxis\":{\"from\":1,\"to\":2},\"yaxis\":{\"from\":3,\"to\":4},\"color\":\"#333\"},{\"x2axis\":{\"from\":5,\"to\":6},\"y3axis\":{\"from\":7,\"to\":8},\"color\":\"#444\"}]");
+            actual.ShouldBe("[{\"xaxis\":{\"from\":1,\"to\":2},\"yaxis\":{\"from\":3,\"to\":4},\"color\":\"#333\",\"lineWidth\":5},{\"x6axis\":{\"from\":7,\"to\":8},\"y9axis\":{\"from\":10,\"to\":11},\"color\":\"#444\",\"lineWidth\":12}]");
         }
 
         [Fact]
