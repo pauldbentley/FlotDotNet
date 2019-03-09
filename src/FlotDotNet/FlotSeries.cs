@@ -78,7 +78,7 @@
         public FlotLines Lines { get; set; } = new FlotLines();
 
         /// <summary>
-        /// The 1-based index of the X-axis against which this data series is to be plotted.
+        /// Gets or sets the 1-based index of the X-axis against which this data series is to be plotted.
         /// </summary>
         [JsonProperty(PropertyName = "xaxis")]
         public int? XAxis { get; set; }
