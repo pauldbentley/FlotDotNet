@@ -39,7 +39,7 @@
 }
 
 <div class="demo-container">
-    @Html.Raw(Model.Placeholder(new { @class = "demo-placeholder" }))
+    <div id="@Model.Placeholder" class="demo-placeholder"></div>
 </div>
 
 <p>Multiple axis support showing the raw oil price in US $/barrel of crude oil vs. the exchange rate from US $ to €.</p>

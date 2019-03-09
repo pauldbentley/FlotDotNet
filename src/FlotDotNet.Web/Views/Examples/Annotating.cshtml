@@ -9,14 +9,14 @@
 
     <script type="text/javascript">
         var plot = chart.plot;
-        var o = plot.pointOffset({ x: 2, y: -1.2});
+        var o = plot.pointOffset({ x: 2, y: -1.2 });
 
         // Append it to the placeholder that Flot already uses for positioning
         var placeholder = chart.placeholder;
 
         placeholder.append("<div style='position:absolute;left:" + (o.left + 4) + "px;top:" + o.top + "px;color:#666;font-size:smaller'>Warming up</div>");
 
-        o = plot.pointOffset({ x: 8, y: -1.2});
+        o = plot.pointOffset({ x: 8, y: -1.2 });
         placeholder.append("<div style='position:absolute;left:" + (o.left + 4) + "px;top:" + o.top + "px;color:#666;font-size:smaller'>Actual measurements</div>");
 
         // Draw a little arrow on top of the last label to demonstrate canvas
@@ -35,7 +35,7 @@
 }
 
 <div class="demo-container">
-    @Html.Raw(Model.Placeholder(new { @class = "demo-placeholder" }))
+    <div id="@Model.Placeholder" class="demo-placeholder"></div>
 </div>
 
 <p>Flot has support for simple background decorations such as lines and rectangles. They can be useful for marking up certain areas. You can easily add any HTML you need with standard DOM manipulation, e.g. for labels. For drawing custom shapes there is also direct access to the canvas.</p>

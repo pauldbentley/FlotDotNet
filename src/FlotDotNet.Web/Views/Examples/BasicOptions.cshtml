@@ -9,7 +9,7 @@
 }
 
 <div class="demo-container">
-    @Html.Raw(Model.Placeholder(new { @class = "demo-placeholder" }))
+    <div id="@Model.Placeholder" class="demo-placeholder"></div>
 </div>
 
 <p>There are plenty of options you can set to control the precise looks of your plot. You can control the ticks on the axes, the legend, the graph type, etc.</p>
