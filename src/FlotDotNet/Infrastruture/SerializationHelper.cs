@@ -1,6 +1,7 @@
 ﻿namespace FlotDotNet.Infrastruture
 {
     using System;
+    using System.Collections;
     using System.Reflection;
     using Newtonsoft.Json;
 
@@ -14,10 +15,10 @@
         private const string ShouldSerializeMethodPrefix = "ShouldSerialize";
 
         /// <summary>
-        /// Gets the serialize method from the given type.
+        /// Gets the Serialize() method from the given type.
         /// </summary>
         /// <param name="objectType">The type.</param>
-        /// <returns>A <see cref="MethodInfo"/> of the serialize method if it exists; otherwise, null.</returns>
+        /// <returns>A <see cref="MethodInfo"/> of the Serialize() method if it exists; otherwise, null.</returns>
         public static MethodInfo GetSerializeMethod(Type objectType)
         {
             // see if there is a specific Serialize() method

@@ -49,46 +49,46 @@
         }
 
         /// <summary>
-        /// Gets the x axis of the chart.
+        /// Gets or sets the x axis of the chart.
         /// </summary>
         [JsonIgnore]
-        public FlotAxis XAxis { get; } = new FlotAxis();
+        public FlotAxis XAxis { get; set; } = new FlotAxis();
 
         /// <summary>
-        /// Gets the y axis of the chart
+        /// Gets or sets the y axis of the chart
         /// </summary>
         [JsonIgnore]
-        public FlotAxis YAxis { get; } = new FlotAxis();
+        public FlotAxis YAxis { get; set; } = new FlotAxis();
 
         /// <summary>
-        /// Gets a list of x axes when more than one x axis is required.
+        /// Gets or sets a list of x axes when more than one x axis is required.
         /// </summary>
         [JsonIgnore]
-        public IList<FlotAxis> XAxes { get; } = new List<FlotAxis>();
+        public List<FlotAxis> XAxes { get; set; } = new List<FlotAxis>();
 
         /// <summary>
-        /// Gets a list of y axes when more than one y axis is required.
+        /// Gets or sets a list of y axes when more than one y axis is required.
         /// </summary>
         [JsonIgnore]
-        public IList<FlotAxis> YAxes { get; } = new List<FlotAxis>();
+        public List<FlotAxis> YAxes { get; set; } = new List<FlotAxis>();
 
         /// <summary>
-        /// Gets the chart legend.
+        /// Gets or sets the chart legend.
         /// </summary>
         [JsonIgnore]
-        public FlotLegend Legend { get; } = new FlotLegend();
+        public FlotLegend Legend { get; set; } = new FlotLegend();
 
         /// <summary>
-        /// Gets the options for displaying points on the chart
+        /// Gets or sets the options for displaying points on the chart
         /// </summary>
         [JsonIgnore]
-        public FlotPoints Points { get; } = new FlotPoints();
+        public FlotPoints Points { get; set; } = new FlotPoints();
 
         /// <summary>
-        /// Gets the options for displaying bars on the chart
+        /// Gets or sets the options for displaying bars on the chart
         /// </summary>
         [JsonIgnore]
-        public FlotBars Bars { get; } = new FlotBars();
+        public FlotBars Bars { get; set; } = new FlotBars();
 
         /// <summary>
         /// Gets or sets the stack option for this chart.
@@ -97,10 +97,10 @@
         public FlotStack Stack { get; set; }
 
         /// <summary>
-        /// Gets the options for displaying lines on the chart
+        /// Gets or sets the options for displaying lines on the chart
         /// </summary>
         [JsonIgnore]
-        public FlotLines Lines { get; } = new FlotLines();
+        public FlotLines Lines { get; set; } = new FlotLines();
 
         /// <summary>
         /// Gets the options for displaying a pie chart.
@@ -109,9 +109,10 @@
         public FlotPie Pie { get; } = new FlotPie();
 
         /// <summary>
-        /// Gets the colours.
+        /// Gets or sets a list of colours.
         /// </summary>
-        public List<FlotColor> Colors { get; } = new List<FlotColor>();
+        [JsonIgnore]
+        public List<FlotColor> Colors { get; set; } = new List<FlotColor>();
 
         /// <summary>
         /// Gets the identifier for the chart.
@@ -127,16 +128,25 @@
         public string PlaceholderId { get; set; }
 
         /// <summary>
-        /// Gets the chart grid.
+        /// Gets or sets the chart grid.
         /// </summary>
         [JsonIgnore]
-        public FlotGrid Grid { get; } = new FlotGrid();
+        public FlotGrid Grid { get; set; } = new FlotGrid();
 
         /// <summary>
-        /// Gets the list of the data series within the chart.
+        /// Gets or sets a list of the data series within the chart.
         /// </summary>
         [JsonIgnore]
-        public IList<FlotSeries> Series { get; } = new List<FlotSeries>();
+        public List<FlotSeries> Series { get; set; } = new List<FlotSeries>();
+
+        /// <summary>
+        /// Gets or sets a value which specifies the maximum time to delay a redraw
+        /// of interactive things(this works as a rate limiting device). The
+        /// default is capped to 60 frames per second.You can set it to -1 to
+        /// disable the rate limiting.
+        /// </summary>
+        [JsonIgnore]
+        public int? RedrawOverlayInterval { get; set; }
 
         [JsonProperty(PropertyName = "plot", NullValueHandling = NullValueHandling.Include)]
         private object PlotObject => null;
@@ -213,15 +223,32 @@
                 return new
                 {
                     Legend = SerializationHelper.ShouldSerializeOrDefault(Legend),
-                    Xaxes = XAxes.Any() ? XAxes : null,
-                    Yaxes = YAxes.Any() ? YAxes : null,
-                    Xaxis = !XAxes.Any() && SerializationHelper.ShouldSerialize(XAxis) ? XAxis : null,
-                    Yaxis = !YAxes.Any() && SerializationHelper.ShouldSerialize(YAxis) ? YAxis : null,
+                    Xaxes = XAxes != null && XAxes.Any() ? XAxes : null,
+                    Yaxes = XAxes != null && YAxes.Any() ? YAxes : null,
+                    Xaxis = SerializationHelper.ShouldSerializeOrDefault(XAxis),
+                    Yaxis = SerializationHelper.ShouldSerializeOrDefault(YAxis),
                     Grid = SerializationHelper.ShouldSerializeOrDefault(Grid),
                     Series = series
                 };
             }
         }
+
+        [JsonProperty]
+        private object Interaction
+        {
+            get
+            {
+                if (RedrawOverlayInterval.HasValue)
+                {
+                    return new { RedrawOverlayInterval.Value };
+                }
+
+                return null;
+            }
+        }
+
+        [JsonProperty(PropertyName = "colors")]
+        private object ColorsObject => Colors != null && Colors.Count > 0 ? Colors : null;
 
         /// <summary>
         /// Creates a javascript timestamp suitable for a time series.
@@ -349,7 +376,5 @@
 
             return Placeholder(attributes);
         }
-
-        private bool ShouldSerializeColors() => Colors.Any();
     }
 }
