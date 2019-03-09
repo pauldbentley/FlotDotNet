@@ -26,6 +26,11 @@
         /// </summary>
         public string Color { get; set; }
 
+        /// <summary>
+        /// Gets or sets the width of the line in pixels.
+        /// </summary>
+        public int? LineWidth { get; set; }
+
         private static string BuildAxisKey(string axisName, int? axis)
         {
             return axisName + (axis.GetValueOrDefault(0) > 1 ? axis.Value.ToString(CultureInfo.InvariantCulture) : string.Empty) + "axis";
@@ -50,6 +55,11 @@
             if (Color != null)
             {
                 data.Add("color", Color);
+            }
+
+            if (LineWidth != null)
+            {
+                data.Add("lineWidth", LineWidth);
             }
 
             return data;

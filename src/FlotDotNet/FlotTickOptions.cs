@@ -19,6 +19,15 @@
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="FlotTickOptions"/> class with the given ticks.
+        /// </summary>
+        /// <param name="ticks">The ticks.</param>
+        public FlotTickOptions(IEnumerable<FlotTick> ticks)
+            : base(ticks)
+        {
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="FlotTickOptions"/> class with a given number of ticks.
         /// </summary>
         /// <param name="number">The number of ticks.</param>
@@ -57,6 +66,12 @@
         /// </summary>
         /// <param name="function">The tick function.</param>
         public static implicit operator FlotTickOptions(string function) => new FlotTickOptions(function);
+
+        /// <summary>
+        /// Creates a new <see cref="FlotTickOptions"/> instance with the given ticks.
+        /// </summary>
+        /// <param name="ticks">The ticks</param>
+        public static implicit operator FlotTickOptions(FlotTick[] ticks) => new FlotTickOptions(ticks);
 
         private object Serialize()
         {
