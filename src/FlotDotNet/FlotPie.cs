@@ -8,10 +8,6 @@
     /// </summary>
     public sealed class FlotPie
     {
-        internal FlotPie()
-        {
-        }
-
         /// <summary>
         /// Enable the plugin and draw as a pie.
         /// </summary>
@@ -40,22 +36,22 @@
         /// <summary>
         /// Positioning of the pie chart within the canvas.
         /// </summary>
-        public FlotPieOffset Offset { get; } = new FlotPieOffset();
+        public FlotPieOffset Offset { get; set; } = new FlotPieOffset();
 
         /// <summary>
         /// Pie slice borders.
         /// </summary>
-        public FlotPieStroke Stroke { get; } = new FlotPieStroke();
+        public FlotPieStroke Stroke { get; set; } = new FlotPieStroke();
 
         /// <summary>
         /// Pie slice label.
         /// </summary>
-        public FlotPieLabel Label { get; } = new FlotPieLabel();
+        public FlotPieLabel Label { get; set; } = new FlotPieLabel();
 
         /// <summary>
         /// Combines slices that are smaller than the specified percentage.
         /// </summary>
-        public FlotPieCombine Combine { get; } = new FlotPieCombine();
+        public FlotPieCombine Combine { get; set; } = new FlotPieCombine();
 
         /// <summary>
         /// This option is not used because any value causes the hover to fill the slice black. The manual says this:

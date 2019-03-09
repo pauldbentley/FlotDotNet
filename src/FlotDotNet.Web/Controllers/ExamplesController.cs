@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using FlotDotNet.Web.Models.Examples;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlotDotNet.Web.Controllers
 {
-    public class ExamplesController : Controller
+    public partial class ExamplesController : Controller
     {
         public IActionResult Index()
         {
@@ -304,12 +303,6 @@ namespace FlotDotNet.Web.Controllers
             chart.Lines.Steps = false;
 
             return View(chart);
-        }
-
-        public IActionResult SeriesPie(int? example)
-        {
-            var model = new SeriesPieViewModel(example.GetValueOrDefault(1));
-            return View(model);
         }
     }
 }

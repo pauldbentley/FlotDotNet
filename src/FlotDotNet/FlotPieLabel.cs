@@ -10,13 +10,6 @@
     public sealed class FlotPieLabel
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="FlotPieLabel"/> class.
-        /// </summary>
-        internal FlotPieLabel()
-        {
-        }
-
-        /// <summary>
         /// Enable/Disable the labels. This can be set to true, false, or 'auto'. When set to 'auto', it will be set to false if the legend is enabled and true if not.
         /// </summary>
         public AutoValue<bool?> Show { get; set; }
@@ -41,9 +34,9 @@
         /// <summary>
         /// Background color of the positioned labels.
         /// </summary>
-        public FlotPieLabelBackground Background { get; } = new FlotPieLabelBackground();
+        public FlotPieLabelBackground Background { get; set; } = new FlotPieLabelBackground();
 
-        [JsonProperty(PropertyName = nameof(Formatter))]
+        [JsonProperty(PropertyName = "formatter")]
         private JRaw FormatterRaw => string.IsNullOrEmpty(Formatter) ? null : new JRaw(Formatter);
 
         public bool ShouldSerializeBackground() => SerializationHelper.ShouldSerialize(Background);

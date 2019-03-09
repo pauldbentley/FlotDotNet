@@ -103,10 +103,10 @@
         public FlotLines Lines { get; set; } = new FlotLines();
 
         /// <summary>
-        /// Gets the options for displaying a pie chart.
+        /// Gets or sets the options for displaying a pie chart.
         /// </summary>
         [JsonIgnore]
-        public FlotPie Pie { get; } = new FlotPie();
+        public FlotPie Pie { get; set; } = new FlotPie();
 
         /// <summary>
         /// Gets or sets a list of colours.
