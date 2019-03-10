@@ -150,30 +150,6 @@ namespace FlotDotNet.Web.Controllers
             return View(chart);
         }
 
-        public IActionResult Annotating()
-        {
-            var chart = new FlotChart();
-
-            var d1 = chart.CreateSeries("d1", "Pressure");
-            d1.Color = "#333";
-            for (double i = 0; i < 20; ++i)
-            {
-                d1.Data.Add(i, Math.Sin(i));
-            }
-
-            d1.Bars.Show = true;
-            d1.Bars.BarWidth = 0.5;
-            d1.Bars.Fill = 0.9;
-
-            chart.XAxis.Ticks = 0;
-            chart.XAxis.AutoscaleMargin = 0.02;
-
-            chart.YAxis.Min = -2;
-            chart.YAxis.Max = 2;
-
-            return View(chart);
-        }
-
         public IActionResult SeriesToggle()
         {
             var chart = new FlotChart();

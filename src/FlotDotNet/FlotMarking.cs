@@ -8,6 +8,13 @@
     public sealed class FlotMarking
     {
         /// <summary>
+        /// Initializes a new instance of the <see cref="FlotMarking"/> class.
+        /// </summary>
+        public FlotMarking()
+        {
+        }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="FlotMarking"/> class with the given from and to values, on the default axis.
         /// </summary>
         /// <param name="from">The from point.</param>
@@ -31,19 +38,19 @@
         }
 
         /// <summary>
-        /// Gets the number of the axis.
+        /// Gets or sets the number of the axis.
         /// </summary>
         [JsonIgnore]
-        public int Axis { get; }
+        public int Axis { get; set; }
 
         /// <summary>
-        /// Gets the from value.
+        /// Gets or sets the from value.
         /// </summary>
-        public int From { get; }
+        public int? From { get; set; }
 
         /// <summary>
-        /// Gets the to value.
+        /// Gets or sets the to value.
         /// </summary>
-        public int To { get; }
+        public int? To { get; set; }
     }
 }

@@ -45,7 +45,7 @@
             }
 
             Id = id;
-            PlaceholderId = id + "_placeholder";
+            Placeholder = id + "_placeholder";
         }
 
         /// <summary>
@@ -125,7 +125,7 @@
         /// Gets or sets the identifier for the placeholder DOM element in which the chart is rendered.
         /// </summary>
         [JsonIgnore]
-        public string PlaceholderId { get; set; }
+        public string Placeholder { get; set; }
 
         /// <summary>
         /// Gets or sets the chart grid.
@@ -152,7 +152,7 @@
         private object PlotObject => null;
 
         [JsonProperty(PropertyName = "placeholder")]
-        private JRaw PlaceholderObject => new JRaw("$(\"#" + PlaceholderId + "\")");
+        private string PlaceholderId => "#" + Placeholder;
 
         [JsonIgnore]
         private JRaw PlotChartStandard => new JRaw("function(keys){var t=this;var d=[];if(keys===undefined){keys=Object.keys(this.data);}for(var i=0; i<keys.length; i++){var k=keys[i];if(t.data[k]){d.push(t.data[k]);}}t.plot=$.plot(t.placeholder,d,t.options);}");
@@ -313,68 +313,6 @@
 
             html.Append("</script>");
             return html.ToString();
-        }
-
-        /// <summary>
-        /// Returns the HTML for the placeholder.
-        /// </summary>
-        /// <returns>The HTML for the placeholder.</returns>
-        public string Placeholder() => Placeholder(null);
-
-        /// <summary>
-        /// Returns the HTML for the placeholder with the given HTML attributes
-        /// </summary>
-        /// <param name="htmlAttributes">The HTML attributes to render</param>
-        /// <returns>The HTML for the placeholder.</returns>
-        public string Placeholder(IDictionary<string, object> htmlAttributes)
-        {
-            // We are not using TagBuilder so we do not have a reference to MVC
-            var attributes = new StringBuilder();
-            string attributeFormat = " {0}=\"{1}\"";
-
-            attributes.AppendFormat(attributeFormat, "id", PlaceholderId);
-
-            if (htmlAttributes != null)
-            {
-                if (!htmlAttributes.ContainsKey("class"))
-                {
-                    attributes.AppendFormat(attributeFormat, "class", "flot");
-                }
-
-                foreach (var entry in htmlAttributes)
-                {
-                    string key = Convert.ToString(entry.Key, CultureInfo.InvariantCulture);
-                    string value = Convert.ToString(entry.Value, CultureInfo.InvariantCulture);
-                    attributes.AppendFormat(attributeFormat, key, value);
-                }
-            }
-
-            return string.Format(
-                CultureInfo.InvariantCulture,
-                "<div{0}></div>",
-                attributes.ToString());
-        }
-
-        /// <summary>
-        /// Returns the HTML for the placeholder with the given HTML attributes
-        /// </summary>
-        /// <param name="htmlAttributes">The HTML attributes to render</param>
-        /// <returns>The HTML for the placeholder.</returns>
-        public string Placeholder(object htmlAttributes)
-        {
-            // We are not using RouteValueDictionary so we dont need a reference to System.Web.Routing
-            var attributes = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
-
-            if (htmlAttributes != null)
-            {
-                foreach (PropertyDescriptor descriptor in TypeDescriptor.GetProperties(htmlAttributes))
-                {
-                    object obj2 = descriptor.GetValue(htmlAttributes);
-                    attributes.Add(descriptor.Name, obj2);
-                }
-            }
-
-            return Placeholder(attributes);
         }
     }
 }
