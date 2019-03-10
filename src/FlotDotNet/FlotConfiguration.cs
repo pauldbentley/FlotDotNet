@@ -13,6 +13,11 @@
         /// </summary>
         public static JsonSerializerSettings SerializerSettings { get; } = BuildSerializerSettings();
 
+        /// <summary>
+        /// Gets the Flot script version.
+        /// </summary>
+        public static string FlotVersion => "0.8.3";
+
         private static JsonSerializerSettings BuildSerializerSettings()
         {
             return new JsonSerializerSettings
