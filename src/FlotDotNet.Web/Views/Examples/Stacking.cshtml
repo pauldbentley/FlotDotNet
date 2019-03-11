@@ -4,13 +4,31 @@
     ViewData["Title"] = "Stacking";
 }
 
+<div class="demo-container">
+    <div id="@Model.PlaceholderId" class="demo-placeholder"></div>
+</div>
+
+<p>With the stack plugin, you can have Flot stack the series. This is useful if you wish to display both a total and the constituents it is made of. The only requirement is that you provide the input sorted on x.</p>
+
+<p class="stackControls">
+    <button>With stacking</button>
+    <button>Without stacking</button>
+</p>
+
+<p class="graphControls">
+    <button>Bars</button>
+    <button>Lines</button>
+    <button>Lines with steps</button>
+</p>
+
 @section Scripts {
     <script src="~/lib/flot/jquery.flot.stack.js"></script>
-    @Html.Raw(Model.Plot(false))
 
     <script type="text/javascript">
         $(function()
         {
+            @Html.Raw(Model.Plot(false))
+
             var stack = 0,
                 bars = true,
                 lines = false,
@@ -47,20 +65,3 @@
         });
     </script>
 }
-
-<div class="demo-container">
-    <div id="@Model.Placeholder" class="demo-placeholder"></div>
-</div>
-
-<p>With the stack plugin, you can have Flot stack the series. This is useful if you wish to display both a total and the constituents it is made of. The only requirement is that you provide the input sorted on x.</p>
-
-<p class="stackControls">
-    <button>With stacking</button>
-    <button>Without stacking</button>
-</p>
-
-<p class="graphControls">
-    <button>Bars</button>
-    <button>Lines</button>
-    <button>Lines with steps</button>
-</p>

@@ -4,10 +4,21 @@
     ViewData["Title"] = "Multiple axes";
 }
 
+<div class="demo-container">
+    <div id="@Model.PlaceholderId" class="demo-placeholder"></div>
+</div>
+
+<p>Multiple axis support showing the raw oil price in US $/barrel of crude oil vs. the exchange rate from US $ to €.</p>
+
+<p>As illustrated, you can put in multiple axes if you need to. For each data series, simply specify the axis number. In the options, you can then configure where you want the extra axes to appear.</p>
+
+<p>Position axis <button>left</button> or <button>right</button>.</p>
+
 @section Scripts {
     <script src="~/lib/flot/jquery.flot.time.js"></script>
-
     <script type="text/javascript">
+        @Html.Raw(Model.Plot(false))
+
         function euroFormatter(v, axis)
         {
             return v.toFixed(axis.tickDecimals) + "€";
@@ -21,11 +32,7 @@
 
             chart.plotChart();
         }
-    </script>
 
-    @Html.Raw(Model.Plot(false))
-
-    <script type="text/javascript">
         $(function()
         {
             doPlot("right");
@@ -37,13 +44,3 @@
         });
     </script>
 }
-
-<div class="demo-container">
-    <div id="@Model.Placeholder" class="demo-placeholder"></div>
-</div>
-
-<p>Multiple axis support showing the raw oil price in US $/barrel of crude oil vs. the exchange rate from US $ to €.</p>
-
-<p>As illustrated, you can put in multiple axes if you need to. For each data series, simply specify the axis number. In the options, you can then configure where you want the extra axes to appear.</p>
-
-<p>Position axis <button>left</button> or <button>right</button>.</p>

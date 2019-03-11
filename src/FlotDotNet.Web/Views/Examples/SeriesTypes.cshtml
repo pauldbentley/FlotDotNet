@@ -4,12 +4,14 @@
     ViewData["Title"] = "Series Types";
 }
 
-@section Scripts {
-    @Html.Raw(Model.Plot())
-}
-
 <div class="demo-container">
-    <div id="@Model.Placeholder" class="demo-placeholder"></div>
+    <div id="@Model.PlaceholderId" class="demo-placeholder"></div>
 </div>
 
 <p>Flot supports lines, points, filled areas, bars and any combinations of these, in the same plot and even on the same data series.</p>
+
+@section Scripts {
+    <script type="text/javascript">
+        @Html.Raw(Model.Plot())
+    </script>
+}

@@ -2,8 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Globalization;
     using System.Linq;
     using System.Text;
     using FlotDotNet.Infrastruture;
@@ -31,7 +29,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="FlotChart"/> class with a specified identifier.
         /// </summary>
-        /// <param name="id">The identifier for the chart.</param>
+        /// <param name="id">The identifier for the chart.  This will be the variable name of the JavaScript object.</param>
         public FlotChart(string id)
         {
             if (id == null)
@@ -45,7 +43,7 @@
             }
 
             Id = id;
-            Placeholder = id + "_placeholder";
+            PlaceholderId = id + "_placeholder";
         }
 
         /// <summary>
@@ -119,7 +117,7 @@
         /// Gets or sets the identifier for the placeholder DOM element in which the chart is rendered.
         /// </summary>
         [JsonIgnore]
-        public string Placeholder { get; set; }
+        public string PlaceholderId { get; set; }
 
         /// <summary>
         /// Gets or sets the chart grid.
@@ -145,8 +143,8 @@
         [JsonProperty(PropertyName = "plot", NullValueHandling = NullValueHandling.Include)]
         private object PlotObject => null;
 
-        [JsonProperty(PropertyName = "placeholder")]
-        private string PlaceholderId => "#" + Placeholder;
+        [JsonProperty]
+        private string Placeholder => "#" + PlaceholderId;
 
         [JsonProperty]
         private JRaw PlotChart => new JRaw("function(){this.plotData(Object.keys(this.data));}");
@@ -259,22 +257,20 @@
         /// <summary>
         /// Returns the client-side Javascript to interact with this chart.
         /// </summary>
-        /// <param name="callPlot">A bool to determine if the returned Javascript contains a call to the $.plot() function to render the chart or not</param>
+        /// <param name="plot">A bool to determine if the returned Javascript contains a call to the $.plot() function to render the chart or not</param>
         /// <returns>The client-side Javascript to interact with this chart.</returns>
-        public string Plot(bool callPlot)
+        public string Plot(bool plot)
         {
             var html = new StringBuilder();
-            html.AppendLine("<script type=\"text/javascript\">");
             html.AppendLine("var " + Id + " = ");
             html.Append(JsonConvert.SerializeObject(this, FlotConfiguration.SerializerSettings));
             html.AppendLine(";");
 
-            if (callPlot)
+            if (plot)
             {
                 html.AppendLine(Id + ".plotChart();");
             }
 
-            html.Append("</script>");
             return html.ToString();
         }
     }
