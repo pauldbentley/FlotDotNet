@@ -17,6 +17,16 @@
         /// Initializes a new instance of the <see cref="FlotGridMarkings"/> class.
         /// </summary>
         public FlotGridMarkings()
+            : base()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FlotGridMarkings"/> class with the given markings.
+        /// </summary>
+        /// <param name="markings">The markings.</param>
+        public FlotGridMarkings(IEnumerable<FlotGridMarking> markings)
+            : base(markings)
         {
         }
 
@@ -25,6 +35,7 @@
         /// </summary>
         /// <param name="function">The function.</param>
         public FlotGridMarkings(string function)
+            : base()
         {
             Function = function;
         }
@@ -39,6 +50,12 @@
         /// </summary>
         /// <param name="function">The CSS color.</param>
         public static implicit operator FlotGridMarkings(string function) => new FlotGridMarkings(function);
+
+        /// <summary>
+        /// Creates a new <see cref="FlotGridMarkings"/> instance with the given ticks.
+        /// </summary>
+        /// <param name="markings">The markings.</param>
+        public static implicit operator FlotGridMarkings(FlotGridMarking[] markings) => new FlotGridMarkings(markings);
 
         private object Serialize()
         {

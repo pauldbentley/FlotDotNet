@@ -1,11 +1,12 @@
 ﻿namespace FlotDotNet
 {
+    using System.Collections.Generic;
     using System.Diagnostics;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
 
     /// <summary>
-    /// The border of a <see cref="FlotGrid"/>.
+    /// Defines a box with four sides.
     /// </summary>
     /// <typeparam name="T">The type of the box edges.</typeparam>
     [DebuggerDisplay("{" + nameof(DebuggerDisplay) + "()}")]

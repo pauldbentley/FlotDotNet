@@ -1,5 +1,6 @@
 ﻿namespace FlotDotNet
 {
+    using System.Collections.Generic;
     using System.Diagnostics;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
@@ -75,7 +76,7 @@
         /// Serialized the <see cref="FlotStack"/> to an object for JSON output.
         /// </summary>
         /// <returns>An object for JSON output.</returns>
-        internal object Serialize()
+        private object Serialize()
         {
             if (BooleanKey.HasValue)
             {

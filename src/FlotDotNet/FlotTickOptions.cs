@@ -15,6 +15,7 @@
         /// Initializes a new instance of the <see cref="FlotTickOptions"/> class.
         /// </summary>
         public FlotTickOptions()
+            : base()
         {
         }
 
@@ -32,6 +33,7 @@
         /// </summary>
         /// <param name="number">The number of ticks.</param>
         public FlotTickOptions(int number)
+            : base()
         {
             Number = number;
         }
@@ -41,6 +43,7 @@
         /// </summary>
         /// <param name="function">The tick function.</param>
         public FlotTickOptions(string function)
+            : base()
         {
             Function = function;
         }
@@ -70,7 +73,7 @@
         /// <summary>
         /// Creates a new <see cref="FlotTickOptions"/> instance with the given ticks.
         /// </summary>
-        /// <param name="ticks">The ticks</param>
+        /// <param name="ticks">The ticks.</param>
         public static implicit operator FlotTickOptions(FlotTick[] ticks) => new FlotTickOptions(ticks);
 
         private object Serialize()

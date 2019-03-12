@@ -1,6 +1,7 @@
 ﻿namespace FlotDotNet.Infrastruture
 {
     using System;
+    using System.Reflection;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -8,6 +9,8 @@
     /// </summary>
     internal class FlotConverter : JsonConverter
     {
+        private const string SerializeMethodName = "Serialize";
+
         /// <summary>
         /// Gets a value indicating whether this <see cref="FlotConverter"/> can read JSON.
         /// </summary>
@@ -41,12 +44,22 @@
         /// <param name="serializer">The calling serializer.</param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var method = SerializationHelper.GetSerializeMethod(value.GetType());
+            var method = GetSerializeMethod(value.GetType());
             if (method != null)
             {
                 var data = method.Invoke(value, null);
                 serializer.Serialize(writer, data);
             }
+        }
+
+        private static MethodInfo GetSerializeMethod(Type objectType)
+        {
+            // see if there is a specific Serialize() method
+            var method = objectType.GetMethod(SerializeMethodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+            return method != null && method.GetParameters().Length == 0
+                ? method
+                : null;
         }
     }
 }

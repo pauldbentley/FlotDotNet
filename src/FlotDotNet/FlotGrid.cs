@@ -1,7 +1,6 @@
 ﻿namespace FlotDotNet
 {
     using System.Collections.Generic;
-    using System.ComponentModel;
     using Newtonsoft.Json;
 
     /// <summary>

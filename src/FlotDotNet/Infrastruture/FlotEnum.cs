@@ -1,7 +1,6 @@
-﻿namespace FlotDotNet
+﻿namespace FlotDotNet.Infrastruture
 {
     using System.Diagnostics;
-    using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -15,7 +14,7 @@
         /// Initializes a new instance of the <see cref="FlotEnum"/> class with a specific value.
         /// </summary>
         /// <param name="value">The enumeration value.</param>
-        protected FlotEnum(string value)
+        internal FlotEnum(string value)
             : this(value, value)
         {
         }
@@ -25,7 +24,7 @@
         /// </summary>
         /// <param name="name">The enumeration name.</param>
         /// <param name="value">The enumeration value.</param>
-        protected FlotEnum(string name, string value)
+        internal FlotEnum(string name, string value)
         {
             Name = name;
             Value = value;
@@ -41,11 +40,7 @@
         /// </summary>
         public string Value { get; }
 
-        /// <summary>
-        /// Serialized the <see cref="FlotEnum"/> to an object for JSON output.
-        /// </summary>
-        /// <returns>An object for JSON output.</returns>
-        protected internal string Serialize() => Value.ToLowerInvariant();
+        private object Serialize() => Value.ToLowerInvariant();
 
         private object DebuggerDisplay() => Name;
     }

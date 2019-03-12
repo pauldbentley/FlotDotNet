@@ -50,13 +50,13 @@
         /// Gets or sets the x axis of the chart.
         /// </summary>
         [JsonIgnore]
-        public FlotAxis XAxis { get; set; } = new FlotAxis();
+        public FlotAxis XAxis { get; set; }
 
         /// <summary>
         /// Gets or sets the y axis of the chart
         /// </summary>
         [JsonIgnore]
-        public FlotAxis YAxis { get; set; } = new FlotAxis();
+        public FlotAxis YAxis { get; set; }
 
         /// <summary>
         /// Gets or sets a list of x axes when more than one x axis is required.
@@ -74,7 +74,7 @@
         /// Gets or sets the chart legend.
         /// </summary>
         [JsonIgnore]
-        public FlotLegend Legend { get; set; } = new FlotLegend();
+        public FlotLegend Legend { get; set; }
 
         /// <summary>
         /// Gets or sets the options for displaying points on the chart
@@ -123,7 +123,7 @@
         /// Gets or sets the chart grid.
         /// </summary>
         [JsonIgnore]
-        public FlotGrid Grid { get; set; } = new FlotGrid();
+        public FlotGrid Grid { get; set; }
 
         /// <summary>
         /// Gets or sets a list of the data series within the chart.
@@ -168,29 +168,33 @@
         {
             get
             {
-                // The series property is serialized
-                // if any of these properties are set
-                var bars = SerializationHelper.ShouldSerializeOrDefault(Bars);
-                var points = SerializationHelper.ShouldSerializeOrDefault(Points);
-                var lines = SerializationHelper.ShouldSerializeOrDefault(Lines);
-                var stack = Stack;
-
-                var series = (bars == null && points == null && lines == null && stack == null)
-                    ? null
-                    : new { bars, points, lines, stack };
-
                 // We will always return an options property
                 // we still need this even if it is empty
                 return new
                 {
-                    Legend = SerializationHelper.ShouldSerializeOrDefault(Legend),
+                    Legend,
                     Xaxes = XAxes != null && XAxes.Any() ? XAxes : null,
                     Yaxes = XAxes != null && YAxes.Any() ? YAxes : null,
-                    Xaxis = SerializationHelper.ShouldSerializeOrDefault(XAxis),
-                    Yaxis = SerializationHelper.ShouldSerializeOrDefault(YAxis),
-                    Grid = SerializationHelper.ShouldSerializeOrDefault(Grid),
-                    Series = series
+                    Xaxis = XAxis,
+                    Yaxis = YAxis,
+                    Grid,
+                    Series = SeriesObject
                 };
+            }
+        }
+
+        private object SeriesObject
+        {
+            get
+            {
+                // The series property is serialized
+                // if any of these properties are empty
+                // we don't serialize.
+                var series = (Bars?.HasValue == false && Points?.HasValue == false && Lines?.HasValue == false && Stack == null)
+                    ? null
+                    : new { Bars, Points, Lines, Stack };
+
+                return series;
             }
         }
 

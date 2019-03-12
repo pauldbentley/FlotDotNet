@@ -1,5 +1,7 @@
 ﻿namespace FlotDotNet
 {
+    using FlotDotNet.Infrastruture;
+
     /// <summary>
     /// Specifies the overall placement of the legend within the plot.
     /// </summary>

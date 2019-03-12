@@ -8,9 +8,9 @@ namespace FlotDotNet.Tests
         [Fact]
         public void ShouldSerialize()
         {
-            var input = new TestEnum("TestEnum");
+            var input = FlotAxisMode.Decimal;
             string actual = SerializeObject(input);
-            actual.ShouldBe("\"testenum\"");
+            actual.ShouldBe("\"decimal\"");
         }
     }
 }

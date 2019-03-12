@@ -51,7 +51,7 @@
         /// Gets or sets the thresholds (requires the threshold plugin).
         /// </summary>
         [JsonIgnore]
-        public List<FlotThreshold> Thresholds { get; set; }
+        public List<FlotThreshold> Thresholds { get; set; } = new List<FlotThreshold>();
 
         /// <summary>
         /// Gets or sets the label.
@@ -62,20 +62,17 @@
         /// <summary>
         /// Gets or sets the options for displaying points on the series.
         /// </summary>
-        [JsonIgnore]
-        public FlotPoints Points { get; set; } = new FlotPoints();
+        public FlotPoints Points { get; set; }
 
         /// <summary>
         /// Gets or sets the options for displaying bars on the series.
         /// </summary>
-        [JsonIgnore]
-        public FlotBars Bars { get; set; } = new FlotBars();
+        public FlotBars Bars { get; set; }
 
         /// <summary>
         /// Gets or sets the options for displaying lines on the series.
         /// </summary>
-        [JsonIgnore]
-        public FlotLines Lines { get; set; } = new FlotLines();
+        public FlotLines Lines { get; set; }
 
         /// <summary>
         /// Gets or sets the 1-based index of the X-axis against which this data series is to be plotted.
@@ -148,16 +145,7 @@
             }
         }
 
-        [JsonProperty(PropertyName = "points")]
-        private object PointsObject => SerializationHelper.ShouldSerializeOrDefault(Points);
-
-        [JsonProperty(PropertyName = "bars")]
-        private object BarsObject => SerializationHelper.ShouldSerializeOrDefault(Bars);
-
-        [JsonProperty(PropertyName = "lines")]
-        private object LinesObject => SerializationHelper.ShouldSerializeOrDefault(Lines);
-
         [JsonProperty(PropertyName = "colors")]
-        private object ColorsObject => Colors != null && Colors.Count > 0 ? Colors : null;
+        private IEnumerable<string> ColorsObject => Colors != null && Colors.Count > 0 ? Colors : null;
     }
 }
