@@ -4,38 +4,41 @@
     ViewData["Title"] = "Adding Annotations";
 }
 
-@section Scripts {
-    @Html.Raw(Model.Plot())
-
-    <script type="text/javascript">
-        var plot = chart.plot;
-        var o = plot.pointOffset({ x: 2, y: -1.2 });
-
-        // Append it to the placeholder that Flot already uses for positioning
-        var placeholder = chart.placeholder;
-
-        placeholder.append("<div style='position:absolute;left:" + (o.left + 4) + "px;top:" + o.top + "px;color:#666;font-size:smaller'>Warming up</div>");
-
-        o = plot.pointOffset({ x: 8, y: -1.2 });
-        placeholder.append("<div style='position:absolute;left:" + (o.left + 4) + "px;top:" + o.top + "px;color:#666;font-size:smaller'>Actual measurements</div>");
-
-        // Draw a little arrow on top of the last label to demonstrate canvas
-        // drawing
-
-        var ctx = plot.getCanvas().getContext("2d");
-        ctx.beginPath();
-        o.left += 4;
-        ctx.moveTo(o.left, o.top);
-        ctx.lineTo(o.left, o.top - 10);
-        ctx.lineTo(o.left + 10, o.top - 5);
-        ctx.lineTo(o.left, o.top);
-        ctx.fillStyle = "#000";
-        ctx.fill();
-    </script>
-}
-
 <div class="demo-container">
-    <div id="@Model.Placeholder" class="demo-placeholder"></div>
+    <div id="@Model.PlaceholderId" class="demo-placeholder"></div>
 </div>
 
 <p>Flot has support for simple background decorations such as lines and rectangles. They can be useful for marking up certain areas. You can easily add any HTML you need with standard DOM manipulation, e.g. for labels. For drawing custom shapes there is also direct access to the canvas.</p>
+
+@section Scripts {
+    <script type="text/javascript">
+        $(function()
+        {
+            @Html.Raw(Model.Plot())
+
+            var plot = chart.plot;
+            var o = plot.pointOffset({ x: 2, y: -1.2 });
+
+            // Append it to the placeholder that Flot already uses for positioning
+            var placeholder = $(chart.placeholder);
+
+            placeholder.append("<div style='position:absolute;left:" + (o.left + 4) + "px;top:" + o.top + "px;color:#666;font-size:smaller'>Warming up</div>");
+
+            o = plot.pointOffset({ x: 8, y: -1.2 });
+            placeholder.append("<div style='position:absolute;left:" + (o.left + 4) + "px;top:" + o.top + "px;color:#666;font-size:smaller'>Actual measurements</div>");
+
+            // Draw a little arrow on top of the last label to demonstrate canvas
+            // drawing
+
+            var ctx = plot.getCanvas().getContext("2d");
+            ctx.beginPath();
+            o.left += 4;
+            ctx.moveTo(o.left, o.top);
+            ctx.lineTo(o.left, o.top - 10);
+            ctx.lineTo(o.left + 10, o.top - 5);
+            ctx.lineTo(o.left, o.top);
+            ctx.fillStyle = "#000";
+            ctx.fill();
+        });
+    </script>
+}

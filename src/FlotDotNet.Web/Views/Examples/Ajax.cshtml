@@ -4,14 +4,43 @@
     ViewData["Title"] = "AJAX";
 }
 
+<div class="demo-container">
+    <div id="@Model.PlaceholderId" class="demo-placeholder"></div>
+</div>
+
+<p>Example of loading data dynamically with AJAX. Percentage change in GDP (source: <a href="http://epp.eurostat.ec.europa.eu/tgm/table.do?tab=table&init=1&plugin=1&language=en&pcode=tsieb020">Eurostat</a>). Click the buttons below:</p>
+
+<p>The data is fetched over HTTP, in this case directly from text files. Usually the URL would point to some web server handler (e.g. a PHP page or Java/.NET/Python/Ruby on Rails handler) that extracts it from a database and serializes it to JSON.</p>
+
+<p>
+    <button class="fetchSeries">First dataset</button>
+    [ <a href="/lib/flot/examples/ajax/data-eu-gdp-growth.json">see data</a> ]
+    <span></span>
+</p>
+
+<p>
+    <button class="fetchSeries">Second dataset</button>
+    [ <a href="/lib/flot/examples/ajax/data-japan-gdp-growth.json">see data</a> ]
+    <span></span>
+</p>
+
+<p>
+    <button class="fetchSeries">Third dataset</button>
+    [ <a href="/lib/flot/examples/ajax/data-usa-gdp-growth.json">see data</a> ]
+    <span></span>
+</p>
+
+<p>If you combine AJAX with setTimeout, you can poll the server for new data.</p>
+
+<p>
+    <button class="dataUpdate">Poll for data</button>
+</p>
+
 @section Scripts {
-    @Html.Raw(Model.Plot(false))
-
     <script type="text/javascript">
-
         $(function()
         {
-            chart.plotChart();
+            @Html.Raw(Model.Plot())
 
             $("button.fetchSeries").click(function()
             {
@@ -91,38 +120,5 @@
             // Load the first series by default, so we don't have an empty plot
             $("button.fetchSeries:first").click();
         });
-
     </script>
 }
-
-<div class="demo-container">
-    <div id="@Model.Placeholder" class="demo-placeholder"></div>
-</div>
-
-<p>Example of loading data dynamically with AJAX. Percentage change in GDP (source: <a href="http://epp.eurostat.ec.europa.eu/tgm/table.do?tab=table&init=1&plugin=1&language=en&pcode=tsieb020">Eurostat</a>). Click the buttons below:</p>
-
-<p>The data is fetched over HTTP, in this case directly from text files. Usually the URL would point to some web server handler (e.g. a PHP page or Java/.NET/Python/Ruby on Rails handler) that extracts it from a database and serializes it to JSON.</p>
-
-<p>
-    <button class="fetchSeries">First dataset</button>
-    [ <a href="/lib/flot/examples/ajax/data-eu-gdp-growth.json">see data</a> ]
-    <span></span>
-</p>
-
-<p>
-    <button class="fetchSeries">Second dataset</button>
-    [ <a href="/lib/flot/examples/ajax/data-japan-gdp-growth.json">see data</a> ]
-    <span></span>
-</p>
-
-<p>
-    <button class="fetchSeries">Third dataset</button>
-    [ <a href="/lib/flot/examples/ajax/data-usa-gdp-growth.json">see data</a> ]
-    <span></span>
-</p>
-
-<p>If you combine AJAX with setTimeout, you can poll the server for new data.</p>
-
-<p>
-    <button class="dataUpdate">Poll for data</button>
-</p>

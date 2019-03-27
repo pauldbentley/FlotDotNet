@@ -5,7 +5,7 @@
 }
 
 <div class="demo-container">
-    <div id="@Model.Placeholder" class="demo-placeholder"></div>
+    <div id="@Model.PlaceholderId" class="demo-placeholder" style="float: left; width: 675px; padding: 0px; position: relative;"></div>
     <p id="choices" style="float:right; width:135px;"></p>
 </div>
 
@@ -14,16 +14,14 @@
 <p>Since all data is available client-side, it's pretty easy to make the plot interactive. Try turning countries on and off with the checkboxes next to the plot.</p>
 
 @section Scripts {
-    @Html.Raw(Model.Plot(false))
-
     <script type="text/javascript">
         $(function()
         {
-            var datasets = chart.data;
+            @Html.Raw(Model.Plot(false))
 
             // insert checkboxes
             var choiceContainer = $("#choices");
-            $.each(datasets, function(key, val)
+            $.each(chart.data, function(key, val)
             {
                 choiceContainer.append("<br/><input type='checkbox' name='" + key +
                     "' checked='checked' id='id" + key + "'></input>" +

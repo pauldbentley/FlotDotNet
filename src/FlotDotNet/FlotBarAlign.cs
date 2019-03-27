@@ -1,5 +1,7 @@
 ﻿namespace FlotDotNet
 {
+    using FlotDotNet.Infrastruture;
+
     /// <summary>
     /// Defines the align options for flot elements.
     /// </summary>

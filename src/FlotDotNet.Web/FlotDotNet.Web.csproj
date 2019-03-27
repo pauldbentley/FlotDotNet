@@ -4,6 +4,11 @@
         <TargetFramework>net461</TargetFramework>
         <DebugType>full</DebugType>
     </PropertyGroup>
+  <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
+    <DebugType>full</DebugType>
+    <LangVersion>7.2</LangVersion>
+  </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore" Version="2.1.6" />

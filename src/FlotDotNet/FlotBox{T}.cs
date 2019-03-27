@@ -5,11 +5,11 @@
     using Newtonsoft.Json;
 
     /// <summary>
-    /// The border of a <see cref="FlotGrid"/>.
+    /// Defines a box with four sides.
     /// </summary>
     /// <typeparam name="T">The type of the box edges.</typeparam>
-    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + "()}")]
     [JsonConverter(typeof(FlotConverter))]
+    [DebuggerDisplay("{" + nameof(DebuggerDisplay) + "()}")]
     public class FlotBox<T>
     {
         /// <summary>
@@ -49,21 +49,25 @@
         /// <summary>
         /// Gets or sets the top value.
         /// </summary>
+        [JsonIgnore]
         public T Top { get; set; }
 
         /// <summary>
         /// Gets or sets the right border width.
         /// </summary>
+        [JsonIgnore]
         public T Right { get; set; }
 
         /// <summary>
         /// Gets or sets the bottom border width.
         /// </summary>
+        [JsonIgnore]
         public T Bottom { get; set; }
 
         /// <summary>
         /// Gets or sets the left border width.
         /// </summary>
+        [JsonIgnore]
         public T Left { get; set; }
 
         /// <summary>
@@ -74,10 +78,20 @@
 
         private object Serialize()
         {
+            // All the same value return single value
             if (Top.Equals(Right) && Right.Equals(Bottom) && Bottom.Equals(Left))
             {
-                // All the same value
-                return Top;
+                // return a single value if not null
+                if (Top != null)
+                {
+                    return Top;
+                }
+
+                // all values are null, return an empty object
+                else
+                {
+                    return new { };
+                }
             }
 
             // Different values

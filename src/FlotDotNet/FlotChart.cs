@@ -2,11 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-    using System.Globalization;
     using System.Linq;
     using System.Text;
-    using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
@@ -31,7 +28,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="FlotChart"/> class with a specified identifier.
         /// </summary>
-        /// <param name="id">The identifier for the chart.</param>
+        /// <param name="id">The identifier for the chart.  This will be the variable name of the JavaScript object.</param>
         public FlotChart(string id)
         {
             if (id == null)
@@ -45,62 +42,103 @@
             }
 
             Id = id;
-            Placeholder = id + "_placeholder";
+            PlaceholderId = id + "_placeholder";
         }
+
+        /// <summary>
+        /// Gets the chart options.
+        /// </summary>
+        public FlotChartOptions Options { get; } = new FlotChartOptions();
 
         /// <summary>
         /// Gets or sets the x axis of the chart.
         /// </summary>
         [JsonIgnore]
-        public FlotAxis XAxis { get; set; } = new FlotAxis();
+        public FlotAxis XAxis
+        {
+            get => Options.XAxis;
+            set => Options.XAxis = value;
+        }
 
         /// <summary>
         /// Gets or sets the y axis of the chart
         /// </summary>
         [JsonIgnore]
-        public FlotAxis YAxis { get; set; } = new FlotAxis();
+        public FlotAxis YAxis
+        {
+            get => Options.YAxis;
+            set => Options.YAxis = value;
+        }
 
         /// <summary>
         /// Gets or sets a list of x axes when more than one x axis is required.
         /// </summary>
         [JsonIgnore]
-        public List<FlotAxis> XAxes { get; set; } = new List<FlotAxis>();
+        public List<FlotAxis> XAxes
+        {
+            get => Options.XAxes;
+            set => Options.XAxes = value;
+        }
 
         /// <summary>
         /// Gets or sets a list of y axes when more than one y axis is required.
         /// </summary>
         [JsonIgnore]
-        public List<FlotAxis> YAxes { get; set; } = new List<FlotAxis>();
+        public List<FlotAxis> YAxes
+        {
+            get => Options.YAxes;
+            set => Options.YAxes = value;
+        }
 
         /// <summary>
-        /// Gets or sets the chart legend.
+        /// Gets or sets the legend.
         /// </summary>
         [JsonIgnore]
-        public FlotLegend Legend { get; set; } = new FlotLegend();
+        public FlotLegend Legend
+        {
+            get => Options.Legend;
+            set => Options.Legend = value;
+        }
 
         /// <summary>
         /// Gets or sets the options for displaying points on the chart
         /// </summary>
         [JsonIgnore]
-        public FlotPoints Points { get; set; } = new FlotPoints();
+        public FlotPoints Points
+        {
+            get => Options.Series.Points;
+            set => Options.Series.Points = value;
+        }
 
         /// <summary>
         /// Gets or sets the options for displaying bars on the chart
         /// </summary>
         [JsonIgnore]
-        public FlotBars Bars { get; set; } = new FlotBars();
+        public FlotBars Bars
+        {
+            get => Options.Series.Bars;
+            set => Options.Series.Bars = value;
+        }
 
         /// <summary>
         /// Gets or sets the stack option for this chart.
         /// </summary>
         [JsonIgnore]
-        public FlotStack Stack { get; set; }
+        public FlotStack Stack
+        {
+            get => Options.Series.Stack;
+            set => Options.Series.Stack = value;
+        }
 
         /// <summary>
         /// Gets or sets the options for displaying lines on the chart
         /// </summary>
         [JsonIgnore]
-        public FlotLines Lines { get; set; } = new FlotLines();
+        public FlotLines Lines
+        {
+            get => Options.Series.Lines;
+            set => Options.Series.Lines = value;
+        }
 
         /// <summary>
         /// Gets or sets the options for displaying a pie chart.
@@ -125,13 +163,17 @@
         /// Gets or sets the identifier for the placeholder DOM element in which the chart is rendered.
         /// </summary>
         [JsonIgnore]
-        public string Placeholder { get; set; }
+        public string PlaceholderId { get; set; }
 
         /// <summary>
         /// Gets or sets the chart grid.
         /// </summary>
         [JsonIgnore]
-        public FlotGrid Grid { get; set; } = new FlotGrid();
+        public FlotGrid Grid
+        {
+            get => Options.Grid;
+            set => Options.Grid = value;
+        }
 
         /// <summary>
         /// Gets or sets a list of the data series within the chart.
@@ -151,8 +193,8 @@
         [JsonProperty(PropertyName = "plot", NullValueHandling = NullValueHandling.Include)]
         private object PlotObject => null;
 
-        [JsonProperty(PropertyName = "placeholder")]
-        private string PlaceholderId => "#" + Placeholder;
+        [JsonProperty]
+        private string Placeholder => "#" + PlaceholderId;
 
         [JsonIgnore]
         private JRaw PlotChartStandard => new JRaw("function(keys){var t=this;var d=[];if(keys===undefined){keys=Object.keys(this.data);}for(var i=0; i<keys.length; i++){var k=keys[i];if(t.data[k]){d.push(t.data[k]);}}t.plot=$.plot(t.placeholder,d,t.options);}");
@@ -211,12 +253,11 @@
                 var bars = SerializationHelper.ShouldSerializeOrDefault(Bars);
                 var points = SerializationHelper.ShouldSerializeOrDefault(Points);
                 var lines = SerializationHelper.ShouldSerializeOrDefault(Lines);
-                var pie = SerializationHelper.ShouldSerializeOrDefault(Pie);
                 var stack = Stack;
 
-                var series = (bars == null && points == null && lines == null && stack == null && pie == null)
+                var series = (bars == null && points == null && lines == null && stack == null)
                     ? null
-                    : new { bars, points, lines, stack, pie };
+                    : new { bars, points, lines, stack };
 
                 // We will always return an options property
                 // we still need this even if it is empty
@@ -240,15 +281,12 @@
             {
                 if (RedrawOverlayInterval.HasValue)
                 {
-                    return new { RedrawOverlayInterval.Value };
+                    return new { RedrawOverlayInterval };
                 }
 
                 return null;
             }
         }
-
-        [JsonProperty(PropertyName = "colors")]
-        private object ColorsObject => Colors != null && Colors.Count > 0 ? Colors : null;
 
         /// <summary>
         /// Creates a javascript timestamp suitable for a time series.
@@ -296,22 +334,20 @@
         /// <summary>
         /// Returns the client-side Javascript to interact with this chart.
         /// </summary>
-        /// <param name="callPlot">A bool to determine if the returned Javascript contains a call to the $.plot() function to render the chart or not</param>
+        /// <param name="plot">A bool to determine if the returned Javascript contains a call to the $.plot() function to render the chart or not</param>
         /// <returns>The client-side Javascript to interact with this chart.</returns>
-        public string Plot(bool callPlot)
+        public string Plot(bool plot)
         {
             var html = new StringBuilder();
-            html.AppendLine("<script type=\"text/javascript\">");
-            html.AppendLine("var " + Id + " = ");
+            html.AppendLine("var " + Id + "=");
             html.Append(JsonConvert.SerializeObject(this, FlotConfiguration.SerializerSettings));
-            html.AppendLine(";");
+            html.Append(";");
 
-            if (callPlot)
+            if (plot)
             {
-                html.AppendLine(Id + ".plotChart();");
+                html.Append(Id + ".plotChart();");
             }
 
-            html.Append("</script>");
             return html.ToString();
         }
     }

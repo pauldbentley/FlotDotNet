@@ -32,11 +32,13 @@
         /// <summary>
         /// Gets the opacity, anumber between 0 (fully transparent) and 1 (fully opaque).
         /// </summary>
+        [JsonIgnore]
         public double? Opacity { get; }
 
         /// <summary>
         /// Gets a value indicating whether the shape is filled.
         /// </summary>
+        [JsonIgnore]
         public bool? Fill { get; }
 
         /// <summary>

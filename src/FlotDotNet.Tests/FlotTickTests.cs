@@ -6,7 +6,7 @@ namespace FlotDotNet.Tests
     public class FlotTickTests : TestClass
     {
         [Fact]
-        public void WithValue_ShouldSerialize()
+        public void WithValue()
         {
             var input = new FlotTick(1);
             string actual = SerializeObject(input);
@@ -14,7 +14,7 @@ namespace FlotDotNet.Tests
         }
 
         [Fact]
-        public void WithValueAndLabel_ShouldSerialize()
+        public void WithValueAndLabel()
         {
             var input = new FlotTick(1, "Tick");
             string actual = SerializeObject(input);
@@ -22,7 +22,7 @@ namespace FlotDotNet.Tests
         }
 
         [Fact]
-        public void WithValueAndTimeLabel_ShouldSerialize()
+        public void WithValueAndTimeLabel()
         {
             var input = new FlotTick(1, 1234);
             string actual = SerializeObject(input);

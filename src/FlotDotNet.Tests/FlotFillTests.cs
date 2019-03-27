@@ -6,7 +6,7 @@ namespace FlotDotNet.Tests
     public class FlotFillTests : TestClass
     {
         [Fact]
-        public void WithFill_ShouldSerialize()
+        public void WithFill()
         {
             var input = new FlotFill(0.9);
             string actual = SerializeObject(input);
@@ -14,7 +14,7 @@ namespace FlotDotNet.Tests
         }
 
         [Fact]
-        public void WithFull_ShouldSerialize()
+        public void WithFull()
         {
             var input = new FlotFill(true);
             string actual = SerializeObject(input);

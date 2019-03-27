@@ -1,13 +1,16 @@
 ﻿namespace FlotDotNet.Infrastruture
 {
     using System;
+    using System.Reflection;
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Converts Flot objecs to JSON.
+    /// Converts Flot objects to JSON.
     /// </summary>
     internal class FlotConverter : JsonConverter
     {
+        private const string SerializeMethodName = "Serialize";
+
         /// <summary>
         /// Gets a value indicating whether this <see cref="FlotConverter"/> can read JSON.
         /// </summary>
@@ -15,6 +18,7 @@
 
         /// <summary>
         /// Determines whether this instance can convert the specified object type.
+        /// We assume that any object given this converter can convert.
         /// </summary>
         /// <param name="objectType">Type of the object.</param>
         /// <returns>true if this instance can convert the specified object type; otherwise, false.</returns>
@@ -41,12 +45,22 @@
         /// <param name="serializer">The calling serializer.</param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-            var method = SerializationHelper.GetSerializeMethod(value.GetType());
-            if (method != null)
-            {
-                var data = method.Invoke(value, null);
-                serializer.Serialize(writer, data);
-            }
+            // we are assuming the Serialize() method exists
+            // it would be a developer error to uses this attribute
+            // and not have the method.
+            var method = GetSerializeMethod(value.GetType());
+            var data = method.Invoke(value, null);
+            serializer.Serialize(writer, data);
+        }
+
+        private static MethodInfo GetSerializeMethod(Type objectType)
+        {
+            // see if there is a specific Serialize() method
+            var method = objectType.GetMethod(SerializeMethodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+            return method != null && method.GetParameters().Length == 0
+                ? method
+                : null;
         }
     }
 }

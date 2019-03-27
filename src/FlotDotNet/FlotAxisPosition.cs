@@ -1,5 +1,7 @@
 ﻿namespace FlotDotNet
 {
+    using FlotDotNet.Infrastruture;
+
     /// <summary>
     /// Defines where the axes are to be placed on the chart.
     /// </summary>

@@ -1,5 +1,6 @@
 ﻿namespace FlotDotNet
 {
+    using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
 
@@ -12,6 +13,11 @@
         /// Gets the settings used when serializing JSON.
         /// </summary>
         public static JsonSerializerSettings SerializerSettings { get; } = BuildSerializerSettings();
+
+        /// <summary>
+        /// Gets the Flot script version.
+        /// </summary>
+        public static string FlotVersion => "0.8.3";
 
         private static JsonSerializerSettings BuildSerializerSettings()
         {
