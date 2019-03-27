@@ -8,12 +8,12 @@
         /// <summary>
         /// Gets or sets the size of the font in pixels.
         /// </summary>
-        public int Size { get; set; }
+        public int? Size { get; set; }
 
         /// <summary>
         /// Gets or sets the line height in pixels.
         /// </summary>
-        public int LineHeight { get; set; }
+        public int? LineHeight { get; set; }
 
         /// <summary>
         /// Gets or sets the font style e.g. "italic".

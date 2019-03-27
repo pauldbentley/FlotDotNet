@@ -6,7 +6,7 @@ namespace FlotDotNet.Tests
     public class FlotTickSizeTests : TestClass
     {
         [Fact]
-        public void WithTickSize_ShouldSerialize()
+        public void WithTickSize()
         {
             var input = new FlotTickSize(10);
             string actual = SerializeObject(input);
@@ -14,7 +14,7 @@ namespace FlotDotNet.Tests
         }
 
         [Fact]
-        public void WithTimeUnit_ShouldSerialize()
+        public void WithTimeUnit()
         {
             var input = new FlotTickSize(10, FlotTickUnit.Hour);
             string actual = SerializeObject(input);

@@ -2,9 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     /// <summary>
     /// The data points which are plotted on the chart
@@ -51,7 +51,7 @@
         /// Gets or sets the thresholds (requires the threshold plugin).
         /// </summary>
         [JsonIgnore]
-        public List<FlotThreshold> Thresholds { get; set; }
+        public List<FlotThreshold> Thresholds { get; set; } = new List<FlotThreshold>();
 
         /// <summary>
         /// Gets or sets the label.
@@ -123,41 +123,40 @@
         public FlotBarAlign Align { get; set; }
 
         /// <summary>
-        /// Gets any additional attributes to serialize.
+        /// Gets any additional properties to serialize.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, object> Attributes { get; } = new Dictionary<string, object>();
+        public Dictionary<string, object> Properties { get; } = new Dictionary<string, object>();
+
+        [JsonProperty(PropertyName = "points")]
+        private JRaw PointsObject => SerializationHelper.SerializeObjectRaw(Points, EmptyValueHandling.Ignore);
+
+        [JsonProperty(PropertyName = "bars")]
+        private JRaw BarsObject => SerializationHelper.SerializeObjectRaw(Bars, EmptyValueHandling.Ignore);
+
+        [JsonProperty(PropertyName = "lines")]
+        private JRaw LinesObject => SerializationHelper.SerializeObjectRaw(Lines, EmptyValueHandling.Ignore);
 
         [JsonProperty(PropertyName = "threshold")]
         private object ThresholdsObject
         {
             get
             {
-                if (Thresholds == null || !Thresholds.Any())
+                if (Thresholds?.Count == 1)
                 {
-                    return null;
+                    return Thresholds[0];
                 }
-                else if (Thresholds.Count() == 1)
-                {
-                    return Thresholds.First();
-                }
-                else
+
+                if (Thresholds?.Count > 1)
                 {
                     return Thresholds;
                 }
+
+                return null;
             }
         }
 
-        [JsonProperty(PropertyName = "points")]
-        private object PointsObject => SerializationHelper.ShouldSerializeOrDefault(Points);
-
-        [JsonProperty(PropertyName = "bars")]
-        private object BarsObject => SerializationHelper.ShouldSerializeOrDefault(Bars);
-
-        [JsonProperty(PropertyName = "lines")]
-        private object LinesObject => SerializationHelper.ShouldSerializeOrDefault(Lines);
-
         [JsonProperty(PropertyName = "colors")]
-        private object ColorsObject => Colors != null && Colors.Count > 0 ? Colors : null;
+        private IEnumerable<string> ColorsObject => Colors?.Count > 0 ? Colors : null;
     }
 }

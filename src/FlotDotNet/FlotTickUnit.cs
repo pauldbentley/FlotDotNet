@@ -1,5 +1,7 @@
 ﻿namespace FlotDotNet
 {
+    using FlotDotNet.Infrastruture;
+
     /// <summary>
     /// Defines the units to specify ticks for time mode.
     /// </summary>

@@ -26,19 +26,21 @@
         /// <param name="x">The x margin.</param>
         /// <param name="y">The y margin.</param>
         public FlotLegendMargin(int x, int y)
-            : this(x)
         {
+            X = x;
             Y = y;
         }
 
         /// <summary>
         /// Gets the x margin.
         /// </summary>
+        [JsonIgnore]
         public int X { get; }
 
         /// <summary>
         /// Gets the y margin.
         /// </summary>
+        [JsonIgnore]
         public int? Y { get; }
 
         /// <summary>
@@ -51,7 +53,7 @@
         {
             if (Y.HasValue)
             {
-                return new[] { X, Y.Value };
+                return new[] { X, Y };
             }
 
             return X;

@@ -1,7 +1,7 @@
-﻿namespace FlotDotNet
+﻿namespace FlotDotNet.Infrastruture
 {
     /// <summary>
-    /// Defines the base options available to flot option elements
+    /// Defines the base options available to flot option elements.
     /// </summary>
     public abstract class FlotOptions
     {

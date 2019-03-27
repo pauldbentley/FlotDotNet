@@ -1,5 +1,6 @@
 ﻿namespace FlotDotNet.Tests
 {
+    using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
 
     public abstract class TestClass

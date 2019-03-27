@@ -1,5 +1,6 @@
 ﻿namespace FlotDotNet
 {
+    using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Serialization;
 

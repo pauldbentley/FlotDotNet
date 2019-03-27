@@ -1,6 +1,7 @@
 ﻿namespace FlotDotNet
 {
     using System.Collections.Generic;
+    using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
 
     /// <summary>
@@ -52,7 +53,7 @@
                     return FillColor;
                 }
 
-                if (FillGradient.Count > 0)
+                if (FillGradient?.Count > 0)
                 {
                     return new { Colors = FillGradient };
                 }

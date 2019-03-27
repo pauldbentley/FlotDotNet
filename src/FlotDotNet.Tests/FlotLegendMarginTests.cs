@@ -6,7 +6,7 @@ namespace FlotDotNet.Tests
     public class FlotLegendMarginTests : TestClass
     {
         [Fact]
-        public void SingleMargin_ShouldSerialize()
+        public void SingleMargin()
         {
             var input = new FlotLegendMargin(10);
             string actual = SerializeObject(input);
@@ -14,7 +14,7 @@ namespace FlotDotNet.Tests
         }
 
         [Fact]
-        public void MultipleMargins_ShouldSerialize()
+        public void MultipleMargins()
         {
             var input = new FlotLegendMargin(10, 20);
             string actual = SerializeObject(input);

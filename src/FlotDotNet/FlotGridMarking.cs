@@ -8,61 +8,52 @@
     /// <summary>
     /// A marking which is drawn on the grid.
     /// </summary>
-    [JsonConverter(typeof(FlotConverter))]
     public sealed class FlotGridMarking
     {
         /// <summary>
         /// Gets or sets the marking on the x-axis.
         /// </summary>
+        [JsonIgnore]
         public FlotMarking XAxis { get; set; }
 
         /// <summary>
         /// Gets or sets the marking on the y-axis
         /// </summary>
+        [JsonIgnore]
         public FlotMarking YAxis { get; set; }
 
         /// <summary>
         /// Gets or sets the color of the marking
         /// </summary>
+        [JsonIgnore]
         public string Color { get; set; }
 
         /// <summary>
         /// Gets or sets the width of the line in pixels.
         /// </summary>
+        [JsonIgnore]
         public int? LineWidth { get; set; }
 
-        private static string BuildAxisKey(string axisName, int? axis)
+        [JsonExtensionData]
+        private IDictionary<string, object> Properties
         {
-            return axisName + (axis.GetValueOrDefault(0) > 1 ? axis.Value.ToString(CultureInfo.InvariantCulture) : string.Empty) + "axis";
+            get
+            {
+                var data = new Dictionary<string, object>
+                {
+                    { AxisKey("x", XAxis?.Axis), XAxis, true },
+                    { AxisKey("y", YAxis?.Axis), YAxis, true },
+                    { "color", Color, true },
+                    { "lineWidth", LineWidth, true }
+                };
+
+                return data;
+            }
         }
 
-        private object Serialize()
+        private static string AxisKey(string axisName, int? axis)
         {
-            var data = new Dictionary<string, object>();
-
-            if (XAxis != null)
-            {
-                string key = BuildAxisKey("x", XAxis.Axis);
-                data.Add(key, XAxis);
-            }
-
-            if (YAxis != null)
-            {
-                string key = BuildAxisKey("y", YAxis.Axis);
-                data.Add(key, YAxis);
-            }
-
-            if (Color != null)
-            {
-                data.Add("color", Color);
-            }
-
-            if (LineWidth != null)
-            {
-                data.Add("lineWidth", LineWidth);
-            }
-
-            return data;
+            return axisName + (axis.GetValueOrDefault(0) > 1 ? axis.Value.ToString(CultureInfo.InvariantCulture) : string.Empty) + "axis";
         }
     }
 }

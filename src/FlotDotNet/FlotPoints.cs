@@ -1,10 +1,11 @@
 ﻿namespace FlotDotNet
 {
+    using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
     /// <summary>
-    /// Specific points options
+    /// Specific points options.
     /// </summary>
     public sealed class FlotPoints : FlotOptions
     {

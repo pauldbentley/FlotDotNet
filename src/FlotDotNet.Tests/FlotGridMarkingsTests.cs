@@ -6,17 +6,17 @@
     public class FlotGridMarkingsTests : TestClass
     {
         [Fact]
-        public void WhenEmpty_ShouldSerialize()
+        public void WhenEmpty()
         {
-            var input = new FlotGridMarkings();
+            var input = new FlotGridMarkingCollection();
             string actual = SerializeObject(input);
             actual.ShouldBe("[]");
         }
 
         [Fact]
-        public void WithEmptyMarking_ShouldSerialize()
+        public void WithEmptyMarking()
         {
-            var input = new FlotGridMarkings
+            var input = new FlotGridMarkingCollection
             {
                 new FlotGridMarking()
             };
@@ -25,9 +25,9 @@
         }
 
         [Fact]
-        public void WithData_ShouldSerialize()
+        public void WithData()
         {
-            var input = new FlotGridMarkings
+            var input = new FlotGridMarkingCollection
             {
                 new FlotGridMarking
                 {
@@ -49,9 +49,9 @@
         }
 
         [Fact]
-        public void WithFunction_ShouldSerialize()
+        public void WithFunction()
         {
-            var input = new FlotGridMarkings("functionName");
+            var input = new FlotGridMarkingCollection("functionName");
             string actual = SerializeObject(input);
             actual.ShouldBe("functionName");
         }

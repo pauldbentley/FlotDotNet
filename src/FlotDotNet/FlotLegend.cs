@@ -59,6 +59,6 @@
         public string Container { get; set; }
 
         [JsonProperty(PropertyName = "labelFormatter")]
-        private JRaw LabelFormatterRaw => string.IsNullOrEmpty(LabelFormatter) ? null : new JRaw(LabelFormatter);
+        private JRaw LabelFormatterObject => !string.IsNullOrEmpty(LabelFormatter) ? new JRaw(LabelFormatter) : null;
     }
 }

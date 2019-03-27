@@ -163,7 +163,7 @@
         public List<string> MonthNames { get; set; } = new List<string>(12);
 
         /// <summary>
-        /// Gets or sets a list of 7 day names.
+        /// Gets or sets a list 7 day names.
         /// </summary>
         [JsonIgnore]
         public List<string> DayNames { get; set; } = new List<string>(7);
@@ -178,34 +178,18 @@
         public bool? TwelveHourClock { get; set; }
 
         [JsonProperty(PropertyName = "transform")]
-        private JRaw TransformRaw => string.IsNullOrEmpty(Transform) ? null : new JRaw(Transform);
+        private JRaw TransformObject => !string.IsNullOrEmpty(Transform) ? new JRaw(Transform) : null;
 
         [JsonProperty(PropertyName = "inverseTransform")]
-        private JRaw InverseTransformRaw => string.IsNullOrEmpty(InverseTransform) ? null : new JRaw(InverseTransform);
+        private JRaw InverseTransformObject => !string.IsNullOrEmpty(InverseTransform) ? new JRaw(InverseTransform) : null;
 
         [JsonProperty(PropertyName = "tickFormatter")]
-        private JRaw TickFormatterRaw => string.IsNullOrEmpty(TickFormatter) ? null : new JRaw(TickFormatter);
+        private JRaw TickFormatterObject => !string.IsNullOrEmpty(TickFormatter) ? new JRaw(TickFormatter) : null;
 
         [JsonProperty(PropertyName = "monthNames")]
-        private object MonthNamesObject
-        {
-            get
-            {
-                return MonthNames != null && MonthNames.Count == 12
-                    ? MonthNames
-                    : null;
-            }
-        }
+        private IEnumerable<string> MonthNamesObject => MonthNames?.Count > 0 ? MonthNames : null;
 
         [JsonProperty(PropertyName = "dayNames")]
-        private object DayNamesObject
-        {
-            get
-            {
-                return DayNames != null && DayNames.Count == 7
-                    ? DayNames
-                    : null;
-            }
-        }
+        private IEnumerable<string> DayNamesObject => DayNames?.Count > 0 ? DayNames : null;
     }
 }

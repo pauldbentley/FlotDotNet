@@ -27,7 +27,7 @@ namespace FlotDotNet.Web.Controllers
             chart.YAxis.Min = -2;
             chart.YAxis.Max = 2;
 
-            chart.Grid.Markings = new FlotGridMarkings
+            chart.Grid.Markings = new FlotGridMarkingCollection
             {
                 new FlotGridMarking { Color = "#f6f6f6", YAxis = new FlotMarking { From = 1 } },
                 new FlotGridMarking { Color = "#f6f6f6", YAxis = new FlotMarking { To = -1 } },
