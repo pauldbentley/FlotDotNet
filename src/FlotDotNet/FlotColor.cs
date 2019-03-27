@@ -1,7 +1,6 @@
 ﻿namespace FlotDotNet
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
@@ -54,21 +53,23 @@
         /// <summary>
         /// Gets the CSS color.
         /// </summary>
+        [JsonIgnore]
         public string Color { get; }
 
         /// <summary>
         /// Gets the index of the auto-generated color.
         /// </summary>
+        [JsonIgnore]
         public int? Index { get; }
 
         /// <summary>
-        /// Creates a new <see cref="FlotColor"/> with the specified CSS color.
+        /// Conversion from <see cref="string"/> to <see cref="FlotColor"/>.
         /// </summary>
         /// <param name="color">The CSS color.</param>
         public static implicit operator FlotColor(string color) => new FlotColor(color);
 
         /// <summary>
-        /// Creates a new <see cref="FlotColor"/> with the speficied index.
+        /// Conversion from <see cref="int"/> to <see cref="FlotColor"/>.
         /// </summary>
         /// <param name="index">The index.</param>
         public static implicit operator FlotColor(int index) => new FlotColor(index);

@@ -46,34 +46,29 @@
         /// <summary>
         /// Gets the value.
         /// </summary>
+        [JsonIgnore]
         public double Value { get; }
 
         /// <summary>
         /// Gets the label.
         /// </summary>
+        [JsonIgnore]
         public string Label { get; }
 
         /// <summary>
         /// Gets the time label.
         /// </summary>
+        [JsonIgnore]
         public double? TimeLabel { get; }
 
         private object Serialize()
         {
             var array = new List<object>
             {
-                Value
+                { Value, true },
+                { Label, true },
+                { TimeLabel, true }
             };
-
-            if (!string.IsNullOrEmpty(Label))
-            {
-                array.Add(Label);
-            }
-
-            if (TimeLabel.HasValue)
-            {
-                array.Add(TimeLabel);
-            }
 
             return array.Count == 1
                 ? array[0]

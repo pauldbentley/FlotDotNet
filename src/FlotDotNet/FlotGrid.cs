@@ -55,7 +55,7 @@
         /// Gets or sets the grid markings
         /// </summary>
         [JsonIgnore]
-        public FlotGridMarkings Markings { get; set; } = new FlotGridMarkings();
+        public FlotGridMarkingCollection Markings { get; set; } = new FlotGridMarkingCollection();
 
         /// <summary>
         /// Gets or sets the width of the border around the plot. Set it to 0 to disable the border.
@@ -88,6 +88,7 @@
         [JsonIgnore]
         public bool ShowToolTip { get; set; }
 
+        [JsonIgnore]
         public string ToolTipContent { get; set; }
 
         /// <summary>
@@ -110,7 +111,7 @@
                     return BackgroundColor;
                 }
 
-                if (BackgroundGradient != null && BackgroundGradient.Count > 0)
+                if (BackgroundGradient?.Count > 0)
                 {
                     return new { Colors = BackgroundGradient };
                 }
@@ -120,19 +121,6 @@
         }
 
         [JsonProperty(PropertyName = "markings")]
-        private object MarkingsObject
-        {
-            get
-            {
-                if (Markings == null)
-                {
-                    return null;
-                }
-
-                return Markings.Function != null || Markings.Count > 0
-                    ? Markings
-                    : null;
-            }
-        }
+        private object MarkingsObject => Markings?.Function != null || Markings?.Count > 0 ? Markings : null;
     }
 }

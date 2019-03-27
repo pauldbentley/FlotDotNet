@@ -1,6 +1,5 @@
 ﻿namespace FlotDotNet
 {
-    using System.Collections.Generic;
     using System.Diagnostics;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
@@ -42,16 +41,19 @@
         /// <summary>
         /// Gets the boolean key.
         /// </summary>
+        [JsonIgnore]
         public bool? BooleanKey { get; }
 
         /// <summary>
         /// Gets the string key.
         /// </summary>
+        [JsonIgnore]
         public string StringKey { get; }
 
         /// <summary>
         /// Gets the numeric key.
         /// </summary>
+        [JsonIgnore]
         public int? NumericKey { get; }
 
         /// <summary>
@@ -72,10 +74,6 @@
         /// <param name="key">The key.</param>
         public static implicit operator FlotStack(int key) => new FlotStack(key);
 
-        /// <summary>
-        /// Serialized the <see cref="FlotStack"/> to an object for JSON output.
-        /// </summary>
-        /// <returns>An object for JSON output.</returns>
         private object Serialize()
         {
             if (BooleanKey.HasValue)

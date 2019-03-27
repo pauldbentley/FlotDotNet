@@ -40,7 +40,7 @@
         /// </summary>
         public string Value { get; }
 
-        private object Serialize() => Value.ToLowerInvariant();
+        private protected object Serialize() => Value.ToLowerInvariant();
 
         private object DebuggerDisplay() => Name;
     }

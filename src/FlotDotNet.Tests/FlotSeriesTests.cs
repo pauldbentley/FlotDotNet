@@ -6,7 +6,7 @@ namespace FlotDotNet.Tests
     public class FlotSeriesTests : TestClass
     {
         [Fact]
-        public void WhenEmpty_ShouldSerialize()
+        public void WhenEmpty()
         {
             var input = new FlotSeries("d1");
             string actual = SerializeObject(input);

@@ -2,9 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
+    using Newtonsoft.Json.Linq;
 
     /// <summary>
     /// The data points which are plotted on the chart
@@ -62,17 +62,20 @@
         /// <summary>
         /// Gets or sets the options for displaying points on the series.
         /// </summary>
-        public FlotPoints Points { get; set; }
+        [JsonIgnore]
+        public FlotPoints Points { get; set; } = new FlotPoints();
 
         /// <summary>
         /// Gets or sets the options for displaying bars on the series.
         /// </summary>
-        public FlotBars Bars { get; set; }
+        [JsonIgnore]
+        public FlotBars Bars { get; set; } = new FlotBars();
 
         /// <summary>
         /// Gets or sets the options for displaying lines on the series.
         /// </summary>
-        public FlotLines Lines { get; set; }
+        [JsonIgnore]
+        public FlotLines Lines { get; set; } = new FlotLines();
 
         /// <summary>
         /// Gets or sets the 1-based index of the X-axis against which this data series is to be plotted.
@@ -120,32 +123,40 @@
         public FlotBarAlign Align { get; set; }
 
         /// <summary>
-        /// Gets any additional attributes to serialize.
+        /// Gets any additional properties to serialize.
         /// </summary>
         [JsonExtensionData]
-        public Dictionary<string, object> Attributes { get; } = new Dictionary<string, object>();
+        public Dictionary<string, object> Properties { get; } = new Dictionary<string, object>();
 
-        [JsonProperty(PropertyName = "threshold")]
+        [JsonProperty(PropertyName = "points")]
+        private JRaw PointsObject => SerializationHelper.SerializeObjectRaw(Points, EmptyValueHandling.Ignore);
+
+        [JsonProperty(PropertyName = "bars")]
+        private JRaw BarsObject => SerializationHelper.SerializeObjectRaw(Bars, EmptyValueHandling.Ignore);
+
+        [JsonProperty(PropertyName = "lines")]
+        private JRaw LinesObject => SerializationHelper.SerializeObjectRaw(Lines, EmptyValueHandling.Ignore);
+
+        [JsonProperty(PropertyName = "thresholds")]
         private object ThresholdsObject
         {
             get
             {
-                if (Thresholds == null || !Thresholds.Any())
+                if (Thresholds?.Count == 1)
                 {
-                    return null;
+                    return Thresholds[0];
                 }
-                else if (Thresholds.Count() == 1)
-                {
-                    return Thresholds.First();
-                }
-                else
+
+                if (Thresholds?.Count > 1)
                 {
                     return Thresholds;
                 }
+
+                return null;
             }
         }
 
         [JsonProperty(PropertyName = "colors")]
-        private IEnumerable<string> ColorsObject => Colors != null && Colors.Count > 0 ? Colors : null;
+        private IEnumerable<string> ColorsObject => Colors?.Count > 0 ? Colors : null;
     }
 }

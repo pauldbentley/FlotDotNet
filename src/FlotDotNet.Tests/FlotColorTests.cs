@@ -6,7 +6,7 @@ namespace FlotDotNet.Tests
     public class FlotColorTests : TestClass
     {
         [Fact]
-        public void WithIndex_ShouldSerialize()
+        public void WithIndex()
         {
             var input = new FlotColor(1);
             string actual = SerializeObject(input);
@@ -14,7 +14,7 @@ namespace FlotDotNet.Tests
         }
 
         [Fact]
-        public void WithColor_ShouldSerialize()
+        public void WithColor()
         {
             var input = new FlotColor("#333");
             string actual = SerializeObject(input);

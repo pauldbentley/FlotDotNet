@@ -6,7 +6,7 @@ namespace FlotDotNet.Tests
     public class FlotPointsTests : TestClass
     {
         [Fact]
-        public void WhenEmpty_ShouldSerialize()
+        public void WhenEmpty()
         {
             var input = new FlotPoints();
             string actual = SerializeObject(input);
@@ -14,7 +14,7 @@ namespace FlotDotNet.Tests
         }
 
         [Fact]
-        public void WithCircle_ShouldSerialize()
+        public void WithCircle()
         {
             var input = new FlotPoints
             {
@@ -31,7 +31,7 @@ namespace FlotDotNet.Tests
         }
 
         [Fact]
-        public void WithFunction_ShouldSerialize()
+        public void WithFunction()
         {
             var input = new FlotPoints
             {

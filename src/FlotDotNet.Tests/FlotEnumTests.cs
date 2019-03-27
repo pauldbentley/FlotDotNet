@@ -6,7 +6,7 @@ namespace FlotDotNet.Tests
     public class FlotEnumTests : TestClass
     {
         [Fact]
-        public void ShouldSerialize()
+        public void WithValue()
         {
             var input = FlotAxisMode.Decimal;
             string actual = SerializeObject(input);

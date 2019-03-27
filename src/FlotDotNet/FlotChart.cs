@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
 
@@ -47,58 +46,99 @@
         }
 
         /// <summary>
+        /// Gets the chart options.
+        /// </summary>
+        public FlotChartOptions Options { get; } = new FlotChartOptions();
+
+        /// <summary>
         /// Gets or sets the x axis of the chart.
         /// </summary>
         [JsonIgnore]
-        public FlotAxis XAxis { get; set; }
+        public FlotAxis XAxis
+        {
+            get => Options.XAxis;
+            set => Options.XAxis = value;
+        }
 
         /// <summary>
         /// Gets or sets the y axis of the chart
         /// </summary>
         [JsonIgnore]
-        public FlotAxis YAxis { get; set; }
+        public FlotAxis YAxis
+        {
+            get => Options.YAxis;
+            set => Options.YAxis = value;
+        }
 
         /// <summary>
         /// Gets or sets a list of x axes when more than one x axis is required.
         /// </summary>
         [JsonIgnore]
-        public List<FlotAxis> XAxes { get; set; } = new List<FlotAxis>();
+        public List<FlotAxis> XAxes
+        {
+            get => Options.XAxes;
+            set => Options.XAxes = value;
+        }
 
         /// <summary>
         /// Gets or sets a list of y axes when more than one y axis is required.
         /// </summary>
         [JsonIgnore]
-        public List<FlotAxis> YAxes { get; set; } = new List<FlotAxis>();
+        public List<FlotAxis> YAxes
+        {
+            get => Options.YAxes;
+            set => Options.YAxes = value;
+        }
 
         /// <summary>
-        /// Gets or sets the chart legend.
+        /// Gets or sets the legend.
         /// </summary>
         [JsonIgnore]
-        public FlotLegend Legend { get; set; }
+        public FlotLegend Legend
+        {
+            get => Options.Legend;
+            set => Options.Legend = value;
+        }
 
         /// <summary>
         /// Gets or sets the options for displaying points on the chart
         /// </summary>
         [JsonIgnore]
-        public FlotPoints Points { get; set; } = new FlotPoints();
+        public FlotPoints Points
+        {
+            get => Options.Series.Points;
+            set => Options.Series.Points = value;
+        }
 
         /// <summary>
         /// Gets or sets the options for displaying bars on the chart
         /// </summary>
         [JsonIgnore]
-        public FlotBars Bars { get; set; } = new FlotBars();
+        public FlotBars Bars
+        {
+            get => Options.Series.Bars;
+            set => Options.Series.Bars = value;
+        }
 
         /// <summary>
         /// Gets or sets the stack option for this chart.
         /// </summary>
         [JsonIgnore]
-        public FlotStack Stack { get; set; }
+        public FlotStack Stack
+        {
+            get => Options.Series.Stack;
+            set => Options.Series.Stack = value;
+        }
 
         /// <summary>
         /// Gets or sets the options for displaying lines on the chart
         /// </summary>
         [JsonIgnore]
-        public FlotLines Lines { get; set; } = new FlotLines();
+        public FlotLines Lines
+        {
+            get => Options.Series.Lines;
+            set => Options.Series.Lines = value;
+        }
 
         /// <summary>
         /// Gets or sets a list of colours.
@@ -123,7 +163,11 @@
         /// Gets or sets the chart grid.
         /// </summary>
         [JsonIgnore]
-        public FlotGrid Grid { get; set; }
+        public FlotGrid Grid
+        {
+            get => Options.Grid;
+            set => Options.Grid = value;
+        }
 
         /// <summary>
         /// Gets or sets a list of the data series within the chart.
@@ -164,56 +208,18 @@
         }
 
         [JsonProperty]
-        private object Options
-        {
-            get
-            {
-                // We will always return an options property
-                // we still need this even if it is empty
-                return new
-                {
-                    Legend,
-                    Xaxes = XAxes != null && XAxes.Any() ? XAxes : null,
-                    Yaxes = XAxes != null && YAxes.Any() ? YAxes : null,
-                    Xaxis = XAxis,
-                    Yaxis = YAxis,
-                    Grid,
-                    Series = SeriesObject
-                };
-            }
-        }
-
-        private object SeriesObject
-        {
-            get
-            {
-                // The series property is serialized
-                // if any of these properties are empty
-                // we don't serialize.
-                var series = (Bars?.HasValue == false && Points?.HasValue == false && Lines?.HasValue == false && Stack == null)
-                    ? null
-                    : new { Bars, Points, Lines, Stack };
-
-                return series;
-            }
-        }
-
-        [JsonProperty]
         private object Interaction
         {
             get
             {
                 if (RedrawOverlayInterval.HasValue)
                 {
-                    return new { RedrawOverlayInterval.Value };
+                    return new { RedrawOverlayInterval };
                 }
 
                 return null;
             }
         }
-
-        [JsonProperty(PropertyName = "colors")]
-        private object ColorsObject => Colors != null && Colors.Count > 0 ? Colors : null;
 
         /// <summary>
         /// Creates a javascript timestamp suitable for a time series.
@@ -266,13 +272,13 @@
         public string Plot(bool plot)
         {
             var html = new StringBuilder();
-            html.AppendLine("var " + Id + " = ");
+            html.AppendLine("var " + Id + "=");
             html.Append(JsonConvert.SerializeObject(this, FlotConfiguration.SerializerSettings));
-            html.AppendLine(";");
+            html.Append(";");
 
             if (plot)
             {
-                html.AppendLine(Id + ".plotChart();");
+                html.Append(Id + ".plotChart();");
             }
 
             return html.ToString();

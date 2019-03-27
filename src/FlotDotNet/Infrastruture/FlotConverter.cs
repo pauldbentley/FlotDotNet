@@ -5,7 +5,7 @@
     using Newtonsoft.Json;
 
     /// <summary>
-    /// Converts Flot objecs to JSON.
+    /// Converts Flot objects to JSON.
     /// </summary>
     internal class FlotConverter : JsonConverter
     {

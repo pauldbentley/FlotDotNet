@@ -1,5 +1,6 @@
 ﻿namespace FlotDotNet
 {
+    using System;
     using System.Collections.Generic;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
@@ -33,7 +34,7 @@
         /// </summary>
         /// <param name="number">The number of ticks.</param>
         public FlotTickOptions(int number)
-            : base()
+            : base(0)
         {
             Number = number;
         }
@@ -43,20 +44,34 @@
         /// </summary>
         /// <param name="function">The tick function.</param>
         public FlotTickOptions(string function)
-            : base()
+            : base(0)
         {
-            Function = function;
+            if (function == null)
+            {
+                throw new ArgumentNullException(nameof(function));
+            }
+
+            if (string.IsNullOrWhiteSpace(function))
+            {
+                throw new ArgumentOutOfRangeException(nameof(function));
+            }
+
+            FunctionRaw = new JRaw(function);
         }
 
         /// <summary>
         /// Gets the number of ticks.
         /// </summary>
+        [JsonIgnore]
         public int? Number { get; }
 
         /// <summary>
         /// Gets the tick function.
         /// </summary>
-        public string Function { get; }
+        [JsonIgnore]
+        public string Function => FunctionRaw?.ToString();
+
+        private JRaw FunctionRaw { get; }
 
         /// <summary>
         /// Creates a new <see cref="FlotTickOptions"/> instance with the given number of ticks.
@@ -79,15 +94,13 @@
         private object Serialize()
         {
             // can be number, array, or function
-            if (!string.IsNullOrEmpty(Function))
+            if (FunctionRaw != null)
             {
-                // this needs to be a raw value
-                // as we don't want it quoted
-                return new JRaw(Function);
+                return FunctionRaw;
             }
             else if (Number.HasValue)
             {
-                return Number.Value;
+                return Number;
             }
             else
             {

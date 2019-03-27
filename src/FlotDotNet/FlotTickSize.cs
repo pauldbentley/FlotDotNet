@@ -34,11 +34,13 @@
         /// <summary>
         /// Gets the tick size.
         /// </summary>
+        [JsonIgnore]
         public int TickSize { get; }
 
         /// <summary>
         /// Gets the unit for the time mode.
         /// </summary>
+        [JsonIgnore]
         public FlotTickUnit Unit { get; }
 
         /// <summary>
