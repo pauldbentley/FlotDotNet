@@ -187,9 +187,9 @@
         private JRaw TickFormatterObject => !string.IsNullOrEmpty(TickFormatter) ? new JRaw(TickFormatter) : null;
 
         [JsonProperty(PropertyName = "monthNames")]
-        private IEnumerable<string> MonthNamesObject => MonthNames?.Count == 12 ? MonthNames : null;
+        private IEnumerable<string> MonthNamesObject => MonthNames?.Count > 0 ? MonthNames : null;
 
         [JsonProperty(PropertyName = "dayNames")]
-        private IEnumerable<string> DayNamesObject => DayNames?.Count == 7 ? DayNames : null;
+        private IEnumerable<string> DayNamesObject => DayNames?.Count > 0 ? DayNames : null;
     }
 }

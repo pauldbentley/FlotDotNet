@@ -9,6 +9,7 @@ namespace FlotDotNet.Tests
         public void WithIndex()
         {
             var input = new FlotColor(1);
+
             string actual = SerializeObject(input);
             actual.ShouldBe("1");
         }
@@ -17,6 +18,7 @@ namespace FlotDotNet.Tests
         public void WithColor()
         {
             var input = new FlotColor("#333");
+
             string actual = SerializeObject(input);
             actual.ShouldBe("\"#333\"");
         }

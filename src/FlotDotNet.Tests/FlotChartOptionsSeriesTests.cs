@@ -9,6 +9,7 @@ namespace FlotDotNet.Tests
         public void Empty()
         {
             var input = new FlotChartOptionsSeries();
+
             string actual = SerializeObject(input);
             actual.ShouldBe("{}");
         }
@@ -32,8 +33,12 @@ namespace FlotDotNet.Tests
                 },
                 Stack = true
             };
+
             string actual = SerializeObject(input);
-            actual.ShouldBe("{\"bars\":{\"show\":true},\"lines\":{\"show\":true},\"points\":{\"show\":true},\"stack\":true}");
+            actual.ShouldContain("\"bars\":{\"show\":true}");
+            actual.ShouldContain("\"lines\":{\"show\":true}");
+            actual.ShouldContain("\"points\":{\"show\":true}");
+            actual.ShouldContain("\"stack\":true");
         }
     }
 }

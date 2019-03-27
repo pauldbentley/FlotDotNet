@@ -137,7 +137,7 @@
         [JsonProperty(PropertyName = "lines")]
         private JRaw LinesObject => SerializationHelper.SerializeObjectRaw(Lines, EmptyValueHandling.Ignore);
 
-        [JsonProperty(PropertyName = "thresholds")]
+        [JsonProperty(PropertyName = "threshold")]
         private object ThresholdsObject
         {
             get

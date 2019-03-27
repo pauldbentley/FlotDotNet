@@ -9,6 +9,7 @@ namespace FlotDotNet.Tests
         public void SingleValue()
         {
             var input = new FlotBox<int>(1);
+
             string actual = SerializeObject(input);
             actual.ShouldBe("1");
         }
@@ -17,6 +18,7 @@ namespace FlotDotNet.Tests
         public void TopBottomLeftRight()
         {
             var input = new FlotBox<int>(1, 2);
+
             string actual = SerializeObject(input);
             actual.ShouldBe("{\"top\":1,\"right\":2,\"bottom\":1,\"left\":2}");
         }
@@ -25,6 +27,7 @@ namespace FlotDotNet.Tests
         public void AllBorders()
         {
             var input = new FlotBox<int>(1, 2, 3, 4);
+
             string actual = SerializeObject(input);
             actual.ShouldBe("{\"top\":1,\"right\":2,\"bottom\":3,\"left\":4}");
         }
@@ -33,6 +36,7 @@ namespace FlotDotNet.Tests
         public void AllNull()
         {
             var input = new FlotBox<int?>(null);
+
             string actual = SerializeObject(input);
             actual.ShouldBe("{}");
         }

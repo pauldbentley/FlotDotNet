@@ -1,5 +1,7 @@
 namespace FlotDotNet.Tests
 {
+    using System.Collections.Generic;
+    using System.Runtime.Serialization;
     using Shouldly;
     using Xunit;
 
@@ -9,6 +11,7 @@ namespace FlotDotNet.Tests
         public void Empty()
         {
             var input = new FlotAxis();
+
             string actual = SerializeObject(input);
             actual.ShouldBe("{}");
         }
@@ -20,6 +23,7 @@ namespace FlotDotNet.Tests
             {
                 TickFormatter = "tickFormatFunction"
             };
+
             string actual = SerializeObject(input);
             actual.ShouldBe("{\"tickFormatter\":tickFormatFunction}");
         }
@@ -31,6 +35,7 @@ namespace FlotDotNet.Tests
             {
                 Transform = "transformFunction"
             };
+
             string actual = SerializeObject(input);
             actual.ShouldBe("{\"transform\":transformFunction}");
         }
@@ -42,8 +47,33 @@ namespace FlotDotNet.Tests
             {
                 InverseTransform = "inverseTransformFunction"
             };
+
             string actual = SerializeObject(input);
             actual.ShouldBe("{\"inverseTransform\":inverseTransformFunction}");
+        }
+
+        [Fact]
+        public void WithMonthNames()
+        {
+            var input = new FlotAxis
+            {
+                MonthNames = new List<string> { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }
+            };
+
+            string actual = SerializeObject(input);
+            actual.ShouldBe("{\"monthNames\":[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\",\"8\",\"9\",\"10\",\"11\",\"12\"]}");
+        }
+
+        [Fact]
+        public void WithDayNames()
+        {
+            var input = new FlotAxis
+            {
+                DayNames = new List<string> { "1", "2", "3", "4", "5", "6", "7" }
+            };
+
+            string actual = SerializeObject(input);
+            actual.ShouldBe("{\"dayNames\":[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\"]}");
         }
     }
 }

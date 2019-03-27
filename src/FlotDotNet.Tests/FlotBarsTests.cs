@@ -10,6 +10,7 @@ namespace FlotDotNet.Tests
         public void Empty()
         {
             var input = new FlotBars();
+
             string actual = SerializeObject(input);
             actual.ShouldBe("{}");
         }
@@ -21,6 +22,7 @@ namespace FlotDotNet.Tests
             {
                 FillColor = "#333"
             };
+
             string actual = SerializeObject(input);
             actual.ShouldBe("{\"fillColor\":\"#333\"}");
         }
@@ -36,6 +38,7 @@ namespace FlotDotNet.Tests
                     { 0.3, 0.4 }
                 }
             };
+
             string actual = SerializeObject(input);
             actual.ShouldBe("{\"fillColor\":{\"colors\":[{\"opacity\":0.1,\"brightness\":0.2},{\"opacity\":0.3,\"brightness\":0.4}]}}");
         }
