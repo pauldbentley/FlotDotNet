@@ -144,7 +144,11 @@
         /// Gets or sets the options for displaying a pie chart.
         /// </summary>
         [JsonIgnore]
-        public FlotPie Pie { get; set; } = new FlotPie();
+        public FlotPie Pie
+        {
+            get => Options.Series.Pie;
+            set => Options.Series.Pie = value;
+        }
 
         /// <summary>
         /// Gets or sets a list of colours.
@@ -240,37 +244,6 @@
                         Value = (object)s
                     })
                     .ToDictionary(k => k.Key, v => v.Value);
-            }
-        }
-
-        [JsonProperty]
-        private object Options
-        {
-            get
-            {
-                // The series property is serialized
-                // if any of these properties are set
-                var bars = SerializationHelper.ShouldSerializeOrDefault(Bars);
-                var points = SerializationHelper.ShouldSerializeOrDefault(Points);
-                var lines = SerializationHelper.ShouldSerializeOrDefault(Lines);
-                var stack = Stack;
-
-                var series = (bars == null && points == null && lines == null && stack == null)
-                    ? null
-                    : new { bars, points, lines, stack };
-
-                // We will always return an options property
-                // we still need this even if it is empty
-                return new
-                {
-                    Legend = SerializationHelper.ShouldSerializeOrDefault(Legend),
-                    Xaxes = XAxes != null && XAxes.Any() ? XAxes : null,
-                    Yaxes = XAxes != null && YAxes.Any() ? YAxes : null,
-                    Xaxis = SerializationHelper.ShouldSerializeOrDefault(XAxis),
-                    Yaxis = SerializationHelper.ShouldSerializeOrDefault(YAxis),
-                    Grid = SerializationHelper.ShouldSerializeOrDefault(Grid),
-                    Series = series
-                };
             }
         }
 

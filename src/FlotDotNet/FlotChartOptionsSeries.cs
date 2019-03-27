@@ -40,6 +40,12 @@
         [JsonIgnore]
         public FlotStack Stack { get; set; }
 
+        /// <summary>
+        /// Gets or sets the options for displaying a pie chart.
+        /// </summary>
+        [JsonIgnore]
+        public FlotPie Pie { get; set; } = new FlotPie();
+
         [JsonExtensionData]
         private Dictionary<string, object> Properties
         {
@@ -49,6 +55,7 @@
                 var bars = SerializationHelper.SerializeObjectRaw(Bars, EmptyValueHandling.Ignore);
                 var stack = SerializationHelper.SerializeObjectRaw(Stack, EmptyValueHandling.Ignore);
                 var lines = SerializationHelper.SerializeObjectRaw(Lines, EmptyValueHandling.Ignore);
+                var pie = SerializationHelper.SerializeObjectRaw(Pie, EmptyValueHandling.Ignore);
 
                 bool ignoreNull = FlotConfiguration.SerializerSettings.NullValueHandling == NullValueHandling.Ignore;
 
@@ -57,7 +64,8 @@
                     { nameof(bars), bars, ignoreNull },
                     { nameof(lines), lines, ignoreNull },
                     { nameof(points), points, ignoreNull },
-                    { nameof(stack), stack, ignoreNull }
+                    { nameof(stack), stack, ignoreNull },
+                    { nameof(pie), pie, ignoreNull }
                 };
 
                 return data;
