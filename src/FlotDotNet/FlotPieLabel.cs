@@ -40,6 +40,7 @@
         /// <summary>
         /// Gets or sets the background color of the positioned labels.
         /// </summary>
+        [JsonIgnore]
         public FlotPieLabelBackground Background { get; set; } = new FlotPieLabelBackground();
 
         [JsonProperty(PropertyName = "formatter")]

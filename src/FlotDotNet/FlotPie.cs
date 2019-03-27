@@ -57,6 +57,7 @@
         /// <summary>
         /// Gets or sets the pie slice label.
         /// </summary>
+        [JsonIgnore]
         public FlotPieLabel Label { get; set; } = new FlotPieLabel();
 
         /// <summary>

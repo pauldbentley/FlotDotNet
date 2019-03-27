@@ -25,12 +25,10 @@
             }
 
             IsAuto = true;
-            Value = default;
         }
 
         private AutoValue(T value)
         {
-            IsAuto = false;
             Value = value;
         }
 
@@ -38,13 +36,25 @@
 
         private bool IsAuto { get; }
 
+        /// <summary>
+        /// Conversion from <see cref="string"/> to a <see cref="AutoValue{T}"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
         public static implicit operator AutoValue<T>(string value) => new AutoValue<T>(value);
 
+        /// <summary>
+        /// Conversion from a given value to a <see cref="AutoValue{T}"/>.
+        /// </summary>
+        /// <param name="value">The value.</param>
         public static implicit operator AutoValue<T>(T value) => new AutoValue<T>(value);
 
+        /// <summary>
+        /// Conversion from <see cref="AutoValue{T}"/> to a given type.
+        /// </summary>
+        /// <param name="value">The value.</param>
         public static explicit operator T(AutoValue<T> value) => value.Value;
 
-        internal object Serialize()
+        private object Serialize()
         {
             if (IsAuto)
             {

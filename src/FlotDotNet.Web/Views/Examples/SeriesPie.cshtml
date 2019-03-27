@@ -104,13 +104,11 @@
         {
             $("#code").text(lines.join("\n"));
         }
-    </script>
-
-    @Html.Raw(Model.Chart.Plot(false));
-    <script type="text/javascript">
 
         $(function()
         {
+            @Html.Raw(Model.Chart.Plot(false));
+
             // Example Data
 
             //var data = [
