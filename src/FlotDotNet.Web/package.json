@@ -1,7 +1,14 @@
 {
-  "name": "myproject",
-  "version": "1.0.0",
-  "dependencies": {
-    "flot": "^0.8.3"
-  }
+    "name": "flotdotnet-web",
+    "version": "0.0.1",
+    "private": true,
+    "dependencies": {
+        "flot": "3.0.1",
+        "jquery": "3.3.1"
+    },
+    "devDependencies": {
+        "gulp": "4.0.0",
+        "rimraf": "2.6.3",
+        "merge-stream": "1.0.1"
+    }
 }

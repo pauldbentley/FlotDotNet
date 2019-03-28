@@ -19,7 +19,7 @@
         public bool? AboveData { get; set; }
 
         /// <summary>
-        /// Gets or sets color of the grid itself.
+        /// Gets or sets the primary color used for outline and labels.
         /// </summary>
         public FlotColor Color { get; set; }
 
@@ -52,10 +52,20 @@
         public int? AxisMargin { get; set; }
 
         /// <summary>
-        /// Gets or sets the grid markings
+        /// Gets or sets the grid markings.
         /// </summary>
         [JsonIgnore]
         public FlotGridMarkingCollection Markings { get; set; } = new FlotGridMarkingCollection();
+
+        /// <summary>
+        /// Gets or sets the color of the markings.
+        /// </summary>
+        public FlotColor MarkingsColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the line with for the markings.
+        /// </summary>
+        public int? MarkingsLineWidth { get; set; }
 
         /// <summary>
         /// Gets or sets the width of the border around the plot. Set it to 0 to disable the border.
@@ -66,6 +76,11 @@
         /// Gets or sets the color of the grid border.
         /// </summary>
         public FlotBox<string> BorderColor { get; set; }
+
+        /// <summary>
+        /// Gets or sets the color for the ticks.
+        /// </summary>
+        public FlotColor TickColor { get; set; }
 
         /// <summary>
         /// Gets or sets the default minimum margin around the border.
@@ -85,12 +100,6 @@
         /// </summary>
         public bool? Hoverable { get; set; }
 
-        [JsonIgnore]
-        public bool ShowToolTip { get; set; }
-
-        [JsonIgnore]
-        public string ToolTipContent { get; set; }
-
         /// <summary>
         /// Gets or sets a value indicating whether nearby data items are highlighted automatically.
         /// </summary>
@@ -100,6 +109,12 @@
         /// Gets or sets a vaule which specifies how far the mouse can be from an item and still activate it.
         /// </summary>
         public int? MouseActiveRadius { get; set; }
+
+        [JsonIgnore]
+        public bool ShowToolTip { get; set; }
+
+        [JsonIgnore]
+        public string ToolTipContent { get; set; }
 
         [JsonProperty(PropertyName = "backgroundColor")]
         private object BackgroundColorObject

@@ -21,11 +21,11 @@ namespace FlotDotNet.Web.Controllers
             d1.Bars.BarWidth = 0.5;
             d1.Bars.Fill = 0.9;
 
-            chart.XAxis.Ticks = Array.Empty<FlotTick>();
-            chart.XAxis.AutoscaleMargin = 0.02;
+            chart.XAxis.Show = false;
 
             chart.YAxis.Min = -2;
             chart.YAxis.Max = 2;
+            chart.YAxis.AutoScale = FlotAxisAutoScale.None;
 
             chart.Grid.Markings = new FlotGridMarkingCollection
             {
