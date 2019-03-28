@@ -187,6 +187,11 @@
         public FlotTickSize MinTickSize { get; set; }
 
         /// <summary>
+        /// Gets or sets the position the axis is rendered within its box.
+        /// </summary>
+        public FlotAxisBoxPosition BoxPosition { get; set; }
+
+        /// <summary>
         /// Gets or sets the format string to use when formatting time e.g. "%Y/%m/%d".
         /// </summary>
         [JsonProperty(PropertyName = "timeformat")]
