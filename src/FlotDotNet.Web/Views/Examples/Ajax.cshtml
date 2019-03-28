@@ -14,19 +14,19 @@
 
 <p>
     <button class="fetchSeries">First dataset</button>
-    [ <a href="/lib/flot/examples/ajax/data-eu-gdp-growth.json">see data</a> ]
+    [ <a href="/examples/ajax/data-eu-gdp-growth.json">see data</a> ]
     <span></span>
 </p>
 
 <p>
     <button class="fetchSeries">Second dataset</button>
-    [ <a href="/lib/flot/examples/ajax/data-japan-gdp-growth.json">see data</a> ]
+    [ <a href="/examples/ajax/data-japan-gdp-growth.json">see data</a> ]
     <span></span>
 </p>
 
 <p>
     <button class="fetchSeries">Third dataset</button>
-    [ <a href="/lib/flot/examples/ajax/data-usa-gdp-growth.json">see data</a> ]
+    [ <a href="/examples/ajax/data-usa-gdp-growth.json">see data</a> ]
     <span></span>
 </p>
 
@@ -98,7 +98,7 @@
                     // database - but in this case we only have static example
                     // files, so we need to modify the URL.
                     $.ajax({
-                        url: "/lib/flot/examples/ajax/data-eu-gdp-growth-" + iteration + ".json",
+                        url: "/examples/ajax/data-eu-gdp-growth-" + iteration + ".json",
                         type: "GET",
                         dataType: "json",
                         success: onDataReceived
