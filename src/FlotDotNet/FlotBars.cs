@@ -15,6 +15,12 @@
         public double? BarWidth { get; set; }
 
         /// <summary>
+        /// Gets or sets the bar alignment.
+        /// Value can be "left", "right" or "center".
+        /// </summary>
+        public FlotBarAlign Align { get; set; }
+
+        /// <summary>
         /// Gets or sets a value which specifies whether a bar should be left-aligned (default) or centered on top of the value it represents.
         /// </summary>
         public bool? Horizontal { get; set; }

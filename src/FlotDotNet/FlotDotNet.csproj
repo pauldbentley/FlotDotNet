@@ -5,10 +5,10 @@
         <CodeAnalysisRuleSet>FlotDotNet.ruleset</CodeAnalysisRuleSet>
         <Authors>Paul Bentley</Authors>
         <Company>Paul Bentley</Company>
-        <AssemblyVersion>0.0.1.0</AssemblyVersion>
-        <FileVersion>0.0.1.0</FileVersion>
+        <AssemblyVersion>0.0.2.0</AssemblyVersion>
+        <FileVersion>0.0.2.0</FileVersion>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
-        <Version>0.0.1</Version>
+        <Version>0.0.2</Version>
         <LangVersion>7.2</LangVersion>
     </PropertyGroup>
 

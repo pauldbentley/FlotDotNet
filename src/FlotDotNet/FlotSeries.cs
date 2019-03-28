@@ -48,22 +48,16 @@
         public List<FlotDataPoint> Data { get; } = new List<FlotDataPoint>();
 
         /// <summary>
-        /// Gets or sets the thresholds (requires the threshold plugin).
-        /// </summary>
-        [JsonIgnore]
-        public List<FlotThreshold> Thresholds { get; set; } = new List<FlotThreshold>();
-
-        /// <summary>
         /// Gets or sets the label.
         /// The label is used for the legend, if you don't specify one, the series will not show up in the legend.
         /// </summary>
         public string Label { get; set; }
 
         /// <summary>
-        /// Gets or sets the options for displaying points on the series.
+        /// Gets or sets the options for displaying lines on the series.
         /// </summary>
         [JsonIgnore]
-        public FlotPoints Points { get; set; } = new FlotPoints();
+        public FlotLines Lines { get; set; } = new FlotLines();
 
         /// <summary>
         /// Gets or sets the options for displaying bars on the series.
@@ -72,10 +66,10 @@
         public FlotBars Bars { get; set; } = new FlotBars();
 
         /// <summary>
-        /// Gets or sets the options for displaying lines on the series.
+        /// Gets or sets the options for displaying points on the series.
         /// </summary>
         [JsonIgnore]
-        public FlotLines Lines { get; set; } = new FlotLines();
+        public FlotPoints Points { get; set; } = new FlotPoints();
 
         /// <summary>
         /// Gets or sets the 1-based index of the X-axis against which this data series is to be plotted.
@@ -117,10 +111,10 @@
         public FlotColor HighlightColor { get; set; }
 
         /// <summary>
-        /// Gets or sets the bar alignment.
-        /// Value can be "left" or "center".
+        /// Gets or sets the thresholds (requires the threshold plugin).
         /// </summary>
-        public FlotBarAlign Align { get; set; }
+        [JsonIgnore]
+        public List<FlotThreshold> Thresholds { get; set; } = new List<FlotThreshold>();
 
         /// <summary>
         /// Gets any additional properties to serialize.
