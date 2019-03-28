@@ -33,6 +33,7 @@
         /// Set this value to "browser", or a value recognized by said library,
         /// Flot will use timezone-js to interpret the timestamps according to that time zone.
         /// </summary>
+        [JsonProperty(PropertyName = "timezone")]
         public string TimeZone { get; set; }
 
         /// <summary>
@@ -155,6 +156,11 @@
         /// </summary>
         [JsonProperty(PropertyName = "timeformat")]
         public string TimeFormat { get; set; }
+
+        /// <summary>
+        /// Gets or sets the time base in which the timestamps are given to Flot.
+        /// </summary>
+        public FlotTimeBase TimeBase { get; set; }
 
         /// <summary>
         /// Gets or sets a list of 12 month names.

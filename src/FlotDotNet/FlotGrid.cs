@@ -85,12 +85,6 @@
         /// </summary>
         public bool? Hoverable { get; set; }
 
-        [JsonIgnore]
-        public bool ShowToolTip { get; set; }
-
-        [JsonIgnore]
-        public string ToolTipContent { get; set; }
-
         /// <summary>
         /// Gets or sets a value indicating whether nearby data items are highlighted automatically.
         /// </summary>
@@ -100,6 +94,12 @@
         /// Gets or sets a vaule which specifies how far the mouse can be from an item and still activate it.
         /// </summary>
         public int? MouseActiveRadius { get; set; }
+
+        [JsonIgnore]
+        public bool ShowToolTip { get; set; }
+
+        [JsonIgnore]
+        public string ToolTipContent { get; set; }
 
         [JsonProperty(PropertyName = "backgroundColor")]
         private object BackgroundColorObject

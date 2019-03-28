@@ -58,6 +58,11 @@
         /// </summary>
         public string Container { get; set; }
 
+        /// <summary>
+        /// Gets or sets the options to sort the legend entries.
+        /// </summary>
+        public FlotLegendSorting Sorted { get; set; }
+
         [JsonProperty(PropertyName = "labelFormatter")]
         private JRaw LabelFormatterObject => !string.IsNullOrEmpty(LabelFormatter) ? new JRaw(LabelFormatter) : null;
     }
