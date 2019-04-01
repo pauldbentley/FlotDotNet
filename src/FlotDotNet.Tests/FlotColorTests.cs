@@ -12,6 +12,9 @@ namespace FlotDotNet.Tests
 
             string actual = SerializeObject(input);
             actual.ShouldBe("1");
+
+            bool equals = input == 1;
+            equals.ShouldBe(true);
         }
 
         [Fact]
@@ -21,6 +24,9 @@ namespace FlotDotNet.Tests
 
             string actual = SerializeObject(input);
             actual.ShouldBe("\"#333\"");
+
+            bool equals = input == "#333";
+            equals.ShouldBe(true);
         }
     }
 }

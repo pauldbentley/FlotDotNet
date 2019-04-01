@@ -69,10 +69,22 @@
         public static implicit operator FlotColor(string color) => new FlotColor(color);
 
         /// <summary>
+        /// Conversion from <see cref="FlotColor"/> to <see cref="string"/>.
+        /// </summary>
+        /// <param name="color">The color.</param>
+        public static implicit operator string(FlotColor color) => color.Color;
+
+        /// <summary>
         /// Conversion from <see cref="int"/> to <see cref="FlotColor"/>.
         /// </summary>
         /// <param name="index">The index.</param>
         public static implicit operator FlotColor(int index) => new FlotColor(index);
+
+        /// <summary>
+        /// Conversion from <see cref="Nullable{Int32}"/> to <see cref="FlotColor"/>.
+        /// </summary>
+        /// <param name="color">The color.</param>
+        public static implicit operator int?(FlotColor color) => color.Index;
 
         private object Serialize()
         {
