@@ -7,7 +7,7 @@
     /// <summary>
     /// The series options for a chart.
     /// </summary>
-    public sealed class FlotChartOptionsSeries
+    internal sealed class FlotChartOptionsSeries
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FlotChartOptionsSeries"/> class.

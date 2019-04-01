@@ -46,11 +46,6 @@
         }
 
         /// <summary>
-        /// Gets the chart options.
-        /// </summary>
-        public FlotChartOptions Options { get; } = new FlotChartOptions();
-
-        /// <summary>
         /// Gets or sets the x axis of the chart.
         /// </summary>
         [JsonIgnore]
@@ -206,6 +201,9 @@
                     .ToDictionary(k => k.Key, v => v.Value);
             }
         }
+
+        [JsonProperty]
+        private FlotChartOptions Options { get; } = new FlotChartOptions();
 
         [JsonProperty]
         private object Interaction

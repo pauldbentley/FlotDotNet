@@ -7,7 +7,7 @@
     /// <summary>
     /// The options for a <see cref="FlotChart"/>.
     /// </summary>
-    public sealed class FlotChartOptions
+    internal sealed class FlotChartOptions
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FlotChartOptions"/> class.
