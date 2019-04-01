@@ -45,7 +45,7 @@
         /// <summary>
         /// Gets the data which will be plotted on the chart.
         /// </summary>
-        public List<FlotDataPoint> Data { get; } = new List<FlotDataPoint>();
+        public List<IFlotDataItem> Data { get; } = new List<IFlotDataItem>();
 
         /// <summary>
         /// Gets or sets the label.
