@@ -15,7 +15,6 @@ namespace FlotDotNet.Tests
             actual.ShouldContain("\"plot\":null");
             actual.ShouldContain("\"placeholder\":\"#chart_placeholder\"");
             actual.ShouldContain("\"plotChart\":function");
-            actual.ShouldContain("\"plotData\":function");
             actual.ShouldContain("\"data\":{}");
         }
     }

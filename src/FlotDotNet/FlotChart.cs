@@ -214,11 +214,6 @@
         {
             get
             {
-                if (!Series.Any())
-                {
-                    return Array.Empty<object>();
-                }
-
                 if (Pie.Show == true)
                 {
                     // The Pie plugin assumes that each series has a single data value
