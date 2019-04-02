@@ -1,14 +1,10 @@
 ﻿namespace FlotDotNet
 {
     using System;
-    using System.Collections.Generic;
-    using FlotDotNet.Infrastruture;
-    using Newtonsoft.Json;
 
     /// <summary>
     /// A category when plotting textual data or categories.
     /// </summary>
-    [JsonConverter(typeof(FlotConverter))]
     public sealed class FlotCategory
     {
         /// <summary>
@@ -62,20 +58,5 @@
         /// </summary>
         /// <param name="category">The category.</param>
         public static implicit operator string(FlotCategory category) => category.Name;
-
-        private object Serialize()
-        {
-            // category and a value
-            if (Value.HasValue)
-            {
-                return new Dictionary<string, int>
-                {
-                    { Name, Value.Value }
-                };
-            }
-
-            // just a category
-            return Name;
-        }
     }
 }
