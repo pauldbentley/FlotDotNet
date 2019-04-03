@@ -24,7 +24,7 @@ namespace FlotDotNet.Web.Controllers
             };
 
             var d1 = chart.CreateSeries("d1");
-            // d1.Data.AddRange(new List<FlotCategoryData> { { "January", 10 }, { "February", 8 }, { "March", 4 }, { "April", 13 }, { "May", 17 }, { "June", 9 } })
+            d1.Data = new List<FlotDataPoint> { { "January", 10 }, { "February", 8 }, { "March", 4 }, { "April", 13 }, { "May", 17 }, { "June", 9 } };
 
             return View(chart);
         }

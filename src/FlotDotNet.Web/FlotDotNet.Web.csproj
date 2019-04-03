@@ -27,6 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Update="Views\Examples\Categories.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Examples\Ajax.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

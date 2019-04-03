@@ -34,14 +34,25 @@
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="FlotDataPoint"/> class with a specific category and value.
+        /// </summary>
+        /// <param name="category">The category.</param>
+        /// <param name="value">The value.</param>
+        public FlotDataPoint(string category, double value)
+        {
+            Category = category;
+            Y = value;
+        }
+
+        /// <summary>
         /// Gets the value for the x-axis.
         /// </summary>
-        public double X { get; }
+        public double? X { get; }
 
         /// <summary>
         /// Gets the value for the y-axis.
         /// </summary>
-        public double Y { get; }
+        public double? Y { get; }
 
         /// <summary>
         /// Gets a bottom co-ordinate.
@@ -50,17 +61,33 @@
         public double? Bottom { get; }
 
         /// <summary>
+        /// Gets the category.
+        /// </summary>
+        public string Category { get; }
+
+        /// <summary>
         /// Returns an enumerator that iterates through the data points.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the data points.</returns>
         public IEnumerator<object> GetEnumerator()
         {
-            yield return X;
-            yield return Y;
-
-            if (Bottom.HasValue)
+            // category data
+            if (!string.IsNullOrEmpty(Category))
             {
-                yield return Bottom;
+                yield return Category;
+                yield return Y;
+            }
+
+            // standard data
+            else
+            {
+                yield return X;
+                yield return Y;
+
+                if (Bottom.HasValue)
+                {
+                    yield return Bottom;
+                }
             }
         }
 

@@ -33,6 +33,18 @@
             collection.Add(new FlotDataPoint(x, y, bottom));
         }
 
+        /// <summary>
+        /// Adds a new <see cref="FlotDataPoint"/> to the end of the <see cref="ICollection{T}"/> with the given values.
+        /// </summary>
+        /// <param name="collection">The collection.</param>
+        /// <param name="category">The category name.</param>
+        /// <param name="value">The category value.</param>
+        public static void Add(this ICollection<FlotDataPoint> collection, string category, double value)
+        {
+            GuardNotNull(collection);
+            collection.Add(new FlotDataPoint(category, value));
+        }
+
         private static void GuardNotNull(object value)
         {
             if (value == null)
