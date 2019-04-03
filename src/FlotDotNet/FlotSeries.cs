@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using FlotDotNet.Infrastruture;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Linq;
@@ -43,9 +44,10 @@
         public FlotColor Color { get; set; }
 
         /// <summary>
-        /// Gets the data which will be plotted on the chart.
+        /// Gets or sets the data which will be plotted on the chart.
         /// </summary>
-        public List<IFlotDataItem> Data { get; } = new List<IFlotDataItem>();
+        [JsonIgnore]
+        public List<FlotDataPoint> Data { get; set; } = new List<FlotDataPoint>();
 
         /// <summary>
         /// Gets or sets the label.
@@ -121,6 +123,9 @@
         /// </summary>
         [JsonExtensionData]
         public Dictionary<string, object> Properties { get; } = new Dictionary<string, object>();
+
+        [JsonProperty(PropertyName = "data")]
+        private IEnumerable<FlotDataPoint> DataObject => Data ?? Enumerable.Empty<FlotDataPoint>();
 
         [JsonProperty(PropertyName = "points")]
         private JRaw PointsObject => SerializationHelper.SerializeObjectRaw(Points, EmptyValueHandling.Ignore);
