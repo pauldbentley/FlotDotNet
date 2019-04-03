@@ -8,7 +8,7 @@
     /// Represents an x,y-pair to be plotted on a chart.
     /// </summary>
     [JsonArray]
-    public sealed class FlotDataPoint : IEnumerable<double>, IFlotDataItem
+    public sealed class FlotDataPoint : IEnumerable<object>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="FlotDataPoint"/> class with specific x-y values.
@@ -50,22 +50,17 @@
         public double? Bottom { get; }
 
         /// <summary>
-        /// Gets the data type of the data item.
-        /// </summary>
-        public string DataType => nameof(FlotDataPoint);
-
-        /// <summary>
         /// Returns an enumerator that iterates through the data points.
         /// </summary>
         /// <returns>An enumerator that can be used to iterate through the data points.</returns>
-        public IEnumerator<double> GetEnumerator()
+        public IEnumerator<object> GetEnumerator()
         {
             yield return X;
             yield return Y;
 
             if (Bottom.HasValue)
             {
-                yield return Bottom.Value;
+                yield return Bottom;
             }
         }
 
