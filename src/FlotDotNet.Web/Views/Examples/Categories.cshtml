@@ -1,0 +1,21 @@
+﻿@model FlotDotNet.FlotChart
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="demo-container">
+    <div id="@Model.PlaceholderId" class="demo-placeholder"></div>
+</div>
+
+<p>With the categories plugin you can plot categories/textual data easily.</p>
+
+@section Scripts {
+    <script src="~/lib/flot/jquery.flot.categories.js"></script>
+    <script type="text/javascript">
+        $(function()
+        {
+            @Html.Raw(Model.Plot())
+        });
+    </script>
+}

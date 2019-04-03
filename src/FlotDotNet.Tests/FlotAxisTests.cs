@@ -75,5 +75,29 @@ namespace FlotDotNet.Tests
             string actual = SerializeObject(input);
             actual.ShouldBe("{\"dayNames\":[\"1\",\"2\",\"3\",\"4\",\"5\",\"6\",\"7\"]}");
         }
+
+        [Fact]
+        public void WithCategories()
+        {
+            var input = new FlotAxis
+            {
+                Categories = new List<FlotCategory> { { "First", 1 }, { "Second", 2 }, { "Third", 3 } }
+            };
+
+            string actual = SerializeObject(input);
+            actual.ShouldBe("{\"categories\":{\"First\":1,\"Second\":2,\"Third\":3}}");
+        }
+
+        [Fact]
+        public void WithCategoryNames()
+        {
+            var input = new FlotAxis
+            {
+                Categories = new List<FlotCategory> { "First", "Second", "Third" }
+            };
+
+            string actual = SerializeObject(input);
+            actual.ShouldBe("{\"categories\":[\"First\",\"Second\",\"Third\"]}");
+        }
     }
 }
